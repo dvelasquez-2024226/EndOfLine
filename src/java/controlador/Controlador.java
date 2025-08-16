@@ -10,13 +10,17 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Empleado;
+import modelo.EmpleadoDAO;
 
 /**
  *
  * @author ISAAC
  */
 public class Controlador extends HttpServlet {
-
+    Empleado empleado = new Empleado();
+    EmpleadoDAO empleadoDao = new EmpleadoDAO();
+    int codEmpleado;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -31,6 +35,8 @@ public class Controlador extends HttpServlet {
         String menu = request.getParameter("menu");
         if (menu.equals("Principal")){
             request.getRequestDispatcher("Principal.jsp").forward(request, response);
+        }else if(menu.equals("Empleado")){
+            request.getRequestDispatcher("Empleado.jsp").forward(request, response);
         }
 
     }
