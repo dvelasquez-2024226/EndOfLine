@@ -59,14 +59,14 @@
             </div>
             <div class="dropdown" >
                 <button style="border: none" class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton" aria-haspopup="true" data-toggle="dropdown" aria-expand="false">
-                    ${usuario.getNombresEmpleado()}
+                    
                 </button>
                 <div class="dropdown-menu dropdown-menu-right text-center" aria-labellebdy="dropdownMenuButton">
                     <a class="dropdown-item" href="#">
                         <img src="img/usuario.png" alt="60" width="60">
                     </a>
                     <a class="dropdown-item">
-                        ${usuarioEmpleado.getUsuarioEmleado()}
+                        
                     </a>
                     <a class="dropdown-item">
                         usuario@gmail.com
