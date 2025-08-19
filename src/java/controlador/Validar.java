@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Cliente;
 import modelo.ClienteDAO;
+import modelo.Empleado;
+import modelo.EmpleadoDAO;
 
 /**
  *
@@ -20,6 +22,8 @@ import modelo.ClienteDAO;
 public class Validar extends HttpServlet {
     Cliente cliente = new Cliente () ;
     ClienteDAO clienteDao = new ClienteDAO (); 
+    Empleado empleado = new Empleado();
+    EmpleadoDAO empleadoDao = new EmpleadoDAO();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -83,6 +87,9 @@ public class Validar extends HttpServlet {
                 request.setAttribute("apellidoCliente" , cliente);
                 request.getRequestDispatcher("Controlador?menu=Principal").forward(request,response);
                 System.out.println("Hola");
+            }else if(empleado.getCorreoEmpleado()!= null){
+                request.setAttribute("correoEmpleado", empleado);
+                request.getRequestDispatcher("Controlador?menu=PrincipalEmpleados").forward(request, response);
             }else{
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             }
