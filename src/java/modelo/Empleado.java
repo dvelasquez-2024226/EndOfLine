@@ -1,6 +1,6 @@
 package modelo;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Empleado {
     private int carne;
@@ -9,20 +9,26 @@ public class Empleado {
     private String correoEmpleado;
     private String telefonoEmpleado;
     private Date fechaIngreso;
+    private String usuarioEmpleado;
+    private String contraseniaEmpleado;
     private int codigoConcesionario;
 
     public Empleado() {
     }
 
-    public Empleado(int carne, String nombreEmpleado, String apellidoEmpleado, String correoEmpleado, String telefonoEmpleado, Date fechaIngreso, int codigoConcesionario) {
+    public Empleado(int carne, String nombreEmpleado, String apellidoEmpleado, String correoEmpleado, String telefonoEmpleado, Date fechaIngreso, String usuarioEmpleado, String contraseniaEmpleado, int codigoConcesionario) {
         this.carne = carne;
         this.nombreEmpleado = nombreEmpleado;
         this.apellidoEmpleado = apellidoEmpleado;
         this.correoEmpleado = correoEmpleado;
         this.telefonoEmpleado = telefonoEmpleado;
         this.fechaIngreso = fechaIngreso;
+        this.usuarioEmpleado = usuarioEmpleado;
+        this.contraseniaEmpleado = contraseniaEmpleado;
         this.codigoConcesionario = codigoConcesionario;
     }
+
+    
 
     public int getCarne() {
         return carne;
@@ -79,6 +85,23 @@ public class Empleado {
     public void setCodigoConcesionario(int codigoConcesionario) {
         this.codigoConcesionario = codigoConcesionario;
     }
+
+    public String getUsuarioEmpleado() {
+        return usuarioEmpleado;
+    }
+
+    public void setUsuarioEmpleado(String usuarioEmpleado) {
+        this.usuarioEmpleado = usuarioEmpleado;
+    }
+
+    public String getContraseniaEmpleado() {
+        return contraseniaEmpleado;
+    }
+
+    public void setContraseniaEmpleado(String contraseniaEmpleado) {
+        this.contraseniaEmpleado = contraseniaEmpleado;
+    }
+    
     
     
 }
