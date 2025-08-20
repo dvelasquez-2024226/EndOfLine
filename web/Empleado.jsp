@@ -36,7 +36,7 @@
                         </div>
                         <div class="form-group">
                             <label><strong>fechaIngreso</strong></label>
-                            <input type="text" value="${empleado.getFechaIngreso()}" name="txtFechaIngreso" class="form-control" >
+                            <input type="date" value="${empleado.getFechaIngreso()}" name="txtFechaIngreso" class="form-control" >
                         </div>
                         <div class="form-group">
                             <label><strong>Usuario:</strong></label>
