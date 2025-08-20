@@ -147,6 +147,9 @@ public class Controlador extends HttpServlet {
                     break;
             }
             request.getRequestDispatcher("ProveedorNV.jsp").forward(request, response);
+        } else if (menu.equals("ProveedorVC")) {
+            
+            request.getRequestDispatcher("ProveedorVC.jsp").forward(request, response);
         }
 
     }
