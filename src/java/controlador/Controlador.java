@@ -214,6 +214,67 @@ public class Controlador extends HttpServlet {
             
             }
             request.getRequestDispatcher("Inventario.jsp").forward(request, response);
+        }else if (menu.equals("Empleado")) {
+             switch (accion) {
+                case "Listar":
+                    List listaEmpleados = empleadoDao.listar();
+                    request.setAttribute("empleados", listaEmpleados);
+                    break;
+                case"Agregar":
+                    String nombres = request.getParameter("txtNombreEmpleado");
+                    String apellido = request.getParameter("txtApellidoEmpleado");
+                    String correo = request.getParameter("txtCorreoEmpleado");
+                    String teleofno = request.getParameter("txtTelefonoEmpleado");
+                    String fecha = request.getParameter("txtFechaIngreso");
+                    java.sql.Date fechaIngreso = java.sql.Date.valueOf(fecha);
+                    String usuario = request.getParameter("txtUsuarioEmpleado");
+                    String contra = request.getParameter("txtContraseniaEmpleado");
+                    int codConcesonario = Integer.valueOf(request.getParameter("txtCodigoConcesionario"));
+                    empleado.setNombreEmpleado(nombres);
+                    empleado.setApellidoEmpleado(apellido);
+                    empleado.setCorreoEmpleado(correo);
+                    empleado.setTelefonoEmpleado(teleofno);
+                    empleado.setFechaIngreso(fechaIngreso);
+                    empleado.setUsuarioEmpleado(usuario);
+                    empleado.setContraseniaEmpleado(contra);
+                    empleado.setCodigoConcesionario(codConcesonario);
+                    empleadoDao.agregar(empleado);
+                    request.getRequestDispatcher("Controlador?menu=Empleado&accion=Listar").forward(request, response);
+                break;
+                case "Editar":
+                    codEmpleado = Integer.parseInt(request.getParameter("carne"));
+                    Empleado e = empleadoDao.listarCodigoEmpleado(codEmpleado);
+                    request.setAttribute("empleado", e);
+                    request.getRequestDispatcher("Controlador?menu=Empleado&accion=Listar").forward(request, response);
+                break;
+                case "Actualizar":
+                    String nom = request.getParameter("txtNombreEmpleado");
+                    String apell = request.getParameter("txtApellidoEmpleado");
+                    String corr = request.getParameter("txtCorreoEmpleado");
+                    String teleof = request.getParameter("txtTelefonoEmpleado");
+                    String fech = request.getParameter("txtFechaIngreso");
+                    java.sql.Date fechaIngres = java.sql.Date.valueOf(fech);
+                    String usua = request.getParameter("txtUsuarioEmpleado");
+                    String contr = request.getParameter("txtContraseniaEmpleado");
+                    int codConcesonar = Integer.valueOf(request.getParameter("txtCodigoConcesionario"));
+                    empleado.setNombreEmpleado(nom);
+                    empleado.setApellidoEmpleado(apell);
+                    empleado.setCorreoEmpleado(corr);
+                    empleado.setTelefonoEmpleado(teleof);
+                    empleado.setFechaIngreso(fechaIngres);
+                    empleado.setUsuarioEmpleado(usua);
+                    empleado.setContraseniaEmpleado(contr);
+                    empleado.setCarne(codEmpleado);
+                    empleadoDao.actualizar(empleado);
+                    request.getRequestDispatcher("Controlador?menu=Empleado&accion=Listar").forward(request, response);
+                    break;
+                    case"Eliminar":
+                    codEmpleado = Integer.parseInt(request.getParameter("carne"));
+                    empleadoDao.eliminar(codEmpleado);
+                    request.getRequestDispatcher("Controlador?menu=Empleado&accion=Listar").forward(request, response);
+                    break;
+        }
+             request.getRequestDispatcher("Empleado.jsp").forward(request, response);
         }
 
     }
