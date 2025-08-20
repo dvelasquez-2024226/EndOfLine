@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Empleado;
 import modelo.EmpleadoDAO;
+import modelo.Proveedor;
+import modelo.ProveedorDAO;
 import modelo.Publicidad;
 import modelo.PublicidadDAO;
 
@@ -21,12 +23,17 @@ import modelo.PublicidadDAO;
  * @author ISAAC
  */
 public class Controlador extends HttpServlet {
+
     Empleado empleado = new Empleado();
     EmpleadoDAO empleadoDao = new EmpleadoDAO();
     Publicidad publicidad = new Publicidad();
     PublicidadDAO publicidadDao = new PublicidadDAO();
+    Proveedor proveedor = new Proveedor();
+    ProveedorDAO proveedorDao = new ProveedorDAO();
     int codEmpleado;
     int codPublicidad;
+    int codProveedor;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,19 +47,19 @@ public class Controlador extends HttpServlet {
             throws ServletException, IOException {
         String menu = request.getParameter("menu");
         String accion = request.getParameter("accion");
-        if (menu.equals("Principal")){
+        if (menu.equals("Principal")) {
             request.getRequestDispatcher("Principal.jsp").forward(request, response);
-        }else if(menu.equals("Empleado")){
+        } else if (menu.equals("Empleado")) {
             request.getRequestDispatcher("Empleado.jsp").forward(request, response);
-        }else if (menu.equals("PrincipalEmpleado")){
+        } else if (menu.equals("PrincipalEmpleado")) {
             request.getRequestDispatcher("PrincipalEmpleados.jsp").forward(request, response);
-        }else if (menu.equals("Publicidad")) {
+        } else if (menu.equals("Publicidad")) {
             switch (accion) {
                 case "Listar":
                     List listaPublicidad = publicidadDao.listar();
                     request.setAttribute("publicidades", listaPublicidad);
                     break;
-                case"Agregar":
+                case "Agregar":
                     String fInicio = request.getParameter("txtFechaInicio");
                     java.sql.Date fechaInicio = java.sql.Date.valueOf(fInicio);
                     String fFin = request.getParameter("txtFechaFin");
@@ -68,13 +75,13 @@ public class Controlador extends HttpServlet {
                     publicidadDao.agregar(publicidad);
                     request.getRequestDispatcher("Controlador?menu=Publicidad&accion=Listar").forward(request, response);
                     break;
-                case"Editar":
+                case "Editar":
                     codPublicidad = Integer.parseInt(request.getParameter("codigoPublicidad"));
                     Publicidad p = publicidadDao.listarCodigoPublicidad(codPublicidad);
                     request.setAttribute("publicidad", p);
                     request.getRequestDispatcher("Controlador?menu=Publicidad&accion=Listar").forward(request, response);
                     break;
-                case"Actualizar":
+                case "Actualizar":
                     String fInicioPu = request.getParameter("txtFechaInicio");
                     java.sql.Date fechaInicioPu = java.sql.Date.valueOf(fInicioPu);
                     String fFinPu = request.getParameter("txtFechaFin");
@@ -91,13 +98,65 @@ public class Controlador extends HttpServlet {
                     publicidadDao.actualizar(publicidad);
                     request.getRequestDispatcher("Controlador?menu=Publicidad&accion=Listar").forward(request, response);
                     break;
-                case"Eliminar":
+                case "Eliminar":
                     codPublicidad = Integer.parseInt(request.getParameter("codigoPublicidad"));
                     publicidadDao.eliminar(codPublicidad);
                     request.getRequestDispatcher("Controlador?menu=Publicidad&accion=Listar").forward(request, response);
                     break;
             }
             request.getRequestDispatcher("Publicidad.jsp").forward(request, response);
+        } else if (menu.equals("ProveedorNV")) {
+            switch (accion) {
+                case "Listar":
+                    List<Proveedor> listaProveedores = proveedorDao.listar();
+                    request.setAttribute("proveedores", listaProveedores);
+                    break;
+                case "Agregar":
+                    String nombre = request.getParameter("txtNombreProveedor");
+                    String apellido = request.getParameter("txtApellidoProveedor");
+                    String correo = request.getParameter("txtCorreoProveedor");
+                    String telefono = request.getParameter("txtTelefonoProveedor");
+                    proveedor.setNombreProveedor(nombre);
+                    proveedor.setApellidoProveedor(apellido);
+                    proveedor.setCorreoProveedor(correo);
+                    proveedor.setTelefonoProveedor(telefono);
+                    proveedorDao.agregar(proveedor);
+                    request.getRequestDispatcher("Controlador?menu=ProveedorNV&accion=Listar").forward(request, response);
+                    break;
+                case "Editar":
+                    codProveedor = Integer.parseInt(request.getParameter("codigoProveedor"));
+                    Proveedor p = proveedorDao.listarCodigoProveedor(codProveedor);
+                    request.setAttribute("proveedor", p);
+                    request.getRequestDispatcher("Controlador?menu=ProveedorNV&accion=Listar").forward(request, response);
+                    break;
+                case "Actualizar":
+                    String nombres = request.getParameter("txtNombreProveedor");
+                    String apellidos = request.getParameter("txtApellidoProveedor");
+                    String correos = request.getParameter("txtCorreoProveedor");
+                    String telefonos = request.getParameter("txtTelefonoProveedor");
+                    proveedor.setNombreProveedor(nombres);
+                    proveedor.setApellidoProveedor(apellidos);
+                    proveedor.setCorreoProveedor(correos);
+                    proveedor.setTelefonoProveedor(telefonos);
+                    proveedor.setCodigoProveedor(codProveedor);
+                    proveedorDao.actualizar(proveedor);
+                    request.getRequestDispatcher("Controlador?menu=ProveedorNV&accion=Listar").forward(request, response);
+                    break;
+                case "Eliminar":
+                    codProveedor = Integer.parseInt(request.getParameter("codigoProveedor"));
+                    proveedorDao.eliminar(codProveedor);
+                    request.getRequestDispatcher("Controlador?menu=ProveedorNV&accion=Listar").forward(request, response);
+                    break;
+            }
+            request.getRequestDispatcher("ProveedorNV.jsp").forward(request, response);
+        } else if (menu.equals("ProveedorVC")) {
+            switch (accion) {
+                case "Listar":
+                    List<Proveedor> listaProveedores = proveedorDao.listar();
+                    request.setAttribute("proveedores", listaProveedores);
+                    break;
+            }
+            request.getRequestDispatcher("ProveedorVC.jsp").forward(request, response);
         }
 
     }
