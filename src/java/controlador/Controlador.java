@@ -12,6 +12,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Carro;
+import modelo.CarroDAO;
 import modelo.Empleado;
 import modelo.EmpleadoDAO;
 import modelo.Factura;
@@ -39,6 +41,9 @@ public class Controlador extends HttpServlet {
     InventarioDAO inventarioDAO = new InventarioDAO();
     Factura factura = new Factura();
     FacturaDAO facturaDao = new FacturaDAO();
+    Carro carro = new Carro();
+    CarroDAO carroDao = new CarroDAO();
+    int codCarro;
     int codFactura;
     int codEmpleado;
     int codPublicidad;
@@ -339,6 +344,67 @@ public class Controlador extends HttpServlet {
                 break;
             }
             request.getRequestDispatcher("FacturaEmpleado.jsp").forward(request, response);
+            } else if (menu.equals("Carro")) {
+
+            switch (accion) {
+                case "Listar":
+                    List listaCarros = carroDao.listar();
+                    request.setAttribute("carros", listaCarros);
+                    request.getRequestDispatcher("Carro.jsp").forward(request, response);
+                    break;
+                case "Agregar":
+                    String marca = request.getParameter("txtMarca");
+                    String modelo = request.getParameter("txtModelo");
+                    String color = request.getParameter("txtColor");
+                    String anio = request.getParameter("txtAnio");
+                    String estado = request.getParameter("txtEstado");
+                    String codigoinventario = request.getParameter("txtCodigoinventario");
+                    String codigoproveedor = request.getParameter("txtCodigoProveedor");
+                    int codInventario = Integer.parseInt(codigoinventario);
+                    int codProveedor = Integer.parseInt(codigoproveedor);
+                    carro.setMarca(marca);
+                    carro.setModelo(modelo);
+                    carro.setColor(color);
+                    carro.setAnio(anio);
+                    carro.setEstado(estado);
+                    carro.setCodigoinventario(codInventario);
+                    carro.setCodigoProveedor(codProveedor);
+                    carroDao.agregar(carro);
+                    request.getRequestDispatcher("Controlador?menu=Carro&accion=Listar").forward(request, response);
+                    break;
+                case "Editar":
+                    codCarro = Integer.parseInt(request.getParameter("codigoCarro"));
+                    Carro c = carroDao.listarCodigoCarro(codCarro);
+                    request.setAttribute("carro", c);
+                    request.getRequestDispatcher("Controlador?menu=Carro&accion=Listar").forward(request, response);
+                    break;
+                case "Actualizar":
+                    String marcaEmp = request.getParameter("txtMarca");
+                    String modeloEmp = request.getParameter("txtModelo");
+                    String colorEmp = request.getParameter("txtColor");
+                    String anioEmp = request.getParameter("txtAnio");
+                    String estadoEmp = request.getParameter("txtEstado");
+                    String codigoinv = request.getParameter("txtCodigoinventario");
+                    String codigopro = request.getParameter("txtCodigoProveedor");
+                    int codInv = Integer.parseInt(codigoinv);
+                    int codPro = Integer.parseInt(codigopro);
+                    carro.setCodigoCarro(codCarro);
+                    carro.setMarca(marcaEmp);
+                    carro.setModelo(modeloEmp);
+                    carro.setColor(colorEmp);
+                    carro.setAnio(anioEmp);
+                    carro.setEstado(estadoEmp);
+                    carro.setCodigoinventario(codInv);
+                    carro.setCodigoProveedor(codPro);
+                    carroDao.actualizar(carro);
+                    request.getRequestDispatcher("Controlador?menu=Carro&accion=Listar").forward(request, response);
+                    break;
+                case "Eliminar":
+                    codCarro = Integer.parseInt(request.getParameter("codigoCarro"));
+                    carroDao.eliminar(codCarro);
+                    request.getRequestDispatcher("Controlador?menu=Carro&accion=Listar").forward(request, response);
+                    break;
+            }
         }
 
     }
