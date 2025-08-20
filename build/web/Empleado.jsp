@@ -4,6 +4,7 @@
     Author     : ANDRE
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,7 +17,7 @@
         <div class="d-flex">
             <div class="card col-sm-4">
                 <div class="card-body">
-                    <form action="Controlador?menu=Empleado" method="POST">
+                    <form action="Controlador?menu=Empleados" method="POST">
                         <div class="form-group">
                             <label><strong>Nombres:</strong></label>
                             <input type="text" value="${empleado.getNombreEmpleado()}" name="txtNombreEmpleado" class="form-control">
@@ -72,21 +73,21 @@
                     </thead>
                     <tbody>
                         <c:forEach var="empleado" items="${empleados}">
-                              <tr>
-                                <td>${empleado.getCarne()}</td>
-                                <td>${empleado.getNombreEmpleado()}</td>
-                                <td>${empleado.getApellidoEmpleado()}</td>
-                                <td>${empleado.getCorreoEmpleado()}</td>
-                                <td>${empleado.getTelefonoEmpleado()}</td>
-                                <td>${empleado.getFechaIngreso()}</td>
-                                <td>${empleado.getUsuarioEmpleado()}</td>
-                                <td>${empleado.getContraseniaEmpleado()}</td>
-                                <td>${empleado.getCodigoConcesionario()}</td>
-                                <td>
-                                    <a class="btn btn-warning" href="Controlador?menu=Empleado&accion=Editar&carne=${empleado.getCarne()}">Editar</a>
-                                    <a class="btn btn-danger " href="Controlador?menu=Empleado&accion=Eliminar&carne=${empleado.getCarne()}">Eliminar</a>
-                                </td>
-                            </tr>
+                            <tr>
+                                    <td>${empleado.getCarne()}</td>
+                                    <td>${empleado.getNombreEmpleado()}</td>
+                                    <td>${empleado.getApellidoEmpleado()}</td>
+                                    <td>${empleado.getCorreoEmpleado()}</td>
+                                    <td>${empleado.getTelefonoEmpleado()}</td>
+                                    <td>${empleado.getFechaIngreso()}</td>
+                                    <td>${empleado.getUsuarioEmpleado()}</td>
+                                    <td>${empleado.getContraseniaEmpleado()}</td>
+                                    <td>${empleado.getCodigoConcesionario()}</td>
+                                    <td>
+                                        <a class="btn btn-warning" href="Controlador?menu=Empleados&accion=Editar&carne=${empleado.getCarne()}">Editar</a>
+                                        <a class="btn btn-danger " href="Controlador?menu=Empleados&accion=Eliminar&carne=${empleado.getCarne()}">Eliminar</a>
+                                    </td>
+                                </tr>
                         </c:forEach>
                     </tbody>
                 </table>

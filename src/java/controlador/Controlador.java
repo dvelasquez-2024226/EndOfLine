@@ -6,6 +6,7 @@ package controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Empleado;
 import modelo.EmpleadoDAO;
+import modelo.Factura;
+import modelo.FacturaDAO;
 import modelo.Inventario;
 import modelo.InventarioDAO;
 import modelo.Proveedor;
@@ -34,6 +37,9 @@ public class Controlador extends HttpServlet {
     ProveedorDAO proveedorDao = new ProveedorDAO();
     Inventario inventario = new Inventario();
     InventarioDAO inventarioDAO = new InventarioDAO();
+    Factura factura = new Factura();
+    FacturaDAO facturaDao = new FacturaDAO();
+    int codFactura;
     int codEmpleado;
     int codPublicidad;
     int codProveedor;
@@ -214,7 +220,7 @@ public class Controlador extends HttpServlet {
             
             }
             request.getRequestDispatcher("Inventario.jsp").forward(request, response);
-        }else if (menu.equals("Empleado")) {
+        }else if (menu.equals("Empleados")) {
              switch (accion) {
                 case "Listar":
                     List listaEmpleados = empleadoDao.listar();
@@ -239,13 +245,13 @@ public class Controlador extends HttpServlet {
                     empleado.setContraseniaEmpleado(contra);
                     empleado.setCodigoConcesionario(codConcesonario);
                     empleadoDao.agregar(empleado);
-                    request.getRequestDispatcher("Controlador?menu=Empleado&accion=Listar").forward(request, response);
+                    request.getRequestDispatcher("Controlador?menu=Empleados&accion=Listar").forward(request, response);
                 break;
                 case "Editar":
                     codEmpleado = Integer.parseInt(request.getParameter("carne"));
                     Empleado e = empleadoDao.listarCodigoEmpleado(codEmpleado);
                     request.setAttribute("empleado", e);
-                    request.getRequestDispatcher("Controlador?menu=Empleado&accion=Listar").forward(request, response);
+                    request.getRequestDispatcher("Controlador?menu=Empleados&accion=Listar").forward(request, response);
                 break;
                 case "Actualizar":
                     String nom = request.getParameter("txtNombreEmpleado");
@@ -266,15 +272,65 @@ public class Controlador extends HttpServlet {
                     empleado.setContraseniaEmpleado(contr);
                     empleado.setCarne(codEmpleado);
                     empleadoDao.actualizar(empleado);
-                    request.getRequestDispatcher("Controlador?menu=Empleado&accion=Listar").forward(request, response);
+                    request.getRequestDispatcher("Controlador?menu=Empleados&accion=Listar").forward(request, response);
                     break;
                     case"Eliminar":
                     codEmpleado = Integer.parseInt(request.getParameter("carne"));
                     empleadoDao.eliminar(codEmpleado);
-                    request.getRequestDispatcher("Controlador?menu=Empleado&accion=Listar").forward(request, response);
+                    request.getRequestDispatcher("Controlador?menu=Empleados&accion=Listar").forward(request, response);
                     break;
         }
              request.getRequestDispatcher("Empleado.jsp").forward(request, response);
+        }else if(menu.equals("Factura")){
+            switch(accion){
+                case"Listar":
+                    List lsitaFactura = facturaDao.listar();
+                    request.setAttribute("facturas", lsitaFactura);
+                break;
+                case"Agregar":
+                    Date fechaEmision = Date.valueOf(request.getParameter("txtFechaEmision"));
+                    Double total = Double.parseDouble(request.getParameter("txtTotal"));
+                    String estado = request.getParameter("txtEstado");
+                    String metodoPago = request.getParameter("txtMetodoPago");
+                    Integer codigoDetalleFactura = Integer.parseInt(request.getParameter("txtCodigoDetalleFactura"));
+                    Integer carne = Integer.parseInt(request.getParameter("txtCarne"));
+                    Integer codigoCliente = Integer.parseInt(request.getParameter("txtCodigoCliente"));
+                    factura.setFechaEmision(fechaEmision);
+                    factura.setTotal(total);
+                    factura.setEstado(estado);
+                    factura.setMetodoPago(metodoPago);
+                    factura.setCodigoDetalleFactura(codigoDetalleFactura);
+                    factura.setCarne(carne);
+                    factura.setCodigoCliente(codigoCliente);
+                    facturaDao.agregar(factura);
+                    request.getRequestDispatcher("Controlador?menu=Factura&accion=Listar").forward(request, response);
+                break;
+                case"Editar":
+                    codFactura = Integer.parseInt(request.getParameter("codigoFactura"));
+                    Factura f = facturaDao.listarCodigoFactura(codFactura);
+                    request.setAttribute("factura", f);
+                    request.getRequestDispatcher("Controlador?menu=Factura&accion=Listar").forward(request, response);
+                break;
+                case"Actualizar":
+                    Date fechaEmisionFac = Date.valueOf(request.getParameter("txtFechaEmision"));
+                    Double totalFac = Double.parseDouble(request.getParameter("txtTotal"));
+                    String estadoFac = request.getParameter("txtEstado");
+                    String metodoPagoFac = request.getParameter("txtMetodoPago");
+                    factura.setFechaEmision(fechaEmisionFac);
+                    factura.setTotal(totalFac);
+                    factura.setEstado(estadoFac);
+                    factura.setMetodoPago(metodoPagoFac);
+                    factura.setCodigoFactura(codFactura);
+                    facturaDao.actualizar(factura);
+                    request.getRequestDispatcher("Controlador?menu=Factura&accion=Listar").forward(request, response);
+                break;
+                case"Eliminar":
+                    codFactura = Integer.parseInt(request.getParameter("codigoFactura"));
+                    facturaDao.eliminar(codFactura);
+                    request.getRequestDispatcher("Controlador?menu=Factura&accion=Listar").forward(request, response);
+                break;
+            }
+            request.getRequestDispatcher("FacturaEmpleado.jsp").forward(request, response);
         }
 
     }
