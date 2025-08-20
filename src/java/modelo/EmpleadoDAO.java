@@ -14,6 +14,36 @@ public class EmpleadoDAO {
     ResultSet rs;
     int resp;
     
+    public Empleado validar(String usuarioEmpleado, String contraseniaEmpleado) {
+        Empleado empleado = new Empleado();
+        String sql = "select * from Empleados where usuarioEmpleado = ? and contraseniaEmpleado = ?";
+        try {
+            con = cn.Conexion();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, usuarioEmpleado);
+            ps.setString(2, contraseniaEmpleado);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                empleado.setCarne(rs.getInt("carne"));
+                empleado.setNombreEmpleado(rs.getString("nombreEmpleado"));
+                empleado.setApellidoEmpleado(rs.getString("apellidoEmpleado"));
+                empleado.setCorreoEmpleado(rs.getString("correoEmpleado"));
+                empleado.setTelefonoEmpleado(rs.getString("telefonoEmpleado"));
+                empleado.setFechaIngreso(rs.getDate("fechaIngreso"));
+                empleado.setUsuarioEmpleado(rs.getString("usuarioEmpleado"));
+                empleado.setContraseniaEmpleado(rs.getString("contraseniaEmpleado"));
+                empleado.setCodigoConcesionario(rs.getInt("codigoConcesionario"));
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return empleado;
+    }
+    
+    
     //CRUD
     //LISTAR
     public List listar(){
@@ -31,7 +61,9 @@ public class EmpleadoDAO {
                 em.setCorreoEmpleado(rs.getString(4));
                 em.setTelefonoEmpleado(rs.getString(5));
                 em.setFechaIngreso(rs.getDate(6));
-                em.setCodigoConcesionario(rs.getInt(7));
+                em.setUsuarioEmpleado(rs.getString(7));
+                em.setContraseniaEmpleado(rs.getString(8));
+                em.setCodigoConcesionario(rs.getInt(9));
                 listaEmpleado.add(em);
             }
         }catch(Exception e){
@@ -42,7 +74,7 @@ public class EmpleadoDAO {
     
     //AGREGAR
     public int agregar(Empleado emp){
-        String sql = "insert into Empleados(nombreEmpleado, apellidoEmpleado, correoEmpleado, telefonoEmpleado, fechaIngreso, codigoConcesionario) values (?,?,?,?,?,?)";
+        String sql = "insert into Empleados(nombreEmpleado, apellidoEmpleado, correoEmpleado, telefonoEmpleado, fechaIngreso, usuarioEmpleado, contraseniaEmpleado, codigoConcesionario) values (?,?,?,?,?,?,?,?)";
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
@@ -51,7 +83,9 @@ public class EmpleadoDAO {
             ps.setString(3, emp.getCorreoEmpleado());
             ps.setString(4, emp.getTelefonoEmpleado());
             ps.setDate(5, emp.getFechaIngreso());
-            ps.setInt(6, emp.getCodigoConcesionario());
+            ps.setString(6, emp.getUsuarioEmpleado());
+            ps.setString(7, emp.getContraseniaEmpleado());
+            ps.setInt(8, emp.getCodigoConcesionario());
             ps.executeUpdate();
         }catch(Exception e){
             e.printStackTrace();
@@ -73,7 +107,9 @@ public class EmpleadoDAO {
                 emp.setCorreoEmpleado(rs.getString(4));
                 emp.setTelefonoEmpleado(rs.getString(5));
                 emp.setFechaIngreso(rs.getDate(6));
-                emp.setCodigoConcesionario(rs.getInt(7));
+                emp.setUsuarioEmpleado(rs.getString(7));
+                emp.setContraseniaEmpleado(rs.getString(8));
+                emp.setCodigoConcesionario(rs.getInt(9));
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -85,14 +121,17 @@ public class EmpleadoDAO {
     public int actualizar(Empleado emp){
         String sql = "update empleados set nombreEmpleado = ?,"
                 + "apellidoEmpleado = ?, correoEmpleado = ?,"
-                + "telefonoEmpleado = ?, fechaIngreso = ? where carne = ?";
+                + "telefonoEmpleado = ?, fechaIngreso = ?, usuarioEmpleado= ?,"
+                + "contraseniaEmpleado = ? where carne = ?";
         try{
             ps.setString(1, emp.getNombreEmpleado());
             ps.setString(2, emp.getApellidoEmpleado());
             ps.setString(3, emp.getCorreoEmpleado());
             ps.setString(4, emp.getTelefonoEmpleado());
             ps.setDate(5, emp.getFechaIngreso());
-            ps.setInt(6, emp.getCarne());
+            ps.setString(6, emp.getUsuarioEmpleado());
+            ps.setString(7, emp.getContraseniaEmpleado());
+            ps.setInt(8, emp.getCarne());
             ps.executeUpdate();
         }catch(Exception e){
             e.printStackTrace();
