@@ -83,6 +83,8 @@ public class ProveedorDAO {
                 + "telefonoProveedor = ? where codigoProveedor = ?";
         
         try {
+            con = cn.Conexion();
+            ps = con.prepareStatement(sql);
             ps.setString(1, prove.getNombreProveedor());
             ps.setString(2, prove.getApellidoProveedor());
             ps.setString(3, prove.getCorreoProveedor());

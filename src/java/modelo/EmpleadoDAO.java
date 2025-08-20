@@ -14,11 +14,41 @@ public class EmpleadoDAO {
     ResultSet rs;
     int resp;
     
+    public Empleado validar(String usuarioEmpleado, String contraseniaEmpleado) {
+        Empleado empleado = new Empleado();
+        String sql = "select * from Empleados where usuarioEmpleado = ? and contraseniaEmpleado = ?";
+        try {
+            con = cn.Conexion();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, usuarioEmpleado);
+            ps.setString(2, contraseniaEmpleado);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                empleado.setCarne(rs.getInt("carne"));
+                empleado.setNombreEmpleado(rs.getString("nombreEmpleado"));
+                empleado.setApellidoEmpleado(rs.getString("apellidoEmpleado"));
+                empleado.setCorreoEmpleado(rs.getString("correoEmpleado"));
+                empleado.setTelefonoEmpleado(rs.getString("telefonoEmpleado"));
+                empleado.setFechaIngreso(rs.getDate("fechaIngreso"));
+                empleado.setUsuarioEmpleado(rs.getString("usuarioEmpleado"));
+                empleado.setContraseniaEmpleado(rs.getString("contraseniaEmpleado"));
+                empleado.setCodigoConcesionario(rs.getInt("codigoConcesionario"));
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return empleado;
+    }
+    
+    
     //CRUD
     //LISTAR
     public List listar(){
         String sql = "select * from empleados";
-        List<Empleado> listaEmpleado = new ArrayList<>();
+        List<Empleado> listaEmpleados = new ArrayList<>();
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
@@ -34,12 +64,12 @@ public class EmpleadoDAO {
                 em.setUsuarioEmpleado(rs.getString(7));
                 em.setContraseniaEmpleado(rs.getString(8));
                 em.setCodigoConcesionario(rs.getInt(9));
-                listaEmpleado.add(em);
+                listaEmpleados.add(em);
             }
         }catch(Exception e){
             e.printStackTrace();
         }
-        return listaEmpleado;
+        return listaEmpleados;
     }
     
     //AGREGAR
@@ -66,7 +96,7 @@ public class EmpleadoDAO {
     //BUSCAR
     public  Empleado listarCodigoEmpleado(int id){
         Empleado emp = new Empleado();
-        String sql = "select * Empleados where carne = "+id;
+        String sql = "select * from Empleados where carne = "+id;
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
@@ -94,6 +124,8 @@ public class EmpleadoDAO {
                 + "telefonoEmpleado = ?, fechaIngreso = ?, usuarioEmpleado= ?,"
                 + "contraseniaEmpleado = ? where carne = ?";
         try{
+            con = cn.Conexion();
+            ps = con.prepareStatement(sql);
             ps.setString(1, emp.getNombreEmpleado());
             ps.setString(2, emp.getApellidoEmpleado());
             ps.setString(3, emp.getCorreoEmpleado());
