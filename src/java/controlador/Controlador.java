@@ -220,7 +220,15 @@ public class Controlador extends HttpServlet {
             
             }
             request.getRequestDispatcher("Inventario.jsp").forward(request, response);
-        }else if (menu.equals("Empleados")) {
+        } else if (menu.equals("InventarioCl")) {
+             switch (accion) {
+                case "Listar":
+                    List listaInventario = inventarioDAO.listar();
+                    request.setAttribute("inventario", listaInventario);
+                    break;
+             }
+             request.getRequestDispatcher("InventarioCl.jsp").forward(request, response);
+        } else if (menu.equals("Empleados")) {
              switch (accion) {
                 case "Listar":
                     List listaEmpleados = empleadoDao.listar();

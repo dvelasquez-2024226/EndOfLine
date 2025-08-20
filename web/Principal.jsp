@@ -40,7 +40,7 @@
                     <li><a href="#">Ubicaciones</a></li>
                     <li><a href="#">Ayuda</a></li>
                     <li><a href="#">Carrito de compra</a></li>
-                    <li><a href="#">Inventario</a></li>
+                    <li><a href="Controlador?menu=InventarioCl&accion=Listar">Inventario</a></li>
                     <div class="dropdown" >
                         <button style="border: none" class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton" aria-haspopup="true" data-toggle="dropdown" aria-expand="false">
                             ${apellidoCliente.getNombreCliente()}
