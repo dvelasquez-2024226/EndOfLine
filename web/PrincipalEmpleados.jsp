@@ -49,7 +49,7 @@
                         <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="#" >Servicios</a>
                     </li>
                     <li class="nav-item">
-                        <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="#" >Facutra</a>
+                        <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="Controlador?menu=Factura&accion=Listar" target="myFrame" >Facutra</a>
                     </li>
                     <li class="nav-item">
                         <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="#" >Detalle Factura</a>

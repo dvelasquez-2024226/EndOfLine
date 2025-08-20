@@ -330,7 +330,7 @@ public class Controlador extends HttpServlet {
                     request.getRequestDispatcher("Controlador?menu=Factura&accion=Listar").forward(request, response);
                 break;
             }
-            request.getRequestDispatcher("Factura.jsp").forward(request, response);
+            request.getRequestDispatcher("FacturaEmpleado.jsp").forward(request, response);
         }
 
     }
