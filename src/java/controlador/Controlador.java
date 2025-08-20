@@ -350,7 +350,6 @@ public class Controlador extends HttpServlet {
                 case "Listar":
                     List listaCarros = carroDao.listar();
                     request.setAttribute("carros", listaCarros);
-                    request.getRequestDispatcher("Carro.jsp").forward(request, response);
                     break;
                 case "Agregar":
                     String marca = request.getParameter("txtMarca");
@@ -405,6 +404,7 @@ public class Controlador extends HttpServlet {
                     request.getRequestDispatcher("Controlador?menu=Carro&accion=Listar").forward(request, response);
                     break;
             }
+            request.getRequestDispatcher("CarroEmpleado.jsp").forward(request, response);
         }
 
     }
