@@ -23,6 +23,7 @@ import modelo.PublicidadDAO;
  * @author ISAAC
  */
 public class Controlador extends HttpServlet {
+
     Empleado empleado = new Empleado();
     EmpleadoDAO empleadoDao = new EmpleadoDAO();
     Publicidad publicidad = new Publicidad();
@@ -32,6 +33,7 @@ public class Controlador extends HttpServlet {
     int codEmpleado;
     int codPublicidad;
     int codProveedor;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -45,19 +47,19 @@ public class Controlador extends HttpServlet {
             throws ServletException, IOException {
         String menu = request.getParameter("menu");
         String accion = request.getParameter("accion");
-        if (menu.equals("Principal")){
+        if (menu.equals("Principal")) {
             request.getRequestDispatcher("Principal.jsp").forward(request, response);
-        }else if(menu.equals("Empleado")){
+        } else if (menu.equals("Empleado")) {
             request.getRequestDispatcher("Empleado.jsp").forward(request, response);
-        }else if (menu.equals("PrincipalEmpleado")){
+        } else if (menu.equals("PrincipalEmpleado")) {
             request.getRequestDispatcher("PrincipalEmpleados.jsp").forward(request, response);
-        }else if (menu.equals("Publicidad")) {
+        } else if (menu.equals("Publicidad")) {
             switch (accion) {
                 case "Listar":
                     List listaPublicidad = publicidadDao.listar();
                     request.setAttribute("publicidades", listaPublicidad);
                     break;
-                case"Agregar":
+                case "Agregar":
                     String fInicio = request.getParameter("txtFechaInicio");
                     java.sql.Date fechaInicio = java.sql.Date.valueOf(fInicio);
                     String fFin = request.getParameter("txtFechaFin");
@@ -73,13 +75,13 @@ public class Controlador extends HttpServlet {
                     publicidadDao.agregar(publicidad);
                     request.getRequestDispatcher("Controlador?menu=Publicidad&accion=Listar").forward(request, response);
                     break;
-                case"Editar":
+                case "Editar":
                     codPublicidad = Integer.parseInt(request.getParameter("codigoPublicidad"));
                     Publicidad p = publicidadDao.listarCodigoPublicidad(codPublicidad);
                     request.setAttribute("publicidad", p);
                     request.getRequestDispatcher("Controlador?menu=Publicidad&accion=Listar").forward(request, response);
                     break;
-                case"Actualizar":
+                case "Actualizar":
                     String fInicioPu = request.getParameter("txtFechaInicio");
                     java.sql.Date fechaInicioPu = java.sql.Date.valueOf(fInicioPu);
                     String fFinPu = request.getParameter("txtFechaFin");
@@ -96,7 +98,7 @@ public class Controlador extends HttpServlet {
                     publicidadDao.actualizar(publicidad);
                     request.getRequestDispatcher("Controlador?menu=Publicidad&accion=Listar").forward(request, response);
                     break;
-                case"Eliminar":
+                case "Eliminar":
                     codPublicidad = Integer.parseInt(request.getParameter("codigoPublicidad"));
                     publicidadDao.eliminar(codPublicidad);
                     request.getRequestDispatcher("Controlador?menu=Publicidad&accion=Listar").forward(request, response);
@@ -148,7 +150,12 @@ public class Controlador extends HttpServlet {
             }
             request.getRequestDispatcher("ProveedorNV.jsp").forward(request, response);
         } else if (menu.equals("ProveedorVC")) {
-            
+            switch (accion) {
+                case "Listar":
+                    List<Proveedor> listaProveedores = proveedorDao.listar();
+                    request.setAttribute("proveedores", listaProveedores);
+                    break;
+            }
             request.getRequestDispatcher("ProveedorVC.jsp").forward(request, response);
         }
 
