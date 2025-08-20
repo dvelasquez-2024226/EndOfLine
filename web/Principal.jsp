@@ -20,8 +20,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
-    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-
 </head>
 
 <body>
@@ -195,7 +193,7 @@
             <h2>Vehículos en Exhibición</h2>
             
             <div class="vehicle-display-container">
-                <model-viewer src="2022_toyota_hilux/scene.gltf" alt="Modelo 3D de Toyota Hilux 2022" auto-rotate camera-controls ar shadow-intensity="3" environment-image="neutral" poster="placeholder.jpg"></model-viewer>
+                <img src="image/hilux-color-rojo.png" alt=">Hilux 2022">
                 <div class="vehicle-details">
                     <h1>Toyota Hilux 2022</h1>
                     <h3>Motor: Turbo Diesel, Intercooler, 16 Válvulas, DOHC, Common Rail. Nm/rpm 500/1600-2800</h3>
@@ -207,7 +205,8 @@
             </div>
 
             <div class="vehicle-display-container">
-                <model-viewer src="ford_mustang_shelby_gt500/scene.gltf" alt="Modelo 3D de Mustang GT500" auto-rotate camera-controls ar shadow-intensity="3" environment-image="neutral" poster="placeholder.jpg"></model-viewer>
+                
+                <img src="image/shelby-500.png" alt="Ford Mustang Shelby 500 gt">
                 <div class="vehicle-details">
                     <h1>Ford Mustang Shelby GT500</h1>
                     <h3>Motor: 5.2L V8 Supercargado. 760 hp @ 7300 rpm, 625 lb-ft @ 5000 rpm</h3>
