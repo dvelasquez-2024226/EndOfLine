@@ -86,6 +86,8 @@ create table Empleados (
     correoEmpleado varchar(50) not null,
     telefonoEmpleado varchar(8) not null,
 	fechaIngreso date not null,
+    usuarioEmpleado varchar(15) not null,
+    contraseniaEmpleado varchar(100) not null,
     codigoConcesionario int not null,
     primary key carne (carne),
     constraint FK_empleados_concesionarios foreign key (codigoConcesionario)
@@ -239,16 +241,16 @@ insert into Concesionarios (nombreConcesionario, correoConcesionario, telefonoCo
 insert into Concesionarios (nombreConcesionario, correoConcesionario, telefonoConcesionario, direccionConcesionario, codigoInventario) 
 	values('Auto Premier', 'autopremier@gmail.com', '56789101', 'Zona 8', 5);
     
-insert into Empleados(nombreEmpleado, apellidoEmpleado, correoEmpleado, telefonoEmpleado, fechaIngreso, codigoConcesionario) 
-	values ('Ricardo','Marroquin','rmarroquin-2024231@EndOfLine.gt','56379391','2020-3-12','1');
-insert into Empleados(nombreEmpleado, apellidoEmpleado, correoEmpleado, telefonoEmpleado, fechaIngreso, codigoConcesionario) 
-	values ('Andre','Lopez','alopez-2024231@EndOfLine.gt','24350580','2025-3-12','2');
-insert into Empleados(nombreEmpleado, apellidoEmpleado, correoEmpleado, telefonoEmpleado, fechaIngreso, codigoConcesionario) 
-	values ('Ruben','Doblas','rdoblas-2024789@EndOfLine.gt','45612345','2020-8-11','3');
-insert into Empleados(nombreEmpleado, apellidoEmpleado, correoEmpleado, telefonoEmpleado, fechaIngreso, codigoConcesionario) 
-	values ('Samuel','deluque','vguetta-777777@EndOfLine.gt','77777777','2027-3-12','4');
-insert into Empleados(nombreEmpleado, apellidoEmpleado, correoEmpleado, telefonoEmpleado, fechaIngreso, codigoConcesionario) 
-	values ('Diego','Velasquez','jmartinez-2024083@EndOfLine.gt','45678941','2025-3-12','5');
+insert into Empleados(nombreEmpleado, apellidoEmpleado, correoEmpleado, telefonoEmpleado, fechaIngreso, usuarioEmpleado, contraseniaEmpleado, codigoConcesionario) 
+	values ('Ricardo','Marroquin','rmarroquin-2024231@EndOfLine.gt','56379391','2020-3-12','rmarroquin','123',1);
+insert into Empleados(nombreEmpleado, apellidoEmpleado, correoEmpleado, telefonoEmpleado, fechaIngreso, usuarioEmpleado, contraseniaEmpleado, codigoConcesionario) 
+	values ('Andre','Lopez','alopez-2024231@EndOfLine.gt','24350580','2025-3-12','alopez','456',1);
+insert into Empleados(nombreEmpleado, apellidoEmpleado, correoEmpleado, telefonoEmpleado, fechaIngreso, usuarioEmpleado, contraseniaEmpleado, codigoConcesionario) 
+	values ('Ruben','Doblas','rdoblas-2024789@EndOfLine.gt','45612345','2020-8-11','rdoblas','789',1);
+insert into Empleados(nombreEmpleado, apellidoEmpleado, correoEmpleado, telefonoEmpleado, fechaIngreso, usuarioEmpleado, contraseniaEmpleado, codigoConcesionario) 
+	values ('Samuel','deluque','vguetta-777777@EndOfLine.gt','77777777','2027-3-12','sdeluque','963',1);
+insert into Empleados(nombreEmpleado, apellidoEmpleado, correoEmpleado, telefonoEmpleado, fechaIngreso, usuarioEmpleado, contraseniaEmpleado, codigoConcesionario) 
+	values ('Diego','Velasquez','jmartinez-2024083@EndOfLine.gt','45678941','2025-3-12','d','321',1);
 
 insert into Contratos (clausula, precio, fechaInicio, fechaFin, codigoConcesionario)
 	values('Este contrato entrará en vigencia a partir de la fecha de firma y tendrá una duración de 6 meses, con opción a renovación.','268900.00','2025-01-06','2025-07-06',1);
