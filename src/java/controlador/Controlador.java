@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Empleado;
 import modelo.EmpleadoDAO;
+import modelo.Inventario;
+import modelo.InventarioDAO;
 import modelo.Proveedor;
 import modelo.ProveedorDAO;
 import modelo.Publicidad;
@@ -30,9 +32,12 @@ public class Controlador extends HttpServlet {
     PublicidadDAO publicidadDao = new PublicidadDAO();
     Proveedor proveedor = new Proveedor();
     ProveedorDAO proveedorDao = new ProveedorDAO();
+    Inventario inventario = new Inventario();
+    InventarioDAO inventarioDAO = new InventarioDAO();
     int codEmpleado;
     int codPublicidad;
     int codProveedor;
+    int codInventario;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -157,6 +162,58 @@ public class Controlador extends HttpServlet {
                     break;
             }
             request.getRequestDispatcher("ProveedorVC.jsp").forward(request, response);
+        } else if (menu.equals("Inventario")) {
+             switch (accion) {
+                case "Listar":
+                    List listaInventario = inventarioDAO.listar();
+                    request.setAttribute("inventario", listaInventario);
+                    break;
+                case"Agregar":
+                    int stock = Integer.valueOf(request.getParameter("txtStock"));
+                    String fIngreso = request.getParameter("txtFechaIngreso");
+                    java.sql.Date fechaIngreso = java.sql.Date.valueOf(fIngreso);
+                    String fSalida = request.getParameter("txtFechaSalida");
+                    java.sql.Date fechaSalida = java.sql.Date.valueOf(fSalida);
+                    int carne = Integer.valueOf(request.getParameter("txtCarne"));
+                    inventario.setStock(stock);
+                    inventario.setFechaIngreso(fechaIngreso);
+                    inventario.setFechaSalida(fechaSalida);
+                    inventario.setCarne(carne);
+                    inventarioDAO.agregar(inventario);
+                    request.getRequestDispatcher("Controlador?menu=Inventario&accion=Listar").forward(request, response);
+                    return;
+                    
+                case"Editar":
+                    codInventario = Integer.parseInt(request.getParameter("codigoInventario"));
+                    Inventario inven = inventarioDAO.listarCodigoInventario(codInventario);
+                    request.setAttribute("inventarioSeleccionado", inven);
+                    break;
+                case"Actualizar":
+                    int codIn = Integer.parseInt(request.getParameter("txtCodigoInventario")); // Obtiene el ID del formulario.
+                    int stockIn = Integer.valueOf(request.getParameter("txtStock"));
+                    String fIngresoIn = request.getParameter("txtFechaIngreso");
+                    java.sql.Date fechaIngresoIn = java.sql.Date.valueOf(fIngresoIn);
+                    String fSalidaIn = request.getParameter("txtFechaSalida");
+                    java.sql.Date fechaSalidaIn = java.sql.Date.valueOf(fSalidaIn);
+                    int carneIn = Integer.valueOf(request.getParameter("txtCarne"));
+
+                    inventario.setCodigoInventario(codIn); // Usa la variable local `codIn`.
+                    inventario.setStock(stockIn);
+                    inventario.setFechaIngreso(fechaIngresoIn);
+                    inventario.setFechaSalida(fechaSalidaIn);
+                    inventario.setCarne(carneIn);
+                    inventarioDAO.actualizar(inventario);
+                    request.getRequestDispatcher("Controlador?menu=Inventario&accion=Listar").forward(request, response);
+                    return;
+                    
+                case"Eliminar":
+                    codInventario = Integer.parseInt(request.getParameter("codigoInventario"));
+                    inventarioDAO.eliminar(codInventario);
+                    request.getRequestDispatcher("Controlador?menu=Inventario&accion=Listar").forward(request, response);
+                    return;
+            
+            }
+            request.getRequestDispatcher("Inventario.jsp").forward(request, response);
         }
 
     }
