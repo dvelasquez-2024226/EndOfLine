@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Carro;
 import modelo.CarroDAO;
+import modelo.Cliente;
+import modelo.ClienteDAO;
 import modelo.Empleado;
 import modelo.EmpleadoDAO;
 import modelo.Factura;
@@ -43,12 +45,15 @@ public class Controlador extends HttpServlet {
     FacturaDAO facturaDao = new FacturaDAO();
     Carro carro = new Carro();
     CarroDAO carroDao = new CarroDAO();
+    Cliente cliente       = new Cliente();
+    ClienteDAO clienteDao = new ClienteDAO();
     int codCarro;
     int codFactura;
     int codEmpleado;
     int codPublicidad;
     int codProveedor;
     int codInventario;
+    int codCliente;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -417,8 +422,66 @@ public class Controlador extends HttpServlet {
             request.getRequestDispatcher("CarroCl.jsp").forward(request, response);
             
             
+        }else if (menu.equals("Cliente")) {
+            switch (accion) {
+                case "Listar":
+                    List listaClientes = clienteDao.listar();
+                    request.setAttribute("clientes", listaClientes);
+                    break;
+                case "Agregar":
+                    String nom   = request.getParameter("txtNombreCliente");
+                    String ape   = request.getParameter("txtApellidoCliente");
+                    String correo= request.getParameter("txtCorreoCliente");
+                    String tel   = request.getParameter("txtTelefonoCliente");
+                    String dir   = request.getParameter("txtDireccionCliente");
+                    
+                    cliente.setNombreCliente(nom);
+                    cliente.setApellidoCliente(ape);
+                    cliente.setCorreoCliente(correo);
+                    cliente.setTelefonoCliente(tel);
+                    cliente.setDireccionCliente(dir);
+                    clienteDao.agregar(cliente);
+                    
+                    request.getRequestDispatcher("Controlador?menu=Cliente&accion=Listar")
+                           .forward(request, response);
+                    break;
+                case "Editar":
+                    codCliente = Integer.parseInt(request.getParameter("codigoCliente"));
+                    Cliente c   = clienteDao.listarCodigoCliente(codCliente);
+                    request.setAttribute("cliente", c);
+                    
+                    request.getRequestDispatcher("Controlador?menu=Cliente&accion=Listar")
+                           .forward(request, response);
+                    break;
+                case "Actualizar":
+                    String nomU    = request.getParameter("txtNombreCliente");
+                    String apeU    = request.getParameter("txtApellidoCliente");
+                    String correoU = request.getParameter("txtCorreoCliente");
+                    String telU    = request.getParameter("txtTelefonoCliente");
+                    String dirU    = request.getParameter("txtDireccionCliente");
+                    
+                    cliente.setNombreCliente(nomU);
+                    cliente.setApellidoCliente(apeU);
+                    cliente.setCorreoCliente(correoU);
+                    cliente.setTelefonoCliente(telU);
+                    cliente.setDireccionCliente(dirU);
+                    cliente.setCodigoCliente(codCliente);
+                    clienteDao.actualizar(cliente);
+                    
+                    request.getRequestDispatcher("Controlador?menu=Cliente&accion=Listar")
+                           .forward(request, response);
+                    break;
+                case "Eliminar":
+                    codCliente = Integer.parseInt(request.getParameter("codigoCliente"));
+                    clienteDao.eliminar(codCliente);
+                    
+                    request.getRequestDispatcher("Controlador?menu=Cliente&accion=Listar")
+                           .forward(request, response);
+                    break;
+            }
+            request.getRequestDispatcher("Cliente.jsp").forward(request, response);
         }
-
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
