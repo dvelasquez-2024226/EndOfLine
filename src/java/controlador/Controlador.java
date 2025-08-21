@@ -422,7 +422,7 @@ public class Controlador extends HttpServlet {
             request.getRequestDispatcher("CarroCl.jsp").forward(request, response);
             
             
-        }else if (menu.equals("Cliente")) {
+        } else if (menu.equals("Cliente")) {
             switch (accion) {
                 case "Listar":
                     List listaClientes = clienteDao.listar();
@@ -479,7 +479,7 @@ public class Controlador extends HttpServlet {
                            .forward(request, response);
                     break;
             }
-            request.getRequestDispatcher("Cliente.jsp").forward(request, response);
+            request.getRequestDispatcher("ClienteEmpleado.jsp").forward(request, response);
         }
         
     }
