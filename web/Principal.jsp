@@ -33,13 +33,14 @@
             <nav class="navbar">
                 <a href="Principal.jsp" class="logo">Menu Principal End Of Line</a>
                 <ul class="botones">
-                    <li><a href="Controlador?menu=ProveedorNV&accion=Listar">Vehiculos</a></li>
+                    <li><a href="Controlador?menu=CarroCl&accion=Listar">Vehiculos</a></li>
                     <li><a href="Controlador?menu=ProveedorVC&accion=Listar">Proveedores</a></li>
                     <li><a href="#">Servicios</a></li>
                     <li><a href="#">Talleres</a></li>
                     <li><a href="#">Ubicaciones</a></li>
                     <li><a href="#">Ayuda</a></li>
                     <li><a href="#">Carrito de compra</a></li>
+                    <li><a href="Controlador?menu=InventarioCl&accion=Listar">InventarioCl</a></li>
                     <div class="dropdown" >
                         <button style="border: none" class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton" aria-haspopup="true" data-toggle="dropdown" aria-expand="false">
                             ${apellidoCliente.getNombreCliente()}
