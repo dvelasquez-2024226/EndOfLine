@@ -18,6 +18,8 @@ import modelo.Cliente;
 import modelo.ClienteDAO;
 import modelo.Contrato;
 import modelo.ContratoDAO;
+import modelo.DetalleFactura;
+import modelo.DetalleFacturaDAO;
 import modelo.Empleado;
 import modelo.EmpleadoDAO;
 import modelo.Factura;
@@ -51,6 +53,9 @@ public class Controlador extends HttpServlet {
     ClienteDAO clienteDao = new ClienteDAO();
     Contrato contrato = new Contrato();
     ContratoDAO contratoDao = new ContratoDAO();
+    DetalleFactura detaFactura = new DetalleFactura();
+    DetalleFacturaDAO detaFacturaDao = new DetalleFacturaDAO();
+    int codDetaFactura;
     int codContrato;
     int codCarro;
     int codFactura;
@@ -536,6 +541,51 @@ public class Controlador extends HttpServlet {
                     break;
             }
             request.getRequestDispatcher("Contrato.jsp").forward(request, response);
+        }else if(menu.equals("DetalleFactura")){
+            switch(accion){
+                case"Listar":
+                    List lsitaDetalleFactura = detaFacturaDao.listar();
+                    request.setAttribute("detaFacturas", lsitaDetalleFactura);
+                break;
+                case"Agregar":
+                    Integer cantidad = Integer.parseInt(request.getParameter("txtCantida"));
+                    Double subTotal = Double.parseDouble(request.getParameter("txtSubTotal"));
+                    Double precioUnitario = Double.parseDouble(request.getParameter("txtPrecioUnitario"));
+                    String observaciones = request.getParameter("txtObservaciones");
+                    Integer codigoContrato = Integer.parseInt(request.getParameter("txtCodigoContrato"));
+                    detaFactura.setCantidad(cantidad);
+                    detaFactura.setSubTotal(subTotal);
+                    detaFactura.setPrecioUnitario(precioUnitario);
+                    detaFactura.setObservaciones(observaciones);
+                    detaFactura.setCodigoContrato(codigoContrato);
+                    detaFacturaDao.agregar(detaFactura);
+                    request.getRequestDispatcher("Controlador?menu=DetalleFactura&accion=Listar").forward(request, response);
+                break;
+                case"Editar":
+                    codDetaFactura = Integer.parseInt(request.getParameter("codigoDetalleFactura"));
+                    DetalleFactura df = detaFacturaDao.listarCodigoDetalleFactura(codDetaFactura);
+                    request.setAttribute("detalleFactura", df );
+                    request.getRequestDispatcher("Controlador?menu=DetalleFactura&accion=Listar").forward(request, response);
+                break;
+                case"Actualizar":
+                    Integer cantidadDeFa = Integer.parseInt(request.getParameter("txtCantida"));
+                    Double subTotalDeFa = Double.parseDouble(request.getParameter("txtSubTotal"));
+                    Double precioUnitarioDeFa = Double.parseDouble(request.getParameter("txtPrecioUnitario"));
+                    String observacionesDeFa = request.getParameter("txtObservaciones");
+                    detaFactura.setCantidad(cantidadDeFa);
+                    detaFactura.setSubTotal(subTotalDeFa);
+                    detaFactura.setPrecioUnitario(precioUnitarioDeFa);
+                    detaFactura.setObservaciones(observacionesDeFa);
+                    detaFacturaDao.actualizar(detaFactura);
+                    request.getRequestDispatcher("Controlador?menu=DetalleFactura&accion=Listar").forward(request, response);
+                break;
+                case"Eliminar":
+                    codDetaFactura = Integer.parseInt(request.getParameter("codigoDetalleFactura"));
+                    detaFacturaDao.eliminar(codDetaFactura);
+                    request.getRequestDispatcher("Controlador?menu=DetalleFactura&accion=Listar").forward(request, response);
+                break;
+            }
+            request.getRequestDispatcher("DetalleFacturaEmpleado.jsp").forward(request, response);
         }
         
     }
