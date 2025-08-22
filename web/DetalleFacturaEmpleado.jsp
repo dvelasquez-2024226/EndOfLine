@@ -65,23 +65,23 @@
                             <form action="Controlador?menu=DetalleFactura" method="POST"}>  
                                 <div class="form-group">
                                     <label><strong>Cantidad:</strong></label>
-                                    <input type="date" value="${detaFactura.getCantidad()}" name="txtCantida" class="form-control">
+                                    <input type="text" value="${detalleFactura.getCantidad()}" name="txtCantidad" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label><strong>SubTotal:</strong></label>
-                                    <input type="text" value="${detaFactura.getSubTotal()}" name="txtSubTotal" class="form-control">
+                                    <input type="text" value="${detalleFactura.getSubTotal()}" name="txtSubTotal" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label><strong>Precio Unitario:</strong></label>
-                                    <input type="text" value="${detaFactura.getPrecioUnitario()}" name="txtPrecioUnitario" class="form-control">
+                                    <input type="text" value="${detalleFactura.getPrecioUnitario()}" name="txtPrecioUnitario" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label><strong>Obervaciones:</strong></label>
-                                    <input type="text" value="${detaFactura.getObservaciones()}" name="txtObservaciones" class="form-control">
+                                    <input type="text" value="${detalleFactura.getObservaciones()}" name="txtObservaciones" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label><strong>Codigo del Contrato:</strong></label>
-                                    <input type="text" value="${detaFactura.getCodigoContrato()}" name="txtCodigoContrato" class="form-control">
+                                    <input type="text" value="${detalleFactura.getCodigoContrato()}" name="txtCodigoContrato" class="form-control">
                                 </div>
                                 <div class="d-flex justify-content-between">  
                                     <input type="submit" name="accion" value="Agregar" class="btn btn-info">  

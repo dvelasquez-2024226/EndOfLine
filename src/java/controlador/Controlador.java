@@ -548,7 +548,7 @@ public class Controlador extends HttpServlet {
                     request.setAttribute("detaFacturas", lsitaDetalleFactura);
                 break;
                 case"Agregar":
-                    Integer cantidad = Integer.parseInt(request.getParameter("txtCantida"));
+                    Integer cantidad = Integer.parseInt(request.getParameter("txtCantidad"));
                     Double subTotal = Double.parseDouble(request.getParameter("txtSubTotal"));
                     Double precioUnitario = Double.parseDouble(request.getParameter("txtPrecioUnitario"));
                     String observaciones = request.getParameter("txtObservaciones");
@@ -568,7 +568,7 @@ public class Controlador extends HttpServlet {
                     request.getRequestDispatcher("Controlador?menu=DetalleFactura&accion=Listar").forward(request, response);
                 break;
                 case"Actualizar":
-                    Integer cantidadDeFa = Integer.parseInt(request.getParameter("txtCantida"));
+                    Integer cantidadDeFa = Integer.parseInt(request.getParameter("txtCantidad"));
                     Double subTotalDeFa = Double.parseDouble(request.getParameter("txtSubTotal"));
                     Double precioUnitarioDeFa = Double.parseDouble(request.getParameter("txtPrecioUnitario"));
                     String observacionesDeFa = request.getParameter("txtObservaciones");
@@ -576,6 +576,7 @@ public class Controlador extends HttpServlet {
                     detaFactura.setSubTotal(subTotalDeFa);
                     detaFactura.setPrecioUnitario(precioUnitarioDeFa);
                     detaFactura.setObservaciones(observacionesDeFa);
+                    detaFactura.setCodigoDetalleFactura(codDetaFactura);
                     detaFacturaDao.actualizar(detaFactura);
                     request.getRequestDispatcher("Controlador?menu=DetalleFactura&accion=Listar").forward(request, response);
                 break;
