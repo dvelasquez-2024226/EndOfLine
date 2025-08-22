@@ -18,7 +18,7 @@ public class CarroDAO {
     
     
     public List listar(){
-        String sql ="select * from carros";
+        String sql ="select * from Carros";
         List<Carro> listaCarro = new ArrayList<>();
         try{
             con = cn.Conexion();
@@ -50,7 +50,7 @@ public class CarroDAO {
     
     
     public int agregar(Carro co){
-        String sql ="insert into Carro (marca, modelo, color, anio, estado) values (?, ?, ?, ?, ?)";
+        String sql ="insert into Carros (marca, modelo, color, anio, estado, codigoInventario, codigoProveedor) values (?, ?, ?, ?, ?, ?, ?)";
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
@@ -59,6 +59,8 @@ public class CarroDAO {
             ps.setString(3, co.getColor());
             ps.setString(4, co.getAnio());
             ps.setString(5, co.getEstado());
+            ps.setInt(6, co.getCodigoinventario());
+            ps.setInt(7, co.getCodigoProveedor());
             ps.executeUpdate();
             
         }catch(Exception e){
@@ -74,7 +76,7 @@ public class CarroDAO {
     public Carro listarCodigoCarro(int id){
         
         Carro co = new Carro();
-        String sql = "Select * from carros where codigoCarro ="+id;
+        String sql = "Select * from Carros where codigoCarro ="+id;
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
@@ -85,6 +87,8 @@ public class CarroDAO {
                 co.setColor(rs.getString(4));
                 co.setAnio(rs.getString(5));
                 co.setEstado(rs.getString(6));
+                co.setCodigoinventario(rs.getInt(7));
+                co.setCodigoProveedor(rs.getInt(8));
                 
         }
             
@@ -98,19 +102,20 @@ public class CarroDAO {
     
     
     public int actualizar(Carro co){
-        String sql ="update carros set marca = ?," + "modelo = ?," + "color = ?," + "anio = ?, estado = ? where codigoCarro = ?";
+        String sql ="update Carros set marca = ?, modelo = ?, color = ?, anio = ?, estado = ?, Codigoinventario = ?, CodigoProveedor = ? where CodigoCarro = ?";
         
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
-            ps.setInt(1, co.getCodigoCarro());
-            ps.setString(2, co.getMarca());
-            ps.setString(3, co.getModelo());
-            ps.setString(4, co.getColor());
-            ps.setString(5, co.getAnio());
-            ps.setString(6, co.getEstado());
-            ps.setInt(7, co.getCodigoinventario());
-            ps.setInt(8, co.getCodigoProveedor());
+            
+            ps.setString(1, co.getMarca());
+            ps.setString(2, co.getModelo());
+            ps.setString(3, co.getColor());
+            ps.setString(4, co.getAnio());
+            ps.setString(5, co.getEstado());
+            ps.setInt(6, co.getCodigoinventario());
+            ps.setInt(7, co.getCodigoProveedor());
+            ps.setInt(8, co.getCodigoCarro());
             ps.executeUpdate();
             
         }catch(Exception e){
@@ -125,7 +130,7 @@ public class CarroDAO {
     
     
     public int eliminar(int id){
-        String sql ="delete from carros where codigoCarro ="+id;
+        String sql ="delete from Carros where codigoCarro ="+id;
         
         try{
             con = cn.Conexion();
