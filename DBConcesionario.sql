@@ -206,6 +206,8 @@ insert into Clientes (nombreCliente, apellidoCliente, correoCliente, telefonoCli
 	values ('Carlos', 'Hernández', 'carlos.hdz@example.com', '39871234', 'Residencial Monte Bello, casa 45', 4);
 insert into Clientes (nombreCliente, apellidoCliente, correoCliente, telefonoCliente, direccionCliente, codigoMembresia)
 	values ('Sofía', 'López', 'sofia.lopez@example.com', '28903456', 'Zona 10, Torre Empresarial, apto 302', 5);
+insert into Clientes (nombreCliente, apellidoCliente, correoCliente, telefonoCliente, direccionCliente, codigoMembresia)
+	values ('Diego', 'L', 'deigo.velasquez@example.com', '1', 'Zona 11, Colonia Rosevelt 8 calle', 1);
     
     
 insert into Talleres (ubicacion, repuestos, herramientas, estadocarro) 
@@ -307,4 +309,5 @@ insert into Facturas (fechaEmision, total, estado, metodoPago, codigoDetalleFact
 insert into Facturas (fechaEmision, total, estado, metodoPago, codigoDetalleFactura, carne, codigoCliente)
 	values ('2025-07-20', 760.50, 'Pendiente', 'Paypal',5,5,5);
     
-    select * from clientes where apellidoCliente = 'Ramírez' and telefonoCliente = '45678901';
+Select * from facturas;
+Select * from DetalleFactura;

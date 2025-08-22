@@ -16,28 +16,28 @@
                         <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="#" >Inventarios</a>
+                        <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="Controlador?menu=Inventario&accion=Listar" target="myFrame">Inventarios</a>
                     </li>
                     <li class="nav-item">
-                        <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="#">Proveedores</a>
+                        <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="Controlador?menu=ProveedorNV&accion=Listar" target="myFrame">Proveedores</a>
                     </li>
                     <li class="nav-item">
                         <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="#" >Membresias</a>
                     </li>
                     <li class="nav-item">
-                        <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="#" >Clientes</a>
+                        <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="Controlador?menu=Cliente&accion=Listar" target="myFrame">Cliente</a>
                     </li>
                     <li class="nav-item">
                         <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="#" >Talleres</a>
                     </li>
                     <li class="nav-item">
-                        <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="#" >Carros</a>
+                        <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="Controlador?menu=Carro&accion=Listar" target="myFrame" >Carros</a>
                     </li>
                     <li class="nav-item">
                         <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="#" >Concesionarios</a>
                     </li>
                     <li class="nav-item">
-                        <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="Controlador?menu=Empleado&accion=Listar" target="myFrame" >Empleados</a>
+                        <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="Controlador?menu=Empleados&accion=Listar" target="myFrame" >Empleados</a>
                     </li>
                     <li class="nav-item">
                         <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="#" >Contratos</a>
