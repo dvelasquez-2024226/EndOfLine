@@ -16,6 +16,8 @@ import modelo.Carro;
 import modelo.CarroDAO;
 import modelo.Cliente;
 import modelo.ClienteDAO;
+import modelo.Contrato;
+import modelo.ContratoDAO;
 import modelo.Empleado;
 import modelo.EmpleadoDAO;
 import modelo.Factura;
@@ -47,6 +49,9 @@ public class Controlador extends HttpServlet {
     CarroDAO carroDao = new CarroDAO();
     Cliente cliente       = new Cliente();
     ClienteDAO clienteDao = new ClienteDAO();
+    Contrato contrato = new Contrato();
+    ContratoDAO contratoDao = new ContratoDAO();
+    int codContrato;
     int codCarro;
     int codFactura;
     int codEmpleado;
@@ -480,6 +485,57 @@ public class Controlador extends HttpServlet {
                     break;
             }
             request.getRequestDispatcher("ClienteEmpleado.jsp").forward(request, response);
+        }else if(menu.equals("Contrato")){
+            switch(accion){
+                case "Listar":
+                    List listaContratos = contratoDao.listar();
+                    request.setAttribute("contratos", listaContratos);
+                    break;
+                case "Agregar":
+                    String cla = request.getParameter("txtClausula");
+                    Double pre = Double.parseDouble(request.getParameter("txtPrecio"));
+                    String feIni = request.getParameter("txtFechaInicio");
+                    java.sql.Date fechaIni = java.sql.Date.valueOf(feIni);
+                    String feFin = request.getParameter("txtFechaFin");
+                    java.sql.Date fechaFin = java.sql.Date.valueOf(feFin);
+                    int codConcesonario = Integer.valueOf(request.getParameter("txtCodigoConcesionario"));
+                    contrato.setClausula(cla);
+                    contrato.setPrecio(pre);
+                    contrato.setFechaInicio(fechaIni);
+                    contrato.setFechaFin(fechaFin);
+                    contrato.setCodigoConcesionario(codConcesonario);
+                    contratoDao.agregar(contrato);
+                    request.getRequestDispatcher("Controlador?menu=Contrato&accion=Listar").forward(request, response);
+                    break;
+                case "Editar":
+                    codContrato = Integer.parseInt(request.getParameter("codigoContrato"));
+                    Contrato c = contratoDao.listarCodigoContrato(codContrato);
+                    request.setAttribute("contrato", c);
+                    request.getRequestDispatcher("Controlador?menu=Contrato&accion=Listar").forward(request, response);
+                    break;
+                case "Actualizar":
+                    String claCon = request.getParameter("txtClausula");
+                    Double preCon = Double.parseDouble(request.getParameter("txtPrecio"));
+                    String feIniCon = request.getParameter("txtFechaInicio");
+                    java.sql.Date fechaIniCon = java.sql.Date.valueOf(feIniCon);
+                    String feFinCon = request.getParameter("txtFechaFin");
+                    java.sql.Date fechaFinCon = java.sql.Date.valueOf(feFinCon);
+                    int codConce = Integer.valueOf(request.getParameter("txtCodigoConcesionario"));
+                    contrato.setClausula(claCon);
+                    contrato.setPrecio(preCon);
+                    contrato.setFechaInicio(fechaIniCon);
+                    contrato.setFechaFin(fechaFinCon);
+                    contrato.setCodigoContrato(codContrato);
+                    contratoDao.actualizar(contrato);
+                    request.getRequestDispatcher("Controlador?menu=Contrato&accion=Listar").forward(request, response);
+                    break;
+                case "Eliminar":
+                    codContrato = Integer.parseInt(request.getParameter("codigoContrato"));
+                    contratoDao.eliminar(codContrato);
+                    request.getRequestDispatcher("Controlador?menu=Contrato&accion=Listar").forward(request, response);
+                    break;
+            }
+            request.getRequestDispatcher("Contrato.jsp").forward(request, response);
         }
         
     }
