@@ -16,6 +16,8 @@ import modelo.Carro;
 import modelo.CarroDAO;
 import modelo.Cliente;
 import modelo.ClienteDAO;
+import modelo.Concesionario;
+import modelo.ConcesionarioDAO;
 import modelo.Contrato;
 import modelo.ContratoDAO;
 import modelo.DetalleFactura;
@@ -55,6 +57,9 @@ public class Controlador extends HttpServlet {
     ContratoDAO contratoDao = new ContratoDAO();
     DetalleFactura detaFactura = new DetalleFactura();
     DetalleFacturaDAO detaFacturaDao = new DetalleFacturaDAO();
+    Concesionario concesionario = new Concesionario();
+    ConcesionarioDAO concesionarioDao = new ConcesionarioDAO();
+    int codConcesionario;
     int codDetaFactura;
     int codContrato;
     int codCarro;
@@ -586,6 +591,55 @@ public class Controlador extends HttpServlet {
                 break;
             }
             request.getRequestDispatcher("DetalleFacturaEmpleado.jsp").forward(request, response);
+        }else if (menu.equals("Concesionario")) {
+            switch (accion) {
+                case "Listar":
+                    List listaConcesionarios = concesionarioDao.listar();
+                    request.setAttribute("concesionarios", listaConcesionarios);
+                    break;
+                case "Agregar":
+                    String nombre = request.getParameter("txtNombreConcesionario");
+                    String telefono = request.getParameter("txtTelefonoConcesionario");
+                    String correo = request.getParameter("txtCorreoConcesionario");
+                    String direccion = request.getParameter("txtDireccionConcesionario");
+                    String inventario =  request.getParameter("txtCodigoInventario");
+                    int inven = Integer.parseInt(inventario);
+                    concesionario.setNombreConcesionario(nombre);
+                    concesionario.setTelefonoConcesionario(telefono);
+                    concesionario.setCorreoConcesionario(correo);
+                    concesionario.setDireccionConcesionario(direccion);
+                    concesionario.setCodigoInventario(inven);
+                    concesionarioDao.agregar(concesionario);
+                    request.getRequestDispatcher("Controlador?menu=Concesionario&accion=Listar").forward(request, response);
+                    break;
+                case "Editar":
+                    codConcesionario = Integer.parseInt(request.getParameter("codigoConcesionario"));
+                    Concesionario c = concesionarioDao.listarCodigoConcesionario(codConcesionario);
+                    request.setAttribute("concesionario", c);
+                    request.getRequestDispatcher("Controlador?menu=Concesionario&accion=Listar").forward(request, response);
+                    break;
+                case "Actualizar":
+                    String nombreCo = request.getParameter("txtNombreConcesionario");
+                    String telefonoCo = request.getParameter("txtTelefonoConcesionario");
+                    String correoCo = request.getParameter("txtCorreoConcesionario");
+                    String direccionCo = request.getParameter("txtDireccionConcesionario");
+                    String inventa =  request.getParameter("txtCodigoInventario");
+                    int inve = Integer.parseInt(inventa);
+                    concesionario.setNombreConcesionario(nombreCo);
+                    concesionario.setCorreoConcesionario(correoCo);
+                    concesionario.setTelefonoConcesionario(telefonoCo);
+                    concesionario.setDireccionConcesionario(direccionCo);
+                    concesionario.setCodigoInventario(inve);
+                    concesionario.setCodigoConcesionario(codConcesionario);
+                    concesionarioDao.actualizar(concesionario);
+                    request.getRequestDispatcher("Controlador?menu=Concesionario&accion=Listar").forward(request, response);
+                    break;
+                case "Eliminar":
+                    codEmpleado = Integer.parseInt(request.getParameter("codigoConcesionario"));
+                    concesionarioDao.eliminar(codConcesionario);
+                    request.getRequestDispatcher("Controlador?menu=Concesionario&accion=Listar").forward(request, response);
+            }
+            request.getRequestDispatcher("Concesionario.jsp").forward(request, response);
         }
         
     }
