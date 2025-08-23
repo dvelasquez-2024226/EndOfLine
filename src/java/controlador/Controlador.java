@@ -746,7 +746,14 @@ public class Controlador extends HttpServlet {
                     request.setAttribute("apellidoCliente", request.getSession().getAttribute("apellidoCliente"));
                     request.getRequestDispatcher("PrincipalEmpleado.jsp").forward(request, response);
                     break;
+                case "Listar":
+                    List listaEmpleado = empleadoDao.listar();
+                    request.setAttribute("empleados", listaEmpleado);
+                    break;
+                default:
+                    request.getRequestDispatcher("Controlador?accion=Listar").forward(request, response);
             }
+            request.getRequestDispatcher("PrincipalEmpleados.jsp").forward(request, response);
         }else if(menu.equals("Membresia")){// Controlador membresia
             switch(accion){
                 case "Listar":
