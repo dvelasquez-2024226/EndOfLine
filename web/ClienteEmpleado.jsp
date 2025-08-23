@@ -1,3 +1,8 @@
+<%-- 
+    Document   : Cliente
+    Created on : 20 ago 2025, 14:58:08
+    Author     : boror
+--%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -48,7 +53,7 @@
     </head>  
     <body>  
 
-        <div class="header-bar">Gestión de Publicidad</div>  
+        <div class="header-bar">Gestión de Clientes</div>  
 
         <div class="container-fluid">  
             <div class="row">  
@@ -56,27 +61,27 @@
                 <div class="col-md-4 mb-4">  
                     <div class="card">  
                         <div class="card-body">  
-                            <h5 class="card-title text-center text-primary">Datos de la Publicidad</h5>  
-                            <form action="Controlador?menu=Publicidad" method="POST">
+                            <h5 class="card-title text-center text-primary">Datos del Clientes</h5>  
+                            <form action="Controlador?menu=Cliente" method="POST">
                                 <div class="form-group">
-                                    <label><strong>Fecha Inicio:</strong></label>
-                                    <input type="date" value="${publicidad.fechaInicio}" name="txtFechaInicio" class="form-control" min="2025-01-01">
+                                    <label><strong>Nombre Cliente:</strong></label>
+                                    <input type="text" value="${cliente.nombreCliente}" name="txtNombreCliente" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label><strong>Fecha Fin:</strong></label>
-                                    <input type="date" value="${publicidad.fechaFin}" name="txtFechaFin" class="form-control">
+                                    <label><strong>Apellido Cliente:</strong></label>
+                                    <input type="text" value="${cliente.apellidoCliente}" name="txtApellidoCliente" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label><strong>Costos:</strong></label>
-                                    <input type="number" value="${publicidad.costos}" name="txtCostos" class="form-control" min="0">
+                                    <label><strong>Correo Cliente:</strong></label>
+                                    <input type="text" value="${cliente.correoCliente}" name="txtCorreoCliente" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label><strong>Colaboradores:</strong></label>
-                                    <input type="text" value="${publicidad.colaboradores}" name="txtColaboradores" class="form-control">
+                                    <label><strong>Teléfono Cliente:</strong></label>
+                                    <input type="text" value="${cliente.telefonoCliente}" name="txtTelefonoCliente" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label><strong>Codigo Carro:</strong></label>
-                                    <input type="number" value="${publicidad.codigoCarro}" name="txtCodigoCarro" class="form-control" min="0">
+                                    <label><strong>Dirección Cliente:</strong></label>
+                                    <input type="text" value="${cliente.direccionCliente}" name="txtDireccionCliente" class="form-control">
                                 </div>
                                 <input type="submit" name="accion" value="Agregar" class="btn btn-info">
                                 <input type="submit" name="accion" value="Actualizar" class="btn btn-success">
@@ -89,33 +94,31 @@
                 <div class="col-md-8">  
                     <div class="card">  
                         <div class="card-body">  
-                            <h5 class="card-title text-center text-primary">Lista de Publicidad</h5>  
+                            <h5 class="card-title text-center text-primary">Lista de Clientes</h5>  
                             <table class="table table-hover">  
-                                <thead class="">
+                                <thead>
                                     <tr>
                                         <th>CODIGO</th>
-                                        <th>Fecha Inicio</th>
-                                        <th>Fecha Fin</th>
-                                        <th>Costos</th>
-                                        <th>Colaboradores</th>
-                                        <th>Carro</th>
+                                        <th>Nombre</th>
+                                        <th>Apellido</th>
+                                        <th>Correo</th>
+                                        <th>Teléfono</th>
+                                        <th>Dirección</th>
                                         <th>ACCIONES</th>
                                     </tr>
-                                </thead>    
+                                </thead>
                                 <tbody>
-                                    <c:forEach var="publicidad" items="${publicidades}">
-
-
+                                    <c:forEach var="cliente" items="${clientes}">
                                         <tr>
-                                            <td>${publicidad.getCodigoPublicidad()}</td>
-                                            <td>${publicidad.getFechaInicio()}</td>
-                                            <td>${publicidad.getFechaFin()}</td>
-                                            <td>${publicidad.getCostos()}</td>
-                                            <td>${publicidad.getColaboradores()}</td>
-                                            <td>${publicidad.getCodigoCarro()}</td>
+                                            <td>${cliente.getCodigoCliente()}</td>
+                                            <td>${cliente.getNombreCliente()}</td>
+                                            <td>${cliente.getApellidoCliente()}</td>
+                                            <td>${cliente.getCorreoCliente()}</td>
+                                            <td>${cliente.getTelefonoCliente()}</td>
+                                            <td>${cliente.getDireccionCliente()}</td>
                                             <td>
-                                                <a class="btn btn-warning" href="Controlador?menu=Publicidad&accion=Editar&codigoPublicidad=${publicidad.getCodigoPublicidad()}">Editar</a>
-                                                <a class="btn btn-danger " href="Controlador?menu=Publicidad&accion=Eliminar&codigoPublicidad=${publicidad.getCodigoPublicidad()}">Eliminar</a>
+                                                <a class="btn btn-warning" href="Controlador?menu=Cliente&amp;accion=Editar&amp;codigoCliente=${cliente.getCodigoCliente()}">Editar</a>
+                                                <a class="btn btn-danger" href="Controlador?menu=Cliente&amp;accion=Eliminar&amp;codigoCliente=${cliente.getCodigoCliente()}">Eliminar</a>
                                             </td>
                                         </tr>
                                     </c:forEach>

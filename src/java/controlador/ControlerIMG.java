@@ -10,21 +10,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.Cliente;
-import modelo.ClienteDAO;
-import modelo.Empleado;
 import modelo.EmpleadoDAO;
 
 /**
  *
  * @author ISAAC
  */
-public class Validar extends HttpServlet {
-    Cliente cliente = new Cliente () ;
-    ClienteDAO clienteDao = new ClienteDAO (); 
-    Empleado empleado = new Empleado();
+public class ControlerIMG extends HttpServlet {
     EmpleadoDAO empleadoDao = new EmpleadoDAO();
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -42,10 +35,10 @@ public class Validar extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Validar</title>");
+            out.println("<title>Servlet ControlerIMG</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Validar at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ControlerIMG at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,8 +56,8 @@ public class Validar extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int codigoCliente= Integer.parseInt(request.getParameter("codigoCliente"));
-        clienteDao.listarImg(codigoCliente, response);
+        int carne= Integer.parseInt(request.getParameter("carne"));
+        empleadoDao.listarImg(carne, response);
     }
 
     /**
@@ -78,28 +71,7 @@ public class Validar extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        String accion = request.getParameter("accion");
-        if (accion.equalsIgnoreCase("Ingresar")){
-            String user = request.getParameter("txtUser");
-            String pass = request.getParameter("txtPass");
-            cliente = clienteDao.validar(user, pass);
-            empleado = empleadoDao.validar(user, pass);
-            if (cliente.getApellidoCliente()!= null){
-                request.setAttribute("apellidoCliente" , cliente);
-                request.getRequestDispatcher("Controlador?menu=NavCliente&accion=Listar").forward(request,response);
-                System.out.println("Hola");
-            }else if(empleado.getUsuarioEmpleado()!= null){
-                request.setAttribute("usuarioEmpleado", empleado);
-                request.getRequestDispatcher("Controlador?menu=NavEmpleado&accion=Listar").forward(request, response);
-            }else{
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-            }
-        }else{
-               request.getRequestDispatcher("index.jsp").forward(request, response);
-        }
-        
-        
+        processRequest(request, response);
     }
 
     /**

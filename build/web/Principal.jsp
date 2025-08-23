@@ -33,7 +33,7 @@
             <nav class="navbar">
                 <a href="Principal.jsp" class="logo">Menu Principal End Of Line</a>
                 <ul class="botones">
-                    <li><a href="Controlador?menu=ProveedorNV&accion=Listar">Vehiculos</a></li>
+                    <li><a href="Controlador?menu=CarroCl&accion=Listar">Vehiculos</a></li>
                     <li><a href="Controlador?menu=ProveedorVC&accion=Listar">Proveedores</a></li>
                     <li><a href="#">Servicios</a></li>
                     <li><a href="#">Talleres</a></li>
