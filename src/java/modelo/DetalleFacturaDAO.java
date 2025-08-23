@@ -17,7 +17,7 @@ public class DetalleFacturaDAO {
     //Crud
     //Listar
     public List listar(){
-        String sql = "Select * from detalleFactura";
+        String sql = "Select * from DetalleFactura";
         List<DetalleFactura> listaDetalleFactura = new ArrayList<>();
         try{
             con = cn.Conexion();
@@ -25,12 +25,11 @@ public class DetalleFacturaDAO {
             rs = ps.executeQuery();
             while(rs.next()){
                 DetalleFactura detaFac = new DetalleFactura();
-                detaFac.setCodigoDetalleFactura(rs.getInt(1));
-                detaFac.setCantidad(rs.getInt(2));
-                detaFac.setSubTotal(rs.getDouble(3));
-                detaFac.setPrecioUnitario(rs.getDouble(4));
-                detaFac.setObservaciones(rs.getString(5));
-                detaFac.setCodigoContrato(rs.getInt(6));
+                detaFac.setCantidad(rs.getInt(1));
+                detaFac.setSubTotal(rs.getDouble(2));
+                detaFac.setPrecioUnitario(rs.getDouble(3));
+                detaFac.setObservaciones(rs.getString(4));
+                detaFac.setCodigoContrato(rs.getInt(5));
                 listaDetalleFactura.add(detaFac);
             }
         }catch(Exception e){
@@ -50,7 +49,6 @@ public class DetalleFacturaDAO {
             ps.setDouble(3, detaFac.getPrecioUnitario());
             ps.setString(4, detaFac.getObservaciones());
             ps.setInt(5, detaFac.getCodigoContrato());
-            ps.executeUpdate();
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -66,11 +64,11 @@ public class DetalleFacturaDAO {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while(rs.next()){
-                detaFac.setCantidad(rs.getInt(2));
-                detaFac.setSubTotal(rs.getDouble(3));
-                detaFac.setPrecioUnitario(rs.getDouble(4));
-                detaFac.setObservaciones(rs.getString(5));
-                detaFac.setCodigoContrato(rs.getInt(6));
+                detaFac.setCantidad(rs.getInt(1));
+                detaFac.setSubTotal(rs.getDouble(2));
+                detaFac.setPrecioUnitario(rs.getDouble(3));
+                detaFac.setObservaciones(rs.getString(4));
+                detaFac.setCodigoContrato(rs.getInt(5));
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -90,7 +88,6 @@ public class DetalleFacturaDAO {
             ps.setDouble(3, detaFac.getPrecioUnitario());
             ps.setString(4, detaFac.getObservaciones());
             ps.setInt(5, detaFac.getCodigoDetalleFactura());
-            ps.executeUpdate();
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -99,7 +96,7 @@ public class DetalleFacturaDAO {
     
     //Eliminar
     public void eliminar(int idDetaFac){
-        String sql = "delete from DetalleFactura where codigoDetalleFactura = "+idDetaFac;
+        String sql = "delete * from DetalleFactura = "+idDetaFac;
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);

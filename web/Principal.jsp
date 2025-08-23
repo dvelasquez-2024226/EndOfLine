@@ -33,14 +33,14 @@
             <nav class="navbar">
                 <a href="Principal.jsp" class="logo">Menu Principal End Of Line</a>
                 <ul class="botones">
-                    <li><a href="Controlador?menu=CarroCl&accion=Listar">Vehiculos</a></li>
-                    <li><a href="Controlador?menu=ProveedorVC&accion=Listar">Proveedores</a></li>
+                    <li><a href="Controlador?menu=CarroCl&accion=Listar" target="myFrame">Vehiculos</a></li>
+                    <li><a href="Controlador?menu=ProveedorVC&accion=Listar" target="myFrame">Proveedores</a></li>
                     <li><a href="#">Servicios</a></li>
-                    <li><a href="#">Talleres</a></li>
-                    <li><a href="#">Ubicaciones</a></li>
-                    <li><a href="#">Ayuda</a></li>
-                    <li><a href="#">Carrito de compra</a></li>
-                    <li><a href="Controlador?menu=InventarioCl&accion=Listar">InventarioCl</a></li>
+                    <li><a href="#" >Talleres</a></li>
+                    <li><a href="#" >Ubicaciones</a></li>
+                    <li><a href="#" >Ayuda</a></li>
+                    <li><a href="#" >Carrito de compra</a></li>
+                    <li><a href="Controlador?menu=InventarioCl&accion=Listar" target="myFrame">InventarioCl</a></li>
                     <div class="dropdown" >
                         <button style="border: none" class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton" aria-haspopup="true" data-toggle="dropdown" aria-expand="false">
                             ${apellidoCliente.getNombreCliente()}
@@ -61,185 +61,13 @@
                 </ul>
             </nav>
         </header>
+        <div class="m-4" style="height: 845px" >
+            <iframe name="myFrame" src="PrincipalCliente.jsp" style="height: 100%; width: 100%; border: none"></iframe>
+        </div> 
 
-        <main>
-            <div class="text-center">
-                <h1>¡END OF LINE!</h1>
-            </div>
-
-            <section class="content-section">
-                <h2>Nuestras Instalaciones</h2>
-                <div class="imagen-instalaciones">
-                    <img src="image/lugarModerno.png" alt="Showroom moderno">
-                    <img src="image/AreaServicios.png" alt="Área de servicios">
-                    <img src="image/carroExsibicion.png" alt="Vehículo en exhibición">
-                </div>
-                <p style="text-align: center; margin-top: 5rem;">
-                    Explora nuestras modernas instalaciones, diseñadas para ofrecerte la mejor experiencia de compra.
-                </p>
-            </section>
-
-            <section class="content-section">
-                <h2>Nuestros Servicios</h2>
-                <div class="services-layout">
-                    <div class="service-column">
-                        <h3>Vehículos</h3>
-                        <ul>
-                            <li>Hatchback
-                                <ul>
-                                    <li>Yaris</li>
-                                    <li>Corolla</li>
-                                    <li>Golf</li>
-                                    <li>A3</li>
-                                    <li>Civic</li>
-                                    <li>Impreza</li>
-                                    <li>Fiesta</li>
-                                    <li>Focus</li>
-                                </ul>
-                            </li>
-                            <li>SUV
-                                <ul>
-                                    <li>RAV4</li>
-                                    <li>Highlander</li>
-                                    <li>4Runner</li>
-                                    <li>Explorer</li>
-                                    <li>Tucson</li>
-                                    <li>Tiguan</li>
-                                    <li>Cayenne</li>
-                                    <li>Suburban</li>
-                                </ul>
-                            </li>
-                            <li>Pickup
-                                <ul>
-                                    <li>Hilux</li>
-                                    <li>Tacoma</li>
-                                    <li>Tundra</li>
-                                    <li>Ranger</li>
-                                    <li>F-150</li>
-                                    <li>Ram 1500</li>
-                                    <li>Silverado</li>
-                                    <li>Gladiator</li>
-                                    <li>Ridgeline</li>
-                                </ul>
-                        </ul>
-                    </div>
-                    <div class="service-column">
-                        <h3>Servicios</h3>
-                        <ul>
-                            <li>Taller General
-                                <ul>
-                                    <li>Diagnóstico computarizado</li>
-                                    <li>Reparación de motor</li>
-                                    <li>Frenos ABS</li>
-                                    <li>Suspensión</li>
-                                    <li>Transmisión</li>
-                                    <li>Sistema de escape</li>
-                                </ul>
-                            </li>
-                            <li>Mantenimiento Preventivo
-                                <ul>
-                                    <li>Cambio de aceite</li>
-                                    <li>Filtros</li>
-                                    <li>Baterías</li>
-                                    <li>Bujías</li>
-                                    <li>Limpieza de inyectores</li>
-                                </ul>
-                            </li>
-                            <li>Garantía
-                                <ul>
-                                    <li>Garantía de fábrica</li>
-                                    <li>Garantía extendida</li>
-                                    <li>Cobertura de tren motriz</li>
-                                    <li>Seguro de protección de neumáticos</li>
-                                </ul>
-                            </li>
-                            <li>Financiamiento
-                                <ul>
-                                    <li>Crédito automotriz</li>
-                                    <li>Leasing</li>
-                                    <li>Planes de 0% de interés</li>
-                                    <li>Requisitos de financiamiento</li>
-                                </ul>
-                            </li>
-                            <li>Seguros
-                                <ul>
-                                    <li>Pólizas a todo riesgo</li>
-                                    <li>Cobertura de daños a terceros</li>
-                                    <li>Seguros contra robos</li>
-                                    <li>Asesoría de seguros</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="service-column">
-                        <h3>Ayuda</h3>
-                        <ul>
-                            <li>Asistencia en Carretera
-                                <ul>
-                                    <li>Servicio de grúa 24/7</li>
-                                    <li>Asistencia por avería</li>
-                                    <li>Cambio de llanta</li>
-                                    <li>Suministro de combustible</li>
-                                </ul>
-                            </li>
-                            <li>Ayuda al Cliente
-                                <ul>
-                                    <li>Preguntas Frecuentes (FAQ)</li>
-                                    <li>Manuales de usuario digitales</li>
-                                    <li>Soporte técnico</li>
-                                    <li>Chat en vivo</li>
-                                </ul>
-                            </li>
-                            <li>Reserva
-                                <ul>
-                                    <li>Cita de servicio</li>
-                                    <li>Prueba de manejo</li>
-                                    <li>Valoración de vehículo</li>
-                                    <li>Reserva de modelos nuevos</li>
-                                </ul>
-                            </li>
-                            <li>Soporte en línea
-                                <ul>
-                                    <li>Contacto por WhatsApp</li>
-                                    <li>Soporte en redes sociales</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <section class="content-section">
-                <h2>Vehículos en Exhibición</h2>
-
-                <div class="vehicle-display-container">
-                    <img src="image/hilux-color-rojo.png" alt=">Hilux 2022">
-                    <div class="vehicle-details">
-                        <h1>Toyota Hilux 2022</h1>
-                        <h3>Motor: Turbo Diesel, Intercooler, 16 Válvulas, DOHC, Common Rail. Nm/rpm 500/1600-2800</h3>
-                        <h3>Cilindros: 4</h3>
-                        <h3>Transmisión: Caja mecánica de 6 velocidades y retroceso</h3>
-                        <h3>Color: Rojo</h3>
-                        <p>Explora el modelo 3D de la Toyota Hilux 2022. Puedes rotarlo y hacer zoom para visualizar el modelo en 3D.</p>
-                    </div>
-                </div>
-
-                <div class="vehicle-display-container">
-
-                    <img src="image/shelby-500.png" alt="Ford Mustang Shelby 500 gt">
-                    <div class="vehicle-details">
-                        <h1>Ford Mustang Shelby GT500</h1>
-                        <h3>Motor: 5.2L V8 Supercargado. 760 hp @ 7300 rpm, 625 lb-ft @ 5000 rpm</h3>
-                        <h3>Cilindros: 8</h3>
-                        <h3>Transmisión: Automática de 7 velocidades</h3>
-                        <h3>Color: Blanco con franjas azules</h3>
-                        <p>Explora el modelo 3D del Ford Mustang Shelby GT500. Puedes rotarlo y hacer zoom para visualizar el modelo en 3D.</p>
-                    </div>
-                </div>
-            </section>
-
-
-        </main>
+        
+                   
+                            
 
         <footer class="terminos">
             <div class="redes">
