@@ -76,14 +76,14 @@ public class Controlador extends HttpServlet {
     int codInventario;
     int codCliente;
     int codMembresia;
-    
+
     Contrato contratoCl = new Contrato();
     ContratoDAO contratoClDao = new ContratoDAO();
     List<Carrito> listaCarrito = new ArrayList();
     int item;
     double totalPagar = 0.0;
     int cantidad = 1;
-    
+
     int codCont;
     Carrito car = new Carrito();
 
@@ -102,8 +102,8 @@ public class Controlador extends HttpServlet {
         String accion = request.getParameter("accion");
         if (menu.equals("NavCliente")) {
             request.getRequestDispatcher("NavCliente.jsp").forward(request, response);
-            switch(accion){
-                case"Listar":
+            switch (accion) {
+                case "Listar":
                     List listaCliente = clienteDao.listar();
                     request.setAttribute("clientes", listaCliente);
                     break;
@@ -113,8 +113,8 @@ public class Controlador extends HttpServlet {
         } else if (menu.equals("Empleado")) {
             request.getRequestDispatcher("Empleado.jsp").forward(request, response);
         } else if (menu.equals("NavEmpleado")) {
-            switch(accion){
-                case"Listar":
+            switch (accion) {
+                case "Listar":
                     List listaEmpleado = empleadoDao.listar();
                     request.setAttribute("empleados", listaEmpleado);
                     break;
@@ -239,6 +239,25 @@ public class Controlador extends HttpServlet {
                     String fSalida = request.getParameter("txtFechaSalida");
                     java.sql.Date fechaSalida = java.sql.Date.valueOf(fSalida);
                     int carne = Integer.valueOf(request.getParameter("txtCarne"));
+
+                    String mensajeError = validarInventario(stock, fechaIngreso, fechaSalida, carne);
+
+                    if (mensajeError != null) {
+                        Inventario inventarioInvalido = new Inventario();
+                        inventarioInvalido.setStock(stock);
+                        inventarioInvalido.setFechaIngreso(fechaIngreso);
+                        inventarioInvalido.setFechaSalida(fechaSalida);
+                        inventarioInvalido.setCarne(carne);
+
+                        request.setAttribute("error", mensajeError);
+                        request.setAttribute("inventario", inventarioInvalido);
+                        request.setAttribute("inventarios", inventarioDAO.listar());
+
+                        request.setAttribute("exito", "Inventario agregado correctamente.");
+                        request.getRequestDispatcher("InventarioNV.jsp").forward(request, response);
+                        break;
+                    }
+
                     inventario.setStock(stock);
                     inventario.setFechaIngreso(fechaIngreso);
                     inventario.setFechaSalida(fechaSalida);
@@ -260,6 +279,25 @@ public class Controlador extends HttpServlet {
                     String fSalidaIn = request.getParameter("txtFechaSalida");
                     java.sql.Date fechaSalidaIn = java.sql.Date.valueOf(fSalidaIn);
                     int carneIn = Integer.valueOf(request.getParameter("txtCarne"));
+
+                    String mensajeErrorActualizar = validarInventario(stockIn, fechaIngresoIn, fechaSalidaIn, carneIn);
+
+                    if (mensajeErrorActualizar != null) {
+                        Inventario inventarioInvalido = new Inventario();
+                        inventarioInvalido.setCodigoInventario(codIn);
+                        inventarioInvalido.setStock(stockIn);
+                        inventarioInvalido.setFechaIngreso(fechaIngresoIn);
+                        inventarioInvalido.setFechaSalida(fechaSalidaIn);
+                        inventarioInvalido.setCarne(carneIn);
+
+                        request.setAttribute("error", mensajeErrorActualizar);
+                        request.setAttribute("inventario", inventarioInvalido);
+                        request.setAttribute("inventarios", inventarioDAO.listar());
+
+                        request.setAttribute("exito", "Inventario actualizado correctamente.");
+                        request.getRequestDispatcher("InventarioNV.jsp").forward(request, response);
+                        break;
+                    }
 
                     inventario.setCodigoInventario(codIn); // Usa la variable local `codIn`.
                     inventario.setStock(stockIn);
@@ -670,29 +708,29 @@ public class Controlador extends HttpServlet {
                     request.getRequestDispatcher("Controlador?menu=Concesionario&accion=Listar").forward(request, response);
             }
             request.getRequestDispatcher("Concesionario.jsp").forward(request, response);
-        }else if(menu.equals("ContratoCl")){
-            switch(accion){
-                case"Listar":
+        } else if (menu.equals("ContratoCl")) {
+            switch (accion) {
+                case "Listar":
                     List listaContrato = contratoClDao.listar();
                     request.setAttribute("contratos", listaContrato);
-                break;
-                case"AgregarCarrito":
+                    break;
+                case "AgregarCarrito":
                     int pos = 0;
                     cantidad = 1;
                     codCont = Integer.parseInt(request.getParameter("codCon"));
                     contratoCl = contratoClDao.listarCodigoContrato(codCont);
-                    if(listaCarrito.size() > 0){
-                        for(int i = 0; i < listaCarrito.size(); i++){
-                            if(codCont==listaCarrito.get(i).getCodigoContrato()){
+                    if (listaCarrito.size() > 0) {
+                        for (int i = 0; i < listaCarrito.size(); i++) {
+                            if (codCont == listaCarrito.get(i).getCodigoContrato()) {
                                 pos = i;
                             }
                         }
-                        if(codCont==listaCarrito.get(pos).getCodigoContrato()){
-                            cantidad=listaCarrito.get(pos).getCantidad()+cantidad;
-                            double subtotal=listaCarrito.get(pos).getPrecio()*cantidad;
+                        if (codCont == listaCarrito.get(pos).getCodigoContrato()) {
+                            cantidad = listaCarrito.get(pos).getCantidad() + cantidad;
+                            double subtotal = listaCarrito.get(pos).getPrecio() * cantidad;
                             listaCarrito.get(pos).setCantidad(cantidad);
                             listaCarrito.get(pos).setSubTotal(subtotal);
-                        }else{
+                        } else {
                             item = item + 1;
                             car = new Carrito();
                             car.setItem(item);
@@ -703,7 +741,7 @@ public class Controlador extends HttpServlet {
                             car.setSubTotal(cantidad * contratoCl.getPrecio());
                             listaCarrito.add(car);
                         }
-                    }else{
+                    } else {
                         item = item + 1;
                         car = new Carrito();
                         car.setItem(item);
@@ -715,8 +753,8 @@ public class Controlador extends HttpServlet {
                         listaCarrito.add(car);
                     }
                     request.getRequestDispatcher("Controlador?menu=ContratoCl&accion=Listar").forward(request, response);
-                break;
-                case"Comprar":
+                    break;
+                case "Comprar":
                     totalPagar = 0.0;
                     codCont = Integer.parseInt(request.getParameter("codCon"));
                     contrato = contratoClDao.listarCodigoContrato(codCont);
@@ -729,35 +767,35 @@ public class Controlador extends HttpServlet {
                     car.setCantidad(cantidad);
                     car.setSubTotal(cantidad * contratoCl.getPrecio());
                     listaCarrito.add(car);
-                    for(int i=0; i<listaCarrito.size(); i++){
-                         totalPagar = totalPagar+listaCarrito.get(i).getSubTotal();
+                    for (int i = 0; i < listaCarrito.size(); i++) {
+                        totalPagar = totalPagar + listaCarrito.get(i).getSubTotal();
                     }
                     request.setAttribute("carrito", listaCarrito);
                     request.setAttribute("totalPagar", totalPagar);
                     request.getRequestDispatcher("Controlador?menu=Carrito").forward(request, response);
-                break;
+                    break;
             }
             request.getRequestDispatcher("ContratoCl.jsp").forward(request, response);
-        }else if(menu.equals("Carrito")){
-            totalPagar =0.0;
+        } else if (menu.equals("Carrito")) {
+            totalPagar = 0.0;
             request.setAttribute("carrito", listaCarrito);
-            for(int i=0; i<listaCarrito.size(); i++){
-                totalPagar = totalPagar+listaCarrito.get(i).getSubTotal();
+            for (int i = 0; i < listaCarrito.size(); i++) {
+                totalPagar = totalPagar + listaCarrito.get(i).getSubTotal();
             }
             request.setAttribute("totalPagar", totalPagar);
-            switch(accion){
-                case"Delete":
+            switch (accion) {
+                case "Delete":
                     int codContrato = Integer.parseInt(request.getParameter("codCon"));
-                    for(int i = 0; i<listaCarrito.size(); i++){
-                        if(listaCarrito.get(i).getCodigoContrato()==codContrato){
+                    for (int i = 0; i < listaCarrito.size(); i++) {
+                        if (listaCarrito.get(i).getCodigoContrato() == codContrato) {
                             listaCarrito.remove(i);
                         }
                     }
-                break;
+                    break;
             }
             request.getRequestDispatcher("Carrito.jsp").forward(request, response);
-        }else if(menu.equals("PrincipalEmpleado")){
-            switch(accion){
+        } else if (menu.equals("PrincipalEmpleado")) {
+            switch (accion) {
                 case "mostrar":
                     request.setAttribute("apellidoCliente", request.getSession().getAttribute("apellidoCliente"));
                     request.getRequestDispatcher("PrincipalEmpleado.jsp").forward(request, response);
@@ -770,12 +808,12 @@ public class Controlador extends HttpServlet {
                     request.getRequestDispatcher("Controlador?accion=Listar").forward(request, response);
             }
             request.getRequestDispatcher("PrincipalEmpleados.jsp").forward(request, response);
-        }else if(menu.equals("Membresia")){// Controlador membresia
-            switch(accion){
+        } else if (menu.equals("Membresia")) {// Controlador membresia
+            switch (accion) {
                 case "Listar":
                     List listaMembresias = membresiaDao.listarMembresias();
                     request.setAttribute("membresias", listaMembresias);
-                break;
+                    break;
                 case "Agregar":
                     String tipMembresia = request.getParameter("txtTipoMembresia");
                     String fePago = request.getParameter("txtFechaPago");
@@ -789,13 +827,13 @@ public class Controlador extends HttpServlet {
                     membresia.setFechaVencimiento(fechaVenci);
                     membresiaDao.agregar(membresia);
                     request.getRequestDispatcher("Controlador?menu=Membresia&accion=Listar").forward(request, response);
-                break;
+                    break;
                 case "Editar":
                     codMembresia = Integer.parseInt(request.getParameter("codigoMembresia"));
                     Membresia m = membresiaDao.listarCodigoMembresia(codMembresia);
                     request.setAttribute("membresia", m);
                     request.getRequestDispatcher("Controlador?menu=Membresia&accion=Listar").forward(request, response);
-                break;
+                    break;
                 case "Actualizar":
                     String tipMembre = request.getParameter("txtTipoMembresia");
                     String fechaPa = request.getParameter("txtFechaPago");
@@ -810,7 +848,7 @@ public class Controlador extends HttpServlet {
                     membresia.setCodigoMembresia(codMembresia);
                     membresiaDao.actualizar(membresia);
                     request.getRequestDispatcher("Controlador?menu=Membresia&accion=Listar").forward(request, response);
-                break;
+                    break;
                 case "Eliminar":
                     codMembresia = Integer.parseInt(request.getParameter("codigoMembresia"));
                     membresiaDao.eliminar(codMembresia);
@@ -821,26 +859,25 @@ public class Controlador extends HttpServlet {
         }
 
     }
-    
-    private String validarInventario(int stock, java.sql.Date fechaIngreso, java.sql.Date fechaSalida, int carne) {
-    if (stock < 0) {
-        return "El stock no puede ser negativo";
-    }
-    if (fechaIngreso == null) {
-        return "La fecha de ingreso es obligatoria";
-    }
-    if (fechaSalida == null) {
-        return "La fecha de salida es obligatoria";
-    }
-    if (fechaSalida.before(fechaIngreso)) {
-        return "La fecha de salida no puede ser anterior a la fecha de ingreso";
-    }
-    if (carne <= 0) {
-        return "Debe seleccionar un tipo de carne válido";
-    }
-    return null;
-}
 
+    private String validarInventario(int stock, java.sql.Date fechaIngreso, java.sql.Date fechaSalida, int carne) {
+        if (stock < 0) {
+            return "El stock no puede ser negativo";
+        }
+        if (fechaIngreso == null) {
+            return "La fecha de ingreso es obligatoria";
+        }
+        if (fechaSalida == null) {
+            return "La fecha de salida es obligatoria";
+        }
+        if (fechaSalida.before(fechaIngreso)) {
+            return "La fecha de salida no puede ser anterior a la fecha de ingreso";
+        }
+        if (carne <= 0) {
+            return "Debe seleccionar un tipo de carne válido";
+        }
+        return null;
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
