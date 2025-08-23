@@ -29,8 +29,8 @@
                                 <label>${cont.getFechaInicio()}  -</label>
                                 <label>${cont.getFechaFin()}</label>
                                 <div>
-                                    <a href="Controlador?menu=Contrato&accion=AgregarCarrito&codCon=${cont.getCodigoContrato()}" class="btn btn-outline-info">Agregar al carrito</a>
-                                    <a href="Controlador?menu=Contrato&accion=Comprar&codCon=${cont.getCodigoContrato()}" class="btn btn-danger">Comprar</a>
+                                    <a href="Controlador?menu=ContratoCl&accion=AgregarCarrito&codCon=${cont.getCodigoContrato()}" class="btn btn-outline-info">Agregar al carrito</a>
+                                    <a href="Controlador?menu=ContratoCl&accion=Comprar&codCon=${cont.getCodigoContrato()}" class="btn btn-danger">Comprar</a>
                                 </div>
                             </div>
                         </div>

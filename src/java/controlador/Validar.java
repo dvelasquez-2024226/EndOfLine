@@ -63,7 +63,8 @@ public class Validar extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        int codigoCliente= Integer.parseInt(request.getParameter("codigoCliente"));
+        clienteDao.listarImg(codigoCliente, response);
     }
 
     /**
@@ -86,11 +87,11 @@ public class Validar extends HttpServlet {
             empleado = empleadoDao.validar(user, pass);
             if (cliente.getApellidoCliente()!= null){
                 request.setAttribute("apellidoCliente" , cliente);
-                request.getRequestDispatcher("Controlador?menu=NavCliente").forward(request,response);
+                request.getRequestDispatcher("Controlador?menu=NavCliente&accion=Listar").forward(request,response);
                 System.out.println("Hola");
             }else if(empleado.getUsuarioEmpleado()!= null){
                 request.setAttribute("usuarioEmpleado", empleado);
-                request.getRequestDispatcher("Controlador?menu=NavEmpleado").forward(request, response);
+                request.getRequestDispatcher("Controlador?menu=NavEmpleado&accion=Listar").forward(request, response);
             }else{
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             }
