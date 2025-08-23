@@ -821,6 +821,26 @@ public class Controlador extends HttpServlet {
         }
 
     }
+    
+    private String validarInventario(int stock, java.sql.Date fechaIngreso, java.sql.Date fechaSalida, int carne) {
+    if (stock < 0) {
+        return "El stock no puede ser negativo";
+    }
+    if (fechaIngreso == null) {
+        return "La fecha de ingreso es obligatoria";
+    }
+    if (fechaSalida == null) {
+        return "La fecha de salida es obligatoria";
+    }
+    if (fechaSalida.before(fechaIngreso)) {
+        return "La fecha de salida no puede ser anterior a la fecha de ingreso";
+    }
+    if (carne <= 0) {
+        return "Debe seleccionar un tipo de carne válido";
+    }
+    return null;
+}
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
