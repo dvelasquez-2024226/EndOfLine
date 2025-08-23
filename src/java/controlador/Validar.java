@@ -63,7 +63,8 @@ public class Validar extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        int codigoCliente= Integer.parseInt(request.getParameter("codigoCliente"));
+        clienteDao.listarImg(codigoCliente, response);
     }
 
     /**

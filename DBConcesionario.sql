@@ -36,6 +36,7 @@ create table Clientes (
     correoCliente varchar(50) not null,
     telefonoCliente varchar(8) not null,
     direccionCliente varchar(150) not null,
+    foto longblob,
     codigoMembresia int not null,
 	primary key pk_CodigoCliente (codigoCliente),
     constraint FK_Clientes_Membresias foreign key (codigoMembresia)
@@ -209,18 +210,16 @@ Insert into Membresias(tipoMembresia,fechaPago,mensualidad,fechaVencimiento)
 Insert into Membresias(tipoMembresia,fechaPago,mensualidad,fechaVencimiento) 
 	values('Bronce','2025-05-10',199.99,'2025-10-18');
     
-insert into Clientes (nombreCliente, apellidoCliente, correoCliente, telefonoCliente, direccionCliente, codigoMembresia)
-	values ('Ana', 'Ramirez', 'ana.ramirez@example.com', '45678901', 'Av. Central 123, Zona 1', 1);
-insert into Clientes (nombreCliente, apellidoCliente, correoCliente, telefonoCliente, direccionCliente, codigoMembresia)
-	values ('Luis', 'Martínez', 'luis.martinez@example.com', '50234567', 'Calle 5, Colonia El Prado', 2);
-insert into Clientes (nombreCliente, apellidoCliente, correoCliente, telefonoCliente, direccionCliente, codigoMembresia)
-	values ('María', 'Gómez', 'maria.gomez@example.com', '43127890', 'Boulevard Los Álamos 89', 3);
-insert into Clientes (nombreCliente, apellidoCliente, correoCliente, telefonoCliente, direccionCliente, codigoMembresia)
-	values ('Carlos', 'Hernández', 'carlos.hdz@example.com', '39871234', 'Residencial Monte Bello, casa 45', 4);
-insert into Clientes (nombreCliente, apellidoCliente, correoCliente, telefonoCliente, direccionCliente, codigoMembresia)
-	values ('Sofía', 'López', 'sofia.lopez@example.com', '28903456', 'Zona 10, Torre Empresarial, apto 302', 5);
-insert into Clientes (nombreCliente, apellidoCliente, correoCliente, telefonoCliente, direccionCliente, codigoMembresia)
-	values ('Diego', 'L', 'deigo.velasquez@example.com', '1', 'Zona 11, Colonia Rosevelt 8 calle', 1);
+insert into Clientes (nombreCliente, apellidoCliente, correoCliente, telefonoCliente, direccionCliente, foto, codigoMembresia) 
+	values ('Luis', 'Alay', 'lalay@gmail.com', '45671234', 'Zona 14, Ciudad de Guatemala', load_file('C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\lalay.jpg'), 2);
+insert into Clientes (nombreCliente, apellidoCliente, correoCliente, telefonoCliente, direccionCliente, foto, codigoMembresia) 
+	values ('Otto', 'Diaz', 'odiaz@gmail.com', '56782345', 'Santa Catarina Pinula, Guatemala', load_file('C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\'), 3);
+insert into Clientes (nombreCliente, apellidoCliente, correoCliente, telefonoCliente, direccionCliente, foto, codigoMembresia) 
+	values ('Rigoberto', 'Godinez', 'rgodinez@gmail.com', '67893456', 'Mixco, Zona 1, Guatemala', load_file('C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\rgodinez.jpg'), 5);
+insert into Clientes (nombreCliente, apellidoCliente, correoCliente, telefonoCliente, direccionCliente, foto, codigoMembresia) 
+values ('Ricardo ', 'Marroquin', 'rmarroquin@gmail.com', '78904567', 'San Miguel Petapa, Guatemala', load_file('C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\rmarroquin.jpg'), 1);
+insert into Clientes (nombreCliente, apellidoCliente, correoCliente, telefonoCliente, direccionCliente, foto, codigoMembresia) 
+	values ('David', 'Lopez', 'dlopez@gmail.com', '89015678', 'Villa Canales, Guatemala', load_file('C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\dlopez.jpg'), 4);
     
     
 insert into Talleres (ubicacion, repuestos, herramientas, estadocarro) 
@@ -327,3 +326,4 @@ insert into Facturas (fechaEmision, total, estado, metodoPago, codigoDetalleFact
 	values ('2025-07-20', 760.50, 'Pendiente', 'Paypal',5,5,5);
     
 SELECT carne, LENGTH(foto) FROM Empleados;
+SELECT codigoCliente, LENGTH(foto) FROM Clientes;
