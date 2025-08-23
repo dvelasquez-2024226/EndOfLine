@@ -1,13 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package modelo;
 
-/**
- *
- * @author informatica
- */
+import java.io.InputStream;
+
+
 public class Cliente {
     
     private int codigoCliente;
@@ -16,21 +12,21 @@ public class Cliente {
     private String correoCliente;
     private String telefonoCliente;
     private String direccionCliente;
+    private InputStream foto;
 
     public Cliente() {
     }
 
-    public Cliente(int codigoCliente, String nombreCliente, String apellidoCliente, String correoCliente, String telefonoCliente, String direccionCliente) {
+    public Cliente(int codigoCliente, String nombreCliente, String apellidoCliente, String correoCliente, String telefonoCliente, String direccionCliente, InputStream foto) {
         this.codigoCliente = codigoCliente;
         this.nombreCliente = nombreCliente;
         this.apellidoCliente = apellidoCliente;
         this.correoCliente = correoCliente;
         this.telefonoCliente = telefonoCliente;
         this.direccionCliente = direccionCliente;
+        this.foto = foto;
     }
 
-    
-    
     public int getCodigoCliente() {
         return codigoCliente;
     }
@@ -78,6 +74,16 @@ public class Cliente {
     public void setDireccionCliente(String direccionCliente) {
         this.direccionCliente = direccionCliente;
     }
+
+    public InputStream getFoto() {
+        return foto;
+    }
+
+    public void setFoto(InputStream foto) {
+        this.foto = foto;
+    }
+
+    
 
     
     
