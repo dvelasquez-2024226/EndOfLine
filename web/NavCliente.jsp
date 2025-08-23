@@ -35,6 +35,7 @@
                 <ul class="botones">
                     <li><a href="Controlador?menu=CarroCl&accion=Listar" target="myFrame">Vehiculos</a></li>
                     <li><a href="Controlador?menu=ProveedorVC&accion=Listar" target="myFrame">Proveedores</a></li>
+                    <li><a href="Controlador?menu=InventarioCl&accion=Listar" target="myFrame" >Inventario</a></li>
                     <li><a href="#">Servicios</a></li>
                     <li><a href="#" >Talleres</a></li>
                     <li><a href="#" >Ubicaciones</a></li>
