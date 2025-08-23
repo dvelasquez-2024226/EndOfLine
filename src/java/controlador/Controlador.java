@@ -30,6 +30,8 @@ import modelo.Factura;
 import modelo.FacturaDAO;
 import modelo.Inventario;
 import modelo.InventarioDAO;
+import modelo.Membresia;
+import modelo.MembresiaDAO;
 import modelo.Proveedor;
 import modelo.ProveedorDAO;
 import modelo.Publicidad;
@@ -61,6 +63,8 @@ public class Controlador extends HttpServlet {
     DetalleFacturaDAO detaFacturaDao = new DetalleFacturaDAO();
     Concesionario concesionario = new Concesionario();
     ConcesionarioDAO concesionarioDao = new ConcesionarioDAO();
+    Membresia membresia = new Membresia();
+    MembresiaDAO membresiaDao = new MembresiaDAO();
     int codConcesionario;
     int codDetaFactura;
     int codContrato;
@@ -71,6 +75,7 @@ public class Controlador extends HttpServlet {
     int codProveedor;
     int codInventario;
     int codCliente;
+    int codMembresia;
     
     Contrato contratoCl = new Contrato();
     ContratoDAO contratoClDao = new ContratoDAO();
@@ -742,6 +747,54 @@ public class Controlador extends HttpServlet {
                     request.getRequestDispatcher("PrincipalEmpleado.jsp").forward(request, response);
                     break;
             }
+        }else if(menu.equals("Membresia")){// Controlador membresia
+            switch(accion){
+                case "Listar":
+                    List listaMembresias = membresiaDao.listarMembresias();
+                    request.setAttribute("membresias", listaMembresias);
+                break;
+                case "Agregar":
+                    String tipMembresia = request.getParameter("txtTipoMembresia");
+                    String fePago = request.getParameter("txtFechaPago");
+                    java.sql.Date fechaPaga = java.sql.Date.valueOf(fePago);
+                    Double mensua = Double.parseDouble(request.getParameter("txtMensualidad"));
+                    String feVencimiento = request.getParameter("txtFechaVencimiento");
+                    java.sql.Date fechaVenci = java.sql.Date.valueOf(feVencimiento);
+                    membresia.setTipoMembresia(tipMembresia);
+                    membresia.setFechaPago(fechaPaga);
+                    membresia.setMensualidad(mensua);
+                    membresia.setFechaVencimiento(fechaVenci);
+                    membresiaDao.agregar(membresia);
+                    request.getRequestDispatcher("Controlador?menu=Membresia&accion=Listar").forward(request, response);
+                break;
+                case "Editar":
+                    codMembresia = Integer.parseInt(request.getParameter("codigoMembresia"));
+                    Membresia m = membresiaDao.listarCodigoMembresia(codMembresia);
+                    request.setAttribute("membresia", m);
+                    request.getRequestDispatcher("Controlador?menu=Membresia&accion=Listar").forward(request, response);
+                break;
+                case "Actualizar":
+                    String tipMembre = request.getParameter("txtTipoMembresia");
+                    String fechaPa = request.getParameter("txtFechaPago");
+                    java.sql.Date fecha = java.sql.Date.valueOf(fechaPa);
+                    Double mensual = Double.parseDouble(request.getParameter("txtMensualidad"));
+                    String feV = request.getParameter("txtFechaVencimiento");
+                    java.sql.Date fechaV = java.sql.Date.valueOf(feV);
+                    membresia.setTipoMembresia(tipMembre);
+                    membresia.setFechaPago(fecha);
+                    membresia.setMensualidad(mensual);
+                    membresia.setFechaVencimiento(fechaV);
+                    membresia.setCodigoMembresia(codMembresia);
+                    membresiaDao.actualizar(membresia);
+                    request.getRequestDispatcher("Controlador?menu=Membresia&accion=Listar").forward(request, response);
+                break;
+                case "Eliminar":
+                    codMembresia = Integer.parseInt(request.getParameter("codigoMembresia"));
+                    membresiaDao.eliminar(codMembresia);
+                    request.getRequestDispatcher("Controlador?menu=Membresia&accion=Listar").forward(request, response);
+                    break;
+            }
+            request.getRequestDispatcher("MembresiaEm.jsp").forward(request, response);
         }
 
     }
