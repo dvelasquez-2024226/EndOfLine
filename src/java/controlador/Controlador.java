@@ -297,6 +297,8 @@ public class Controlador extends HttpServlet {
                         request.setAttribute("exito", "Inventario actualizado correctamente.");
                         request.getRequestDispatcher("InventarioNV.jsp").forward(request, response);
                         break;
+                        
+                        
                     }
 
                     inventario.setCodigoInventario(codIn); // Usa la variable local `codIn`.
