@@ -185,11 +185,33 @@ public class Controlador extends HttpServlet {
                     String apellido = request.getParameter("txtApellidoProveedor");
                     String correo = request.getParameter("txtCorreoProveedor");
                     String telefono = request.getParameter("txtTelefonoProveedor");
+
+                    String mensajeError = validarProveedor(nombre, apellido, correo, telefono);
+
+                    if (mensajeError != null) {
+                        Proveedor proveedorInvalido = new Proveedor();
+                        proveedorInvalido.setNombreProveedor(nombre);
+                        proveedorInvalido.setApellidoProveedor(apellido);
+                        proveedorInvalido.setCorreoProveedor(correo);
+                        proveedorInvalido.setTelefonoProveedor(telefono);
+
+                        request.setAttribute("error", mensajeError);
+                        request.setAttribute("proveedor", proveedorInvalido);
+
+                        request.setAttribute("proveedores", proveedorDao.listar());
+
+                        request.getRequestDispatcher("ProveedorNV.jsp").forward(request, response);
+                        break;
+                    }
+
                     proveedor.setNombreProveedor(nombre);
                     proveedor.setApellidoProveedor(apellido);
                     proveedor.setCorreoProveedor(correo);
                     proveedor.setTelefonoProveedor(telefono);
+
                     proveedorDao.agregar(proveedor);
+
+                    request.setAttribute("exito", "Proveedor agregado correctamente.");
                     request.getRequestDispatcher("Controlador?menu=ProveedorNV&accion=Listar").forward(request, response);
                     break;
                 case "Editar":
