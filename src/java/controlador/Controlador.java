@@ -102,6 +102,14 @@ public class Controlador extends HttpServlet {
         String accion = request.getParameter("accion");
         if (menu.equals("NavCliente")) {
             request.getRequestDispatcher("NavCliente.jsp").forward(request, response);
+            switch(accion){
+                case"Listar":
+                    List listaCliente = clienteDao.listar();
+                    request.setAttribute("clientes", listaCliente);
+                    break;
+                default:
+                    request.getRequestDispatcher("Controlador?accion=Listar").forward(request, response);
+            }
         } else if (menu.equals("Empleado")) {
             request.getRequestDispatcher("Empleado.jsp").forward(request, response);
         } else if (menu.equals("NavEmpleado")) {

@@ -43,13 +43,14 @@
                     <li><a href="Controlador?menu=Carrito" target="myFrame" >Carrito de compra</a></li>
                     <div class="dropdown" >
                         <button style="border: none" class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton" aria-haspopup="true" data-toggle="dropdown" aria-expand="false">
-                            ${apellidoCliente.getNombreCliente()}
+                            ${apellidoCliente.getNombreCliente()} ${apellidoCliente.getApellidoCliente()}
                         </button>
                         <div class="dropdown-menu dropdown-menu-right text-center" aria-labellebdy="dropdownMenuButton">
                             <a class="dropdown-item" href="#">
-                                <img src="img/Logo.png" alt="80" width="80">
+                                <img style="border-radius: 50%; object-fit: cover" src="Validar?codigoCliente=${apellidoCliente.getCodigoCliente()}" alt="usuario" width="70px" height="70px" onerror="this.onerror=null; this.src='image/Usuario.png';">
                             </a>
-                            <a class="dropdown-item text-white"> ${apellidoCliente.getCorreoCliente()}
+                            <a class="dropdown-item text-white"> 
+                                ${apellidoCliente.getCorreoCliente()}
                             </a>
                             <div class="dropdown-divider"></div>
                             <form action="Validar" method="POST">
