@@ -297,8 +297,7 @@ public class Controlador extends HttpServlet {
                         request.setAttribute("exito", "Inventario actualizado correctamente.");
                         request.getRequestDispatcher("InventarioNV.jsp").forward(request, response);
                         break;
-                        
-                        
+
                     }
 
                     inventario.setCodigoInventario(codIn); // Usa la variable local `codIn`.
@@ -877,6 +876,22 @@ public class Controlador extends HttpServlet {
         }
         if (carne <= 0) {
             return "Debe seleccionar un tipo de carne válido";
+        }
+        return null;
+    }
+
+    private String validarProveedor(String nombre, String apellido, String correo, String telefono) {
+        if (nombre == null || nombre.trim().isEmpty()) {
+            return "El nombre es obligatorio";
+        }
+        if (apellido == null || apellido.trim().isEmpty()) {
+            return "El apellido es obligatorio";
+        }
+        if (correo == null || !correo.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
+            return "El correo no tiene un formato válido";
+        }
+        if (telefono == null || !telefono.matches("\\d{8}")) {
+            return "El teléfono debe contener solo números (8 dígitos)";
         }
         return null;
     }
