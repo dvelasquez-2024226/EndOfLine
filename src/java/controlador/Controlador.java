@@ -225,12 +225,35 @@ public class Controlador extends HttpServlet {
                     String apellidos = request.getParameter("txtApellidoProveedor");
                     String correos = request.getParameter("txtCorreoProveedor");
                     String telefonos = request.getParameter("txtTelefonoProveedor");
+
+                    String mensajeErrorActualizar = validarProveedor(nombres, apellidos, correos, telefonos);
+
+                    if (mensajeErrorActualizar != null) {
+                        Proveedor proveedorInvalido = new Proveedor();
+                        proveedorInvalido.setCodigoProveedor(codProveedor);
+                        proveedorInvalido.setNombreProveedor(nombres);
+                        proveedorInvalido.setApellidoProveedor(apellidos);
+                        proveedorInvalido.setCorreoProveedor(correos);
+                        proveedorInvalido.setTelefonoProveedor(telefonos);
+
+                        request.setAttribute("error", mensajeErrorActualizar);
+                        request.setAttribute("proveedor", proveedorInvalido);
+
+                        request.setAttribute("proveedores", proveedorDao.listar());
+
+                        request.getRequestDispatcher("ProveedorNV.jsp").forward(request, response);
+                        break;
+                    }
+
+                    proveedor.setCodigoProveedor(codProveedor);
                     proveedor.setNombreProveedor(nombres);
                     proveedor.setApellidoProveedor(apellidos);
                     proveedor.setCorreoProveedor(correos);
                     proveedor.setTelefonoProveedor(telefonos);
-                    proveedor.setCodigoProveedor(codProveedor);
+
                     proveedorDao.actualizar(proveedor);
+
+                    request.setAttribute("exito", "Proveedor actualizado correctamente.");
                     request.getRequestDispatcher("Controlador?menu=ProveedorNV&accion=Listar").forward(request, response);
                     break;
                 case "Eliminar":
