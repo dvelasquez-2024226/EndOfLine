@@ -74,8 +74,7 @@ public class Controlador extends HttpServlet {
     
     Contrato contratoCl = new Contrato();
     ContratoDAO contratoClDao = new ContratoDAO();
-    
-    List<Carrito> listaCarritoCl = new ArrayList();
+    List<Carrito> listaCarrito = new ArrayList();
     int item;
     double totalPagar = 0.0;
     int cantidad = 1;
@@ -661,17 +660,17 @@ public class Controlador extends HttpServlet {
                     cantidad = 1;
                     codCont = Integer.parseInt(request.getParameter("codCon"));
                     contratoCl = contratoClDao.listarCodigoContrato(codCont);
-                    if(listaCarritoCl.size() > 0){
-                        for(int i = 0; i < listaCarritoCl.size(); i++){
-                            if(codCont==listaCarritoCl.get(i).getCodigoContrato()){
+                    if(listaCarrito.size() > 0){
+                        for(int i = 0; i < listaCarrito.size(); i++){
+                            if(codCont==listaCarrito.get(i).getCodigoContrato()){
                                 pos = i;
                             }
                         }
-                        if(codCont==listaCarritoCl.get(pos).getCodigoContrato()){
-                            cantidad=listaCarritoCl.get(pos).getCantidad()+cantidad;
-                            double subtotal=listaCarritoCl.get(pos).getPrecio()*cantidad;
-                            listaCarritoCl.get(pos).setCantidad(cantidad);
-                            listaCarritoCl.get(pos).setSubTotal(subtotal);
+                        if(codCont==listaCarrito.get(pos).getCodigoContrato()){
+                            cantidad=listaCarrito.get(pos).getCantidad()+cantidad;
+                            double subtotal=listaCarrito.get(pos).getPrecio()*cantidad;
+                            listaCarrito.get(pos).setCantidad(cantidad);
+                            listaCarrito.get(pos).setSubTotal(subtotal);
                         }else{
                             item = item + 1;
                             car = new Carrito();
@@ -681,7 +680,7 @@ public class Controlador extends HttpServlet {
                             car.setPrecio(contratoCl.getPrecio());
                             car.setCantidad(cantidad);
                             car.setSubTotal(cantidad * contratoCl.getPrecio());
-                            listaCarritoCl.add(car);
+                            listaCarrito.add(car);
                         }
                     }else{
                         item = item + 1;
@@ -692,9 +691,9 @@ public class Controlador extends HttpServlet {
                         car.setPrecio(contratoCl.getPrecio());
                         car.setCantidad(cantidad);
                         car.setSubTotal(cantidad * contratoCl.getPrecio());
-                        listaCarritoCl.add(car);
+                        listaCarrito.add(car);
                     }
-                    request.getRequestDispatcher("Controlador?menu=Contrato&accion=Listar").forward(request, response);
+                    request.getRequestDispatcher("Controlador?menu=ContratoCl&accion=Listar").forward(request, response);
                 break;
                 case"Comprar":
                     totalPagar = 0.0;
@@ -708,16 +707,34 @@ public class Controlador extends HttpServlet {
                     car.setPrecio(contratoCl.getPrecio());
                     car.setCantidad(cantidad);
                     car.setSubTotal(cantidad * contratoCl.getPrecio());
-                    listaCarritoCl.add(car);
-                    for(int i=0; i<listaCarritoCl.size(); i++){
-                         totalPagar = totalPagar+listaCarritoCl.get(i).getSubTotal();
+                    listaCarrito.add(car);
+                    for(int i=0; i<listaCarrito.size(); i++){
+                         totalPagar = totalPagar+listaCarrito.get(i).getSubTotal();
                     }
-                    request.setAttribute("carrito", listaCarritoCl);
+                    request.setAttribute("carrito", listaCarrito);
                     request.setAttribute("totalPagar", totalPagar);
                     request.getRequestDispatcher("Controlador?menu=Carrito").forward(request, response);
                 break;
             }
             request.getRequestDispatcher("ContratoCl.jsp").forward(request, response);
+        }else if(menu.equals("Carrito")){
+            totalPagar =0.0;
+            request.setAttribute("carrito", listaCarrito);
+            for(int i=0; i<listaCarrito.size(); i++){
+                totalPagar = totalPagar+listaCarrito.get(i).getSubTotal();
+            }
+            request.setAttribute("totalPagar", totalPagar);
+            switch(accion){
+                case"Delete":
+                    int codContrato = Integer.parseInt(request.getParameter("codCon"));
+                    for(int i = 0; i<listaCarrito.size(); i++){
+                        if(listaCarrito.get(i).getCodigoContrato()==codContrato){
+                            listaCarrito.remove(i);
+                        }
+                    }
+                break;
+            }
+            request.getRequestDispatcher("Carrito.jsp").forward(request, response);
         }
 
     }
