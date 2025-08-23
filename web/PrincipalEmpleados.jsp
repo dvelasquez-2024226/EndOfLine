@@ -28,19 +28,19 @@
                         <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="Controlador?menu=Cliente&accion=Listar" target="myFrame">Cliente</a>
                     </li>
                     <li class="nav-item">
-                        <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="#" >Talleres</a>
+                        <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="Controlador?menu=Talleres&accion=Listar" target="myFrame">Talleres</a>
                     </li>
                     <li class="nav-item">
                         <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="Controlador?menu=Carro&accion=Listar" target="myFrame" >Carros</a>
                     </li>
                     <li class="nav-item">
-                        <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="Controlador?menu=Concesionario&accion=Listar" target="myFrame" >Concesionarios</a>
+                        <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="#" >Concesionarios</a>
                     </li>
                     <li class="nav-item">
                         <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="Controlador?menu=Empleados&accion=Listar" target="myFrame" >Empleados</a>
                     </li>
                     <li class="nav-item">
-                        <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="Controlador?menu=Contrato&accion=Listar" target="myFrame" >Contratos</a>
+                        <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="#" >Contratos</a>
                     </li>
                     <li class="nav-item">
                         <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="Controlador?menu=Publicidad&accion=Listar" target="myFrame">Publicidad</a>
@@ -52,7 +52,7 @@
                         <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="Controlador?menu=Factura&accion=Listar" target="myFrame" >Facutra</a>
                     </li>
                     <li class="nav-item">
-                        <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="Controlador?menu=DetalleFactura&accion=Listar" target="myFrame" >Detalle Factura</a>
+                        <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="#" >Detalle Factura</a>
                     </li>
 
                 </ul>
