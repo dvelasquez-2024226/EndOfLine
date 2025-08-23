@@ -89,6 +89,23 @@
 
                 <div class="col-md-8">  
                     <div class="card">  
+                        <c:if test="${not empty error}">
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                ${error}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </c:if>
+
+                        <c:if test="${not empty exito}">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                ${exito}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </c:if>
                         <div class="card-body">  
                             <h5 class="card-title text-center text-primary">Lista de Proveedor</h5>  
                             <table class="table table-hover">  
@@ -124,6 +141,31 @@
         </div>  
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>  
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>  
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script> 
+        <script>
+            document.querySelector("form").addEventListener("submit", function (evento) {
+
+                let accion = evento.submitter.value;
+                let mensaje;
+
+                if (accion === "Agregar") {
+                    mensaje = "¿Está seguro de que desea AGREGAR este proveedor?";
+                } else {
+                    mensaje = "¿Está seguro de que desea ACTUALIZAR este proveedor?";
+                }
+
+                if (!confirm(mensaje)) {
+                    evento.preventDefault();
+                }
+            });
+
+            document.querySelectorAll(".btn-danger").forEach(boton => {
+                boton.addEventListener("click", function (evento) {
+                    if (!confirm("¿Está seguro de que desea ELIMINAR este proveedor?")) {
+                        evento.preventDefault();
+                    }
+                });
+            });
+        </script>
     </body>  
 </html>
