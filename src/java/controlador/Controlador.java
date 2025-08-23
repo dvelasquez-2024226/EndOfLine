@@ -436,7 +436,15 @@ public class Controlador extends HttpServlet {
                     break;
             }
             request.getRequestDispatcher("Empleado.jsp").forward(request, response);
-        } else if (menu.equals("Factura")) {
+        }else if (menu.equals("EmpleadoCliente")) {
+            switch (accion) {
+                case "Listar":
+                    List listaEmpleado = empleadoDao.listar();
+                    request.setAttribute("empleados", listaEmpleado);
+                    break;
+            }
+            request.getRequestDispatcher("EmpleadoCliente.jsp").forward(request, response);
+        }   else if (menu.equals("Factura")) {
             switch (accion) {
                 case "Listar":
                     List lsitaFactura = facturaDao.listar();
@@ -808,7 +816,7 @@ public class Controlador extends HttpServlet {
                 case "Comprar":
                     totalPagar = 0.0;
                     codCont = Integer.parseInt(request.getParameter("codCon"));
-                    contrato = contratoClDao.listarCodigoContrato(codCont);
+                    contratoCl = contratoClDao.listarCodigoContrato(codCont);
                     item = item + 1;
                     car = new Carrito();
                     car.setItem(item);
