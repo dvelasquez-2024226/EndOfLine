@@ -63,7 +63,7 @@
                 </button>
                 <div class="dropdown-menu dropdown-menu-right text-center" aria-labellebdy="dropdownMenuButton">
                     <a class="dropdown-item" href="#">
-                        <img src="img/usuario.png" alt="60" width="60">
+                        <img style="border-radius: 50%; object-fit: cover" src="ControlerIMG?carne=${usuarioEmpleado.getCarne()}" alt="usuario" width="70px" height="70px" onerror="this.onerror=null; this.src='image/Usuario.png';">
                     </a>
                     <a class="dropdown-item">
                         ${usuarioEmpleado.getCorreoEmpleado()}

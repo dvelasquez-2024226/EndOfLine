@@ -90,7 +90,7 @@ public class Validar extends HttpServlet {
                 System.out.println("Hola");
             }else if(empleado.getUsuarioEmpleado()!= null){
                 request.setAttribute("usuarioEmpleado", empleado);
-                request.getRequestDispatcher("Controlador?menu=NavEmpleado").forward(request, response);
+                request.getRequestDispatcher("Controlador?menu=NavEmpleado&accion=Listar").forward(request, response);
             }else{
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             }
