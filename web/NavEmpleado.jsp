@@ -40,7 +40,7 @@
                         <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="Controlador?menu=Empleados&accion=Listar" target="myFrame" >Empleados</a>
                     </li>
                     <li class="nav-item">
-                        <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="#" >Contratos</a>
+                        <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="Controlador?menu=Contrato&accion=Listar" target="myFrame" >Contratos</a>
                     </li>
                     <li class="nav-item">
                         <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="Controlador?menu=Publicidad&accion=Listar" target="myFrame">Publicidad</a>
@@ -79,7 +79,7 @@
             </div>
         </nav>
         <div class="m-4" style="height: 845px" >
-            <iframe name="myFrame" style="height: 100%; width: 100%; border: none"></iframe>
+            <iframe name="myFrame" src="Controlador?menu=PrincipalEmpleado&accion=mostrar"  style="height: 100%; width: 100%; border: none"></iframe>
         </div>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>

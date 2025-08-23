@@ -117,7 +117,7 @@
                                             <td>${contrato.getPrecio()}</td>
                                             <td>${contrato.getFechaInicio()}</td>
                                             <td>${contrato.getFechaFin()}</td>
-                                            <td>${contrato.getCodigoConcesionario()}</td>                                
+                                            <td>${contrato.getCodigoConcecionario()}</td>                                
                                             <td>
                                                 <a class="btn btn-warning" href="Controlador?menu=Contrato&accion=Editar&codigoContrato=${contrato.getCodigoContrato()}">Editar</a>
                                                 <a class="btn btn-danger" href="Controlador?menu=Contrato&accion=Eliminar&codigoContrato=${contrato.getCodigoContrato()}">Eliminar</a>
@@ -131,7 +131,6 @@
                 </div>  
             </div>  
         </div>  
-
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>  
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>  
     </body>  
