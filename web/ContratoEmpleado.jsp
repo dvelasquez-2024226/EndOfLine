@@ -10,7 +10,7 @@
 <html>  
     <head>  
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
-        <title>Facturas</title>  
+        <title>Gestión de Empleados</title>  
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">  
 
         <style>
@@ -53,7 +53,7 @@
     </head>  
     <body>  
 
-        <div class="header-bar">Gestión de Factuas</div>  
+        <div class="header-bar">Gestión de Contratos</div>  
 
         <div class="container-fluid">  
             <div class="row">  
@@ -61,35 +61,27 @@
                 <div class="col-md-4 mb-4">  
                     <div class="card">  
                         <div class="card-body">  
-                            <h5 class="card-title text-center text-primary">Datos de la Factura</h5>  
-                            <form action="Controlador?menu=Factura" method="POST"}>  
+                            <h5 class="card-title text-center text-primary">Datos del Contrato</h5>  
+                            <form action="Controlador?menu=Contrato" method="POST"}>  
                                 <div class="form-group">
-                                    <label><strong>Fecha de Emision:</strong></label>
-                                    <input type="date" value="${factura.getFechaEmision()}" name="txtFechaEmision" class="form-control">
+                                    <label><strong>CLAUSULA:</strong></label>
+                                    <input type="text" value="${contrato.getClausula()}" name="txtClausula" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label><strong>Total:</strong></label>
-                                    <input type="text" value="${factura.getTotal()}" name="txtTotal" class="form-control">
+                                    <label><strong>PRECIO:</strong></label>
+                                    <input type="text" value="${contrato.getPrecio()}" name="txtPrecio" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label><strong>Estado:</strong></label>
-                                    <input type="text" value="${factura.getEstado()}" name="txtEstado" class="form-control">
+                                    <label><strong>FECHA INICIO:</strong></label>
+                                    <input type="date" value="${contrato.getFechaInicio()}" name="txtFechaInicio" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label><strong>Metodo de Pago:</strong></label>
-                                    <input type="text" value="${factura.getMetodoPago()}" name="txtMetodoPago" class="form-control">
+                                    <label><strong>FECHA FIN:</strong></label>
+                                    <input type="date" value="${contrato.getFechaFin()}" name="txtFechaFin" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label><strong>Codigo del Detalle Factura:</strong></label>
-                                    <input type="text" value="${factura.getCodigoDetalleFactura()}" name="txtCodigoDetalleFactura" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label><strong>Carne de Empleado:</strong></label>
-                                    <input type="text" value="${factura.getCarne()}" name="txtCarne" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label><strong>Codigo del Cliente</strong></label>
-                                    <input type="text" value="${factura.getCodigoCliente()}" name="txtCodigoCliente" class="form-control">
+                                    <label><strong>COD CONCESIONARIO:</strong></label>
+                                    <input type="text" value="${contrato.getCodigoConcesionario()}" name="txtCodigoConcesionario" class="form-control">
                                 </div>
                                 <div class="d-flex justify-content-between">  
                                     <input type="submit" name="accion" value="Agregar" class="btn btn-info">  
@@ -104,38 +96,35 @@
                 <div class="col-md-8">  
                     <div class="card">  
                         <div class="card-body">  
-                            <h5 class="card-title text-center text-primary">Lista de Facturas</h5>  
+                            <h5 class="card-title text-center text-primary">Lista de Contratos</h5>  
                             <table class="table table-hover">  
                                 <thead>
                                     <tr>
                                         <th>CODIGO</th>
-                                        <th>FECHA DE EMISION</th>
-                                        <th>TOTAL</th>
-                                        <th>ESTADO</th>
-                                        <th>METODO DE PAGO</th>
-                                        <th>CODIGO DETALLE FACTURA</th>
-                                        <th>CARNE</th>
-                                        <th>CODIGO CLIENTE</th>
+                                        <th>CLAUSULA</th>
+                                        <th>PRECIO</th>
+                                        <th>FECHA INICIO</th>
+                                        <th>FECHA FIN</th>
+                                        <th>COD CONCESIONARIO</th>                            
+                                        <th>ACCIONES</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach var="factura" items="${facturas}">
+                                    <c:forEach var="contrato" items="${contratos}">
                                         <tr>
-                                            <td>${factura.getCodigoFactura()}</td>
-                                            <td>${factura.getFechaEmision()}</td>
-                                            <td>${factura.getTotal()}</td>
-                                            <td>${factura.getEstado()}</td>
-                                            <td>${factura.getMetodoPago()}</td>
-                                            <td>${factura.getCodigoDetalleFactura()}</td>
-                                            <td>${factura.getCarne()}</td>
-                                            <td>${factura.getCodigoCliente()}</td>
+                                            <td>${contrato.getCodigoContrato()}</td>
+                                            <td>${contrato.getClausula()}</td>
+                                            <td>${contrato.getPrecio()}</td>
+                                            <td>${contrato.getFechaInicio()}</td>
+                                            <td>${contrato.getFechaFin()}</td>
+                                            <td>${contrato.getCodigoConcesionario()}</td>                                
                                             <td>
-                                                <a class="btn btn-warning" href="Controlador?menu=Factura&accion=Editar&codigoFactura=${factura.getCodigoFactura()}">Editar</a>
-                                                <a class="btn btn-danger" href="Controlador?menu=Factura&accion=Eliminar&codigoFactura=${factura.getCodigoFactura()}"> Eliminar</a>
+                                                <a class="btn btn-warning" href="Controlador?menu=Contrato&accion=Editar&codigoContrato=${contrato.getCodigoContrato()}">Editar</a>
+                                                <a class="btn btn-danger" href="Controlador?menu=Contrato&accion=Eliminar&codigoContrato=${contrato.getCodigoContrato()}">Eliminar</a>
                                             </td>
                                         </tr>
                                     </c:forEach>
-                                </tbody>
+                                </tbody>  
                             </table>  
                         </div>  
                     </div>  
