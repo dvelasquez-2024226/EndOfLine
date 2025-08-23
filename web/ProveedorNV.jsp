@@ -89,6 +89,23 @@
 
                 <div class="col-md-8">  
                     <div class="card">  
+                        <c:if test="${not empty error}">
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                ${error}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </c:if>
+
+                        <c:if test="${not empty exito}">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                ${exito}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </c:if>
                         <div class="card-body">  
                             <h5 class="card-title text-center text-primary">Lista de Proveedor</h5>  
                             <table class="table table-hover">  
