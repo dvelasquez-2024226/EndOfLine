@@ -46,7 +46,7 @@ public class InventarioDAO {
         try {
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
-            ps.setInt(1, inventario.getCodigoInventario());
+            ps.setInt(1, inventario.getStock());
             ps.setDate(2, inventario.getFechaIngreso());
             ps.setDate(3, inventario.getFechaSalida());
             ps.setInt(4, inventario.getCarne());
@@ -62,12 +62,14 @@ public class InventarioDAO {
     public Inventario listarCodigoInventario(int id){
         //Instanciar un bojeto de tipo empleado
         Inventario inventario = new Inventario();
-        String sql = "Select * from Inventarios where codigoInventario = "+id;
+        String sql = "Select * from Inventarios where codigoInventario = ?";
         try {
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
             rs = ps.executeQuery();
             while(rs.next()){
+                inventario.setCodigoInventario(rs.getInt(1));
                 inventario.setStock(rs.getInt(2));
                 inventario.setFechaIngreso(rs.getDate(3));
                 inventario.setFechaSalida(rs.getDate(4));
@@ -106,10 +108,11 @@ public class InventarioDAO {
     
     //MÉTODO ELIMINAR
     public void eliminar(int id){
-        String sql = "delete from Inventarios where codigoInventario = "+id;
+        String sql = "delete from Inventarios where codigoInventario = ?";
         try {
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

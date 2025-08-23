@@ -40,6 +40,7 @@ create table Clientes (
 	primary key pk_CodigoCliente (codigoCliente),
     constraint FK_Clientes_Membresias foreign key (codigoMembresia)
 		references 	Membresias(codigoMembresia)
+        on delete cascade
 );
 
 create table Talleres (
@@ -62,9 +63,11 @@ create table Carros (
     codigoProveedor int not null,
 	primary key  PK_codigoCarro (codigoCarro),
 	constraint FK_Carros_Inventarios foreign key (codigoInventario)
-		references inventarios (codigoInventario),
+		references inventarios (codigoInventario)
+        on delete cascade,
 	constraint FK_carros_proveedores foreign key (codigoProveedor)
 		references proveedores(codigoProveedor)
+        on delete cascade
 );
 
 create table Concesionarios (
@@ -77,6 +80,7 @@ create table Concesionarios (
 	primary key pk_codigoconcesionario (codigoConcesionario),
     constraint FK_concesionarios_inventarios foreign key (codigoInventario)
 		references inventarios(codigoInventario)
+        on delete cascade
 );
 
 create table Empleados (
@@ -92,6 +96,7 @@ create table Empleados (
     primary key carne (carne),
     constraint FK_empleados_concesionarios foreign key (codigoConcesionario)
 		references concesionarios(codigoConcesionario)
+        on delete cascade
 );
 
 create table Contratos (
@@ -104,6 +109,7 @@ create table Contratos (
     primary key pk_codigoContrato (codigoContrato),
     constraint FK_contratos_concesionarios foreign key (codigoConcesionario)
 		references concesionarios(codigoConcesionario)
+        on delete cascade
 );
 
 create table Publicidad (
@@ -116,6 +122,7 @@ create table Publicidad (
 	primary key pk_codigoPublicidad (codigoPublicidad),
     constraint FK_publicidad_Carros foreign key (codigoCarro)
 		references Carros(codigoCarro)
+        on delete cascade
 );
 
 create table Servicios (
@@ -128,9 +135,11 @@ create table Servicios (
     noTaller int not null,
 	primary key pk_codigoServicio (noServicio),
     constraint FK_servicios_empleados foreign key (carne)
-		references empleados(carne),
+		references empleados(carne)
+        on delete cascade,
     constraint FK_servicio_talleres foreign key (noTaller)
 		references talleres(noTaller)
+        on delete cascade
 );
 
 create table detalleFactura (
@@ -143,6 +152,7 @@ create table detalleFactura (
     primary key pk_codigoDetalleFactura (codigoDetalleFactura),
     constraint FK_detalleFactura_contratos foreign key (codigoContrato)
 		references contratos(codigoContrato)
+        on delete cascade
 );
 
 create table Facturas (
@@ -156,11 +166,14 @@ create table Facturas (
     codigoCliente int not null,
     primary key pk_codigoFactura (codigoFactura),
 	constraint FK_factura_detalleFacturaforeign foreign key(codigoDetalleFactura)
-		references detalleFactura(codigoDetalleFactura),
+		references detalleFactura(codigoDetalleFactura)
+        on delete cascade,
 	constraint FK_factura_empleados foreign key (carne)
-		references empleados(carne),
+		references empleados(carne)
+        on delete cascade,
 	constraint FK_factura_clientes foreign key (codigoCliente)
 		references clientes(codigoCliente)
+        on delete cascade
 );
 
 insert into Inventarios (stock, fechaIngreso, fechaSalida, carne) 
@@ -206,6 +219,8 @@ insert into Clientes (nombreCliente, apellidoCliente, correoCliente, telefonoCli
 	values ('Carlos', 'Hernández', 'carlos.hdz@example.com', '39871234', 'Residencial Monte Bello, casa 45', 4);
 insert into Clientes (nombreCliente, apellidoCliente, correoCliente, telefonoCliente, direccionCliente, codigoMembresia)
 	values ('Sofía', 'López', 'sofia.lopez@example.com', '28903456', 'Zona 10, Torre Empresarial, apto 302', 5);
+insert into Clientes (nombreCliente, apellidoCliente, correoCliente, telefonoCliente, direccionCliente, codigoMembresia)
+	values ('Diego', 'L', 'deigo.velasquez@example.com', '1', 'Zona 11, Colonia Rosevelt 8 calle', 1);
     
     
 insert into Talleres (ubicacion, repuestos, herramientas, estadocarro) 
@@ -306,5 +321,3 @@ insert into Facturas (fechaEmision, total, estado, metodoPago, codigoDetalleFact
 	values ('2025-07-15', 1420.00, 'Pagado', 'Débito',4,4,4);
 insert into Facturas (fechaEmision, total, estado, metodoPago, codigoDetalleFactura, carne, codigoCliente)
 	values ('2025-07-20', 760.50, 'Pendiente', 'Paypal',5,5,5);
-    
-    select * from clientes where apellidoCliente = 'Ramírez' and telefonoCliente = '45678901';

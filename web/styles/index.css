@@ -1,0 +1,89 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 21 ago 2025, 03:44:20
+    Author     : boror
+*/
+            /* Color fondo principal */
+            .fondoPrincipal {
+                background: linear-gradient(90deg,
+                    #d4dfdefa 0%,
+                    #d4dfdefa 50%,
+                    #04214B 50%,
+                    #4294AD 75%,
+                    #CEC68D 100%);
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+                min-height: 100vh;
+            }
+
+            /* Color de textos */
+            .tituloColor { color: #04214B; font-weight: 600; }
+            .textoColor { color: #125187; }
+
+            /* Estilo input */
+            .inputColor, .form-control.inputColor {
+                background: transparent;
+                border: none;
+                border-bottom: 2px solid rgba(18,81,135,0.16);
+                border-radius: 0;
+                padding: 10px 8px;
+                box-shadow: none;
+                transition: border-color .18s, box-shadow .18s;
+            }
+
+            /* Botón principal */
+            .btnColor {
+                background: linear-gradient(90deg, #125187, #4294AD) !important;
+                border: none !important;
+                color: #fff !important;
+            }
+
+            /* Cuadro del formulario */
+            .card {
+                background: rgba(255,255,255,0.1);
+            }
+
+            /* Contenedor personalizable */
+            .container.mt-4.col-lg-4 {
+                position: center;
+                top: 0;
+                right: 100;
+                left: 95px;
+                width: 1000px;
+                height: 1000px;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                margin: 0 20px;
+            }
+
+            /* Logo Fondo (Mitad derecha) */
+            .logoFondo {
+                position: absolute;
+                left: 50%; 
+                top: 50%;
+                transform: translate(0%, -50%); 
+                width: 48vw; 
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                
+            }
+
+            /* Tamaño imagen usuario */
+            .tamanoUsuario {
+                width: 32px;
+                height: 32px;
+                object-fit: contain;
+            }
+
+            /* Tamaño imagen contraseña */
+            .tamanoContra {
+                width: 40px;
+                height: 40px;
+                object-fit: contain;
+            }

@@ -48,7 +48,7 @@ public class EmpleadoDAO {
     //LISTAR
     public List listar(){
         String sql = "select * from empleados";
-        List<Empleado> listaEmpleado = new ArrayList<>();
+        List<Empleado> listaEmpleados = new ArrayList<>();
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
@@ -64,12 +64,12 @@ public class EmpleadoDAO {
                 em.setUsuarioEmpleado(rs.getString(7));
                 em.setContraseniaEmpleado(rs.getString(8));
                 em.setCodigoConcesionario(rs.getInt(9));
-                listaEmpleado.add(em);
+                listaEmpleados.add(em);
             }
         }catch(Exception e){
             e.printStackTrace();
         }
-        return listaEmpleado;
+        return listaEmpleados;
     }
     
     //AGREGAR
@@ -96,7 +96,7 @@ public class EmpleadoDAO {
     //BUSCAR
     public  Empleado listarCodigoEmpleado(int id){
         Empleado emp = new Empleado();
-        String sql = "select * Empleados where carne = "+id;
+        String sql = "select * from Empleados where carne = "+id;
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
@@ -124,6 +124,8 @@ public class EmpleadoDAO {
                 + "telefonoEmpleado = ?, fechaIngreso = ?, usuarioEmpleado= ?,"
                 + "contraseniaEmpleado = ? where carne = ?";
         try{
+            con = cn.Conexion();
+            ps = con.prepareStatement(sql);
             ps.setString(1, emp.getNombreEmpleado());
             ps.setString(2, emp.getApellidoEmpleado());
             ps.setString(3, emp.getCorreoEmpleado());
