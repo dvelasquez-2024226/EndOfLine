@@ -7,11 +7,13 @@ package controlador;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Carrito;
 import modelo.Carro;
 import modelo.CarroDAO;
 import modelo.Cliente;
@@ -69,6 +71,17 @@ public class Controlador extends HttpServlet {
     int codProveedor;
     int codInventario;
     int codCliente;
+    
+    Contrato contratoCl = new Contrato();
+    ContratoDAO contratoClDao = new ContratoDAO();
+    
+    List<Carrito> listaCarritoCl = new ArrayList();
+    int item;
+    double totalPagar = 0.0;
+    int cantidad = 1;
+    
+    int codCont;
+    Carrito car = new Carrito();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -494,10 +507,10 @@ public class Controlador extends HttpServlet {
             request.getRequestDispatcher("ClienteEmpleado.jsp").forward(request, response);
         } else if (menu.equals("Contrato")) {
             switch (accion) {
-                case"Listar":
+                case "Listar":
                     List listaContrato = contratoDao.listar();
                     request.setAttribute("contratos", listaContrato);
-                break;
+                    break;
                 case "Agregar":
                     String cla = request.getParameter("txtClausula");
                     Double pre = Double.parseDouble(request.getParameter("txtPrecio"));
@@ -637,6 +650,74 @@ public class Controlador extends HttpServlet {
                     request.getRequestDispatcher("Controlador?menu=Concesionario&accion=Listar").forward(request, response);
             }
             request.getRequestDispatcher("Concesionario.jsp").forward(request, response);
+        }else if(menu.equals("ContratoCl")){
+            switch(accion){
+                case"Listar":
+                    List listaContrato = contratoClDao.listar();
+                    request.setAttribute("contratos", listaContrato);
+                break;
+                case"AgregarCarrito":
+                    int pos = 0;
+                    cantidad = 1;
+                    codCont = Integer.parseInt(request.getParameter("codCon"));
+                    contratoCl = contratoClDao.listarCodigoContrato(codCont);
+                    if(listaCarritoCl.size() > 0){
+                        for(int i = 0; i < listaCarritoCl.size(); i++){
+                            if(codCont==listaCarritoCl.get(i).getCodigoContrato()){
+                                pos = i;
+                            }
+                        }
+                        if(codCont==listaCarritoCl.get(pos).getCodigoContrato()){
+                            cantidad=listaCarritoCl.get(pos).getCantidad()+cantidad;
+                            double subtotal=listaCarritoCl.get(pos).getPrecio()*cantidad;
+                            listaCarritoCl.get(pos).setCantidad(cantidad);
+                            listaCarritoCl.get(pos).setSubTotal(subtotal);
+                        }else{
+                            item = item + 1;
+                            car = new Carrito();
+                            car.setItem(item);
+                            car.setCodigoContrato(codCont);
+                            car.setCalusula(contratoCl.getClausula());
+                            car.setPrecio(contratoCl.getPrecio());
+                            car.setCantidad(cantidad);
+                            car.setSubTotal(cantidad * contratoCl.getPrecio());
+                            listaCarritoCl.add(car);
+                        }
+                    }else{
+                        item = item + 1;
+                        car = new Carrito();
+                        car.setItem(item);
+                        car.setCodigoContrato(codCont);
+                        car.setCalusula(contratoCl.getClausula());
+                        car.setPrecio(contratoCl.getPrecio());
+                        car.setCantidad(cantidad);
+                        car.setSubTotal(cantidad * contratoCl.getPrecio());
+                        listaCarritoCl.add(car);
+                    }
+                    request.getRequestDispatcher("Controlador?menu=Contrato&accion=Listar").forward(request, response);
+                break;
+                case"Comprar":
+                    totalPagar = 0.0;
+                    codCont = Integer.parseInt(request.getParameter("codCon"));
+                    contrato = contratoClDao.listarCodigoContrato(codCont);
+                    item = item + 1;
+                    car = new Carrito();
+                    car.setItem(item);
+                    car.setCodigoContrato(codCont);
+                    car.setCalusula(contratoCl.getClausula());
+                    car.setPrecio(contratoCl.getPrecio());
+                    car.setCantidad(cantidad);
+                    car.setSubTotal(cantidad * contratoCl.getPrecio());
+                    listaCarritoCl.add(car);
+                    for(int i=0; i<listaCarritoCl.size(); i++){
+                         totalPagar = totalPagar+listaCarritoCl.get(i).getSubTotal();
+                    }
+                    request.setAttribute("carrito", listaCarritoCl);
+                    request.setAttribute("totalPagar", totalPagar);
+                    request.getRequestDispatcher("Controlador?menu=Carrito").forward(request, response);
+                break;
+            }
+            request.getRequestDispatcher("ContratoCl.jsp").forward(request, response);
         }
 
     }
