@@ -141,6 +141,31 @@
         </div>  
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>  
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>  
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script> 
+        <script>
+            document.querySelector("form").addEventListener("submit", function (evento) {
+
+                let accion = evento.submitter.value;
+                let mensaje;
+
+                if (accion === "Agregar") {
+                    mensaje = "¿Está seguro de que desea AGREGAR este proveedor?";
+                } else {
+                    mensaje = "¿Está seguro de que desea ACTUALIZAR este proveedor?";
+                }
+
+                if (!confirm(mensaje)) {
+                    evento.preventDefault();
+                }
+            });
+
+            document.querySelectorAll(".btn-danger").forEach(boton => {
+                boton.addEventListener("click", function (evento) {
+                    if (!confirm("¿Está seguro de que desea ELIMINAR este proveedor?")) {
+                        evento.preventDefault();
+                    }
+                });
+            });
+        </script>
     </body>  
 </html>
