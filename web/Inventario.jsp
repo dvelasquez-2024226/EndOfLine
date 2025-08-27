@@ -19,7 +19,7 @@
                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             }
             .header-bar {
-                background-color: #1a237e;
+                background-color: #a0a5b2;
                 color: white;
                 padding: 15px;
                 text-align: center;
@@ -36,18 +36,18 @@
                 color: #1a237e;
             }
             .btn-info {
-                background-color: #1a237e;
+                background-color: #2f344f;
                 border: none;
             }
             .btn-info:hover {
-                background-color: #0d164e;
+                background-color: #a0a5b2;
             }
             .table thead {
-                background-color: #1a237e;
+                background-color: #2f344f;
                 color: white;
             }
             .table tbody tr:hover {
-                background-color: #e3e6f0;
+                background-color: #a0a5b2;
             }
         </style>  
 
