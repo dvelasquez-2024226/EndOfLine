@@ -36,6 +36,8 @@ import modelo.Proveedor;
 import modelo.ProveedorDAO;
 import modelo.Publicidad;
 import modelo.PublicidadDAO;
+import modelo.Taller;
+import modelo.TallerDAO;
 
 /**
  *
@@ -65,6 +67,9 @@ public class Controlador extends HttpServlet {
     ConcesionarioDAO concesionarioDao = new ConcesionarioDAO();
     Membresia membresia = new Membresia();
     MembresiaDAO membresiaDao = new MembresiaDAO();
+    Taller taller = new Taller();
+    TallerDAO tallerDao = new TallerDAO();
+    int codTaller;
     int codConcesionario;
     int codDetaFactura;
     int codContrato;
@@ -185,11 +190,33 @@ public class Controlador extends HttpServlet {
                     String apellido = request.getParameter("txtApellidoProveedor");
                     String correo = request.getParameter("txtCorreoProveedor");
                     String telefono = request.getParameter("txtTelefonoProveedor");
+
+                    String mensajeError = validarProveedor(nombre, apellido, correo, telefono);
+
+                    if (mensajeError != null) {
+                        Proveedor proveedorInvalido = new Proveedor();
+                        proveedorInvalido.setNombreProveedor(nombre);
+                        proveedorInvalido.setApellidoProveedor(apellido);
+                        proveedorInvalido.setCorreoProveedor(correo);
+                        proveedorInvalido.setTelefonoProveedor(telefono);
+
+                        request.setAttribute("error", mensajeError);
+                        request.setAttribute("proveedor", proveedorInvalido);
+
+                        request.setAttribute("proveedores", proveedorDao.listar());
+
+                        request.getRequestDispatcher("ProveedorNV.jsp").forward(request, response);
+                        break;
+                    }
+
                     proveedor.setNombreProveedor(nombre);
                     proveedor.setApellidoProveedor(apellido);
                     proveedor.setCorreoProveedor(correo);
                     proveedor.setTelefonoProveedor(telefono);
+
                     proveedorDao.agregar(proveedor);
+
+                    request.setAttribute("exito", "Proveedor agregado correctamente.");
                     request.getRequestDispatcher("Controlador?menu=ProveedorNV&accion=Listar").forward(request, response);
                     break;
                 case "Editar":
@@ -203,12 +230,35 @@ public class Controlador extends HttpServlet {
                     String apellidos = request.getParameter("txtApellidoProveedor");
                     String correos = request.getParameter("txtCorreoProveedor");
                     String telefonos = request.getParameter("txtTelefonoProveedor");
+
+                    String mensajeErrorActualizar = validarProveedor(nombres, apellidos, correos, telefonos);
+
+                    if (mensajeErrorActualizar != null) {
+                        Proveedor proveedorInvalido = new Proveedor();
+                        proveedorInvalido.setCodigoProveedor(codProveedor);
+                        proveedorInvalido.setNombreProveedor(nombres);
+                        proveedorInvalido.setApellidoProveedor(apellidos);
+                        proveedorInvalido.setCorreoProveedor(correos);
+                        proveedorInvalido.setTelefonoProveedor(telefonos);
+
+                        request.setAttribute("error", mensajeErrorActualizar);
+                        request.setAttribute("proveedor", proveedorInvalido);
+
+                        request.setAttribute("proveedores", proveedorDao.listar());
+
+                        request.getRequestDispatcher("ProveedorNV.jsp").forward(request, response);
+                        break;
+                    }
+
+                    proveedor.setCodigoProveedor(codProveedor);
                     proveedor.setNombreProveedor(nombres);
                     proveedor.setApellidoProveedor(apellidos);
                     proveedor.setCorreoProveedor(correos);
                     proveedor.setTelefonoProveedor(telefonos);
-                    proveedor.setCodigoProveedor(codProveedor);
+
                     proveedorDao.actualizar(proveedor);
+
+                    request.setAttribute("exito", "Proveedor actualizado correctamente.");
                     request.getRequestDispatcher("Controlador?menu=ProveedorNV&accion=Listar").forward(request, response);
                     break;
                 case "Eliminar":
@@ -297,8 +347,7 @@ public class Controlador extends HttpServlet {
                         request.setAttribute("exito", "Inventario actualizado correctamente.");
                         request.getRequestDispatcher("InventarioNV.jsp").forward(request, response);
                         break;
-                        
-                        
+
                     }
 
                     inventario.setCodigoInventario(codIn); // Usa la variable local `codIn`.
@@ -387,7 +436,15 @@ public class Controlador extends HttpServlet {
                     break;
             }
             request.getRequestDispatcher("Empleado.jsp").forward(request, response);
-        } else if (menu.equals("Factura")) {
+        }else if (menu.equals("EmpleadoCliente")) {
+            switch (accion) {
+                case "Listar":
+                    List listaEmpleado = empleadoDao.listar();
+                    request.setAttribute("empleados", listaEmpleado);
+                    break;
+            }
+            request.getRequestDispatcher("EmpleadoCliente.jsp").forward(request, response);
+        }   else if (menu.equals("Factura")) {
             switch (accion) {
                 case "Listar":
                     List lsitaFactura = facturaDao.listar();
@@ -759,7 +816,7 @@ public class Controlador extends HttpServlet {
                 case "Comprar":
                     totalPagar = 0.0;
                     codCont = Integer.parseInt(request.getParameter("codCon"));
-                    contrato = contratoClDao.listarCodigoContrato(codCont);
+                    contratoCl = contratoClDao.listarCodigoContrato(codCont);
                     item = item + 1;
                     car = new Carrito();
                     car.setItem(item);
@@ -787,9 +844,9 @@ public class Controlador extends HttpServlet {
             request.setAttribute("totalPagar", totalPagar);
             switch (accion) {
                 case "Delete":
-                    int codContrato = Integer.parseInt(request.getParameter("codCon"));
+                    int codContra = Integer.parseInt(request.getParameter("codCon"));
                     for (int i = 0; i < listaCarrito.size(); i++) {
-                        if (listaCarrito.get(i).getCodigoContrato() == codContrato) {
+                        if (listaCarrito.get(i).getCodigoContrato() == codContra) {
                             listaCarrito.remove(i);
                         }
                     }
@@ -857,7 +914,65 @@ public class Controlador extends HttpServlet {
                     request.getRequestDispatcher("Controlador?menu=Membresia&accion=Listar").forward(request, response);
                     break;
             }
-            request.getRequestDispatcher("MembresiaEm.jsp").forward(request, response);
+            request.getRequestDispatcher("MembresiaEm.jsp").forward(request, response); 
+        }else if (menu.equals("MembresiaCliente")) {
+            switch (accion) {
+                case "Listar":
+                    List listaCarros = membresiaDao.listarMembresias();
+                    request.setAttribute("membresia", listaCarros);
+                    break;
+            }
+            request.getRequestDispatcher("MembresiaCliente.jsp").forward(request, response);
+        }else if (menu.equals("Talleres")) {
+
+            switch (accion) {
+                case "Listar":
+                    List listaTalleres = tallerDao.listar();
+                    request.setAttribute("talleres", listaTalleres);
+                    
+                    break;
+                case "Agregar":
+                    String ubicacionTaller = request.getParameter("txtUbicacion");
+                    String repuestosTaller = request.getParameter("txtRepuestos");
+                    String herramientasTaller = request.getParameter("txtHerramientas");
+                    String estadoTaller = request.getParameter("txtEstadoCarro");
+                    
+                    taller.setUbicacion(ubicacionTaller);
+                    taller.setRepuestos(repuestosTaller);
+                    taller.setHerramientas(herramientasTaller);
+                    taller.setEstadoCarro(estadoTaller);
+                    tallerDao.agregar(taller);
+                    request.getRequestDispatcher("Controlador?menu=Talleres&accion=Listar").forward(request, response);
+                    break;
+                case "Editar":
+                    codTaller = Integer.parseInt(request.getParameter("codigoTaller"));
+                    Taller t = tallerDao.listarCodigoTaller(codTaller);
+                    request.setAttribute("taller", t);
+                   request.getRequestDispatcher("Controlador?menu=Talleres&accion=Listar").forward(request, response);
+                   break;
+                    
+                case "Actualizar":
+                    String ubicacionTar = request.getParameter("txtUbicacion");
+                    String repuestosTar = request.getParameter("txtRepuestos");
+                    String herramientasTar = request.getParameter("txtHerramientas");
+                    String estadoCarrroTar = request.getParameter("txtEstadoCarro");
+                    taller.setUbicacion(ubicacionTar);
+                    taller.setRepuestos(repuestosTar);
+                    taller.setHerramientas(herramientasTar);
+                    taller.setEstadoCarro(estadoCarrroTar);
+                    taller.setNotaller(codTaller);
+                    tallerDao.actualizar(taller);
+                    request.getRequestDispatcher("Controlador?menu=Talleres&accion=Listar").forward(request, response);
+                    
+                    break;
+                case "Eliminar":
+                    codTaller = Integer.parseInt(request.getParameter("codigoTaller"));
+                    tallerDao.eliminar(codTaller);
+                    request.getRequestDispatcher("Controlador?menu=Talleres&accion=Listar").forward(request, response);
+                  break;
+            }
+            
+            request.getRequestDispatcher("Talleres.jsp").forward(request, response);
         }
 
     }
@@ -877,6 +992,22 @@ public class Controlador extends HttpServlet {
         }
         if (carne <= 0) {
             return "Debe seleccionar un tipo de carne válido";
+        }
+        return null;
+    }
+
+    private String validarProveedor(String nombre, String apellido, String correo, String telefono) {
+        if (nombre == null || nombre.trim().isEmpty()) {
+            return "El nombre es obligatorio";
+        }
+        if (apellido == null || apellido.trim().isEmpty()) {
+            return "El apellido es obligatorio";
+        }
+        if (correo == null || !correo.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
+            return "El correo no tiene un formato válido";
+        }
+        if (telefono == null || !telefono.matches("\\d{8}")) {
+            return "El teléfono debe contener solo números (8 dígitos)";
         }
         return null;
     }
