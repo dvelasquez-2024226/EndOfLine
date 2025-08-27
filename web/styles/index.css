@@ -5,15 +5,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 /* 
     Created on : 21 ago 2025, 03:44:20
     Author     : boror
-*/
-            /* Color fondo principal */
+*//* Color fondo principal */
             .fondoPrincipal {
                 background: linear-gradient(90deg,
-                    #d4dfdefa 0%,
-                    #d4dfdefa 50%,
-                    #04214B 50%,
-                    #4294AD 75%,
-                    #CEC68D 100%);
+                    #ffcddb 0%,
+                    #2f344f 50%,
+                     #683653 50%,
+                    #2f344f 65%,
+                    #96253d 75%,
+                    #d45d61 80%,
+                    #fbc1ab 100%);  
                 background-repeat: no-repeat;
                 background-size: 100% 100%;
                 min-height: 100vh;
@@ -51,7 +52,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
                 position: center;
                 top: 0;
                 right: 100;
-                left: 95px;
+                left: 900px;
                 width: 1000px;
                 height: 1000px;
                 display: flex;
@@ -63,7 +64,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
             /* Logo Fondo (Mitad derecha) */
             .logoFondo {
                 position: absolute;
-                left: 50%; 
+                left: 0%; 
                 top: 50%;
                 transform: translate(0%, -50%); 
                 width: 48vw; 
