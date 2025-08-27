@@ -816,7 +816,7 @@ public class Controlador extends HttpServlet {
                 case "Comprar":
                     totalPagar = 0.0;
                     codCont = Integer.parseInt(request.getParameter("codCon"));
-                    contrato = contratoClDao.listarCodigoContrato(codCont);
+                    contratoCl = contratoClDao.listarCodigoContrato(codCont);
                     item = item + 1;
                     car = new Carrito();
                     car.setItem(item);

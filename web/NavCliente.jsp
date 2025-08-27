@@ -41,7 +41,6 @@
                     <li><a href="#" >Ubicaciones</a></li>
                     <li><a href="Controlador?menu=EmpleadoCliente&accion=Listar" target="myFrame"" >Ayuda</a></li>
                     <li><a href="Controlador?menu=ContratoCl&accion=Listar" target="myFrame" >Contratos</a></li>
-                    <li><a href="Controlador?menu=Carrito" target="myFrame" >Carrito de Compras</a></li>
                     <div class="dropdown" >
                         <button style="border: none" class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton" aria-haspopup="true" data-toggle="dropdown" aria-expand="false">
                             ${apellidoCliente.getNombreCliente()} ${apellidoCliente.getApellidoCliente()}
