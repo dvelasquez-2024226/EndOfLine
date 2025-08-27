@@ -12,14 +12,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
         <title>Detalle Factura</title>  
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">  
-
         <style>
             body {
                 background: #f4f6f9;
                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             }
             .header-bar {
-                background-color: #1a237e; /* Azul oscuro como en tu menú principal */
+                background-color: #2f344f;
                 color: white;
                 padding: 15px;
                 text-align: center;
@@ -33,31 +32,66 @@
                 box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             }
             .card-body label {
-                color: #1a237e;
+                color: #38446c;
             }
             .btn-info {
-                background-color: #1a237e;
+                background-color: #683653;
                 border: none;
             }
             .btn-info:hover {
                 background-color: #0d164e;
             }
             .table thead {
-                background-color: #1a237e;
+                background-color: #2f344f;
                 color: white;
             }
             .table tbody tr:hover {
                 background-color: #e3e6f0;
             }
-        </style>  
+        </style>   
     </head>  
     <body>  
 
         <div class="header-bar">Gestión de Detella Factura</div>  
 
         <div class="container-fluid">  
-            <div class="row">  
-                <!-- Formulario -->  
+            <div class="row">
+                <div class="col-md-8">  
+                    <div class="card">  
+                        <div class="card-body">  
+                            <h5 class="card-title text-center text-primary">Lista de Detalle Factura</h5>  
+                            <table class="table table-hover">  
+                                <thead>
+                                    <tr>
+                                        <th>CODIGO</th>
+                                        <th>CANTIDAD</th>
+                                        <th>SUBTOTAL</th>
+                                        <th>PRECIO UNITAIO</th>
+                                        <th>OBSERVACIONES</th>
+                                        <th>CODIGO CONTRATO</th>
+                                        <th>FUNCIONES</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach var="detaFactura" items="${detaFacturas}">
+                                        <tr>
+                                            <td>${detaFactura.getCodigoDetalleFactura()}</td>
+                                            <td>${detaFactura.getCantidad()}</td>
+                                            <td>${detaFactura.getSubTotal()}</td>
+                                            <td>${detaFactura.getPrecioUnitario()}</td>
+                                            <td>${detaFactura.getObservaciones()}</td>
+                                            <td>${detaFactura.getCodigoContrato()}</td>
+                                            <td>
+                                                <a class="btn btn-warning" href="Controlador?menu=DetalleFactura&accion=Editar&codigoDetalleFactura=${detaFactura.getCodigoDetalleFactura()}">Editar</a>
+                                                <a class="btn btn-danger" href="Controlador?menu=DetalleFactura&accion=Eliminar&codigoDetalleFactura=${detaFactura.getCodigoDetalleFactura()}"> Eliminar</a>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>  
+                        </div>  
+                    </div>  
+                </div> 
                 <div class="col-md-4 mb-4">  
                     <div class="card">  
                         <div class="card-body">  
@@ -90,47 +124,9 @@
                             </form>  
                         </div>  
                     </div>  
-                </div>  
-
-                <!-- Tabla -->  
-                <div class="col-md-8">  
-                    <div class="card">  
-                        <div class="card-body">  
-                            <h5 class="card-title text-center text-primary">Lista de Detalle Factura</h5>  
-                            <table class="table table-hover">  
-                                <thead>
-                                    <tr>
-                                        <th>CODIGO</th>
-                                        <th>CANTIDAD</th>
-                                        <th>SUBTOTAL</th>
-                                        <th>PRECIO UNITAIO</th>
-                                        <th>OBSERVACIONES</th>
-                                        <th>CODIGO CONTRATO</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <c:forEach var="detaFactura" items="${detaFacturas}">
-                                        <tr>
-                                            <td>${detaFactura.getCodigoDetalleFactura()}</td>
-                                            <td>${detaFactura.getCantidad()}</td>
-                                            <td>${detaFactura.getSubTotal()}</td>
-                                            <td>${detaFactura.getPrecioUnitario()}</td>
-                                            <td>${detaFactura.getObservaciones()}</td>
-                                            <td>${detaFactura.getCodigoContrato()}</td>
-                                            <td>
-                                                <a class="btn btn-warning" href="Controlador?menu=DetalleFactura&accion=Editar&codigoDetalleFactura=${detaFactura.getCodigoDetalleFactura()}">Editar</a>
-                                                <a class="btn btn-danger" href="Controlador?menu=DetalleFactura&accion=Eliminar&codigoDetalleFactura=${detaFactura.getCodigoDetalleFactura()}"> Eliminar</a>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                </tbody>
-                            </table>  
-                        </div>  
-                    </div>  
-                </div>  
+                </div>    
             </div>  
         </div>  
-
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>  
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>  
     </body>  
