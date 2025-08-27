@@ -19,7 +19,7 @@
                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             }
             .header-bar {
-                background-color: #1a237e;
+                background-color: #2f344f;
                 color: white;
                 padding: 15px;
                 text-align: center;
@@ -33,60 +33,28 @@
                 box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             }
             .card-body label {
-                color: #1a237e;
+                color: #38446c;
             }
             .btn-info {
-                background-color: #1a237e;
+                background-color: #683653;
                 border: none;
             }
             .btn-info:hover {
                 background-color: #0d164e;
             }
             .table thead {
-                background-color: #1a237e;
+                background-color: #2f344f;
                 color: white;
             }
             .table tbody tr:hover {
                 background-color: #e3e6f0;
             }
-        </style>  
+        </style> 
     </head>  
     <body>  
-
         <div class="header-bar">Gestión de Proveedor</div>  
-
         <div class="container-fluid">
             <div class="row">  
-                <div class="col-md-4 mb-4">  
-                    <div class="card">  
-                        <div class="card-body">  
-                            <h5 class="card-title text-center text-primary">Datos del Proveedor</h5>  
-                            <form action="Controlador?menu=ProveedorNV" method="POST"}>  
-                                <div class="form-group">  
-                                    <label><strong>Nombre Proveedor:</strong></label>  
-                                    <input type="text" value="${proveedor.getNombreProveedor()}" name="txtNombreProveedor" class="form-control">  
-                                </div>  
-                                <div class="form-group">  
-                                    <label><strong>Apellido Proveedor</strong></label>  
-                                    <input type="text" value="${proveedor.getApellidoProveedor()}" name="txtApellidoProveedor" class="form-control">  
-                                </div>  
-                                <div class="form-group">  
-                                    <label><strong>Correo Proveedor:</strong></label>  
-                                    <input type="text" value="${proveedor.getCorreoProveedor()}" name="txtCorreoProveedor" class="form-control">  
-                                </div>  
-                                <div class="form-group">  
-                                    <label><strong>Telefono Proveedor:</strong></label>  
-                                    <input type="text" value="${proveedor.getTelefonoProveedor()}" name="txtTelefonoProveedor" class="form-control">  
-                                </div>  
-                                <div class="d-flex justify-content-between">  
-                                    <input type="submit" name="accion" value="Agregar" class="btn btn-info">  
-                                    <input type="submit" name="accion" value="Actualizar" class="btn btn-success">  
-                                </div>  
-                            </form>  
-                        </div>  
-                    </div>  
-                </div>  
-
                 <div class="col-md-8">  
                     <div class="card">  
                         <c:if test="${not empty error}">
@@ -137,8 +105,38 @@
                         </div>  
                     </div>  
                 </div>  
+                <div class="col-md-4 mb-4">  
+                    <div class="card">  
+                        <div class="card-body">  
+                            <h5 class="card-title text-center text-primary">Datos del Proveedor</h5>  
+                            <form action="Controlador?menu=ProveedorNV" method="POST"}>  
+                                <div class="form-group">  
+                                    <label><strong>Nombre Proveedor:</strong></label>  
+                                    <input type="text" value="${proveedor.getNombreProveedor()}" name="txtNombreProveedor" class="form-control">  
+                                </div>  
+                                <div class="form-group">  
+                                    <label><strong>Apellido Proveedor</strong></label>  
+                                    <input type="text" value="${proveedor.getApellidoProveedor()}" name="txtApellidoProveedor" class="form-control">  
+                                </div>  
+                                <div class="form-group">  
+                                    <label><strong>Correo Proveedor:</strong></label>  
+                                    <input type="text" value="${proveedor.getCorreoProveedor()}" name="txtCorreoProveedor" class="form-control">  
+                                </div>  
+                                <div class="form-group">  
+                                    <label><strong>Telefono Proveedor:</strong></label>  
+                                    <input type="text" value="${proveedor.getTelefonoProveedor()}" name="txtTelefonoProveedor" class="form-control">  
+                                </div>  
+                                <div class="d-flex justify-content-between">  
+                                    <input type="submit" name="accion" value="Agregar" class="btn btn-info">  
+                                    <input type="submit" name="accion" value="Actualizar" class="btn btn-success">  
+                                </div>  
+                            </form>  
+                        </div>  
+                    </div>  
+                </div>  
             </div>  
-        </div>  
+        </div>
+
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>  
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script> 

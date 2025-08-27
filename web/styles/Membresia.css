@@ -1,0 +1,158 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #040F28; 
+    color: #78EAE8; 
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.encabezado {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 50px 20px;
+    flex: 1;
+    background: linear-gradient(to bottom, #125187 0%, #4284ad 100%);
+}
+
+.encabezado h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #CEC68D; 
+}
+
+.encabezado p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    color: #ffffffcc;
+}
+
+.membresias {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px 20px;
+    background-color: #040F28;
+}
+
+.gratis, .hierro, .oro, .radiante, .membresia-card {
+    width: 250px;
+    border: 3px solid #CEC68D;
+    border-radius: 15px;
+    padding: 20px;
+    background: linear-gradient(to bottom, #125187 70%, #78EAE8 30%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+    color: #fff;
+}
+
+.gratis:hover, .hierro:hover, .oro:hover, .radiante:hover, .membresia-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+}
+
+.gratis button, .hierro button, .oro button, .radiante button, .membresia-card button {
+    background-color: #125187;
+    color: #CEC68D;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.gratis button:hover, .hierro button:hover, .oro button:hover, .radiante button:hover, .membresia-card button:hover {
+    background-color: #78EAE8;
+    color: #040F28;
+    transform: translateY(-3px);
+}
+
+.info {
+    background-color: #040F28;
+    color: #78EAE8;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    border-top: 2px solid #125187;
+}
+
+.info a {
+    color: #CEC68D;
+    text-decoration: none;
+}
+
+.info a:hover {
+    text-decoration: underline;
+}
+
+.contacto, .redesSociales {
+    width: 48%;
+}
+
+.redesSociales img {
+    margin-right: 15px;
+}
+
+.derechos {
+    width: 100%;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #CEC68D;
+    text-align: center;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+}
+
+.modal-contenido {
+    background-color: rgba(18, 81, 135, 0.9); 
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 15px;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    color: #CEC68D;
+    position: relative;
+    overflow-y: auto;
+    max-height: 80vh;
+}
+
+.info-carro p {
+    font-size: 1.3em;
+    margin: 10px 0;
+}
+
+.cerrar {
+    position: absolute;
+    right: 30px;
+    top: 20px;
+    font-size: 2em;
+    color: #fff;
+    cursor: pointer;
+}
