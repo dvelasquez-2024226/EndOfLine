@@ -167,7 +167,7 @@ model-viewer {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: #125187;
+    background-color: #065F46;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -177,7 +177,7 @@ model-viewer {
 }
 
 .animacion strong {
-    color: #0004ff;
+    color: #10B981 ;
     animation: pulse 1.5s infinite;
 }
 
