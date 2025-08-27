@@ -25,7 +25,7 @@
 
     <body>
         <div class="animacion">
-            <img src="image/carroLogo.png" alt="Carro" class="carro">
+            <img src="image/Logo2.png" alt="Carro" class="carro">
             <div class="text">End <strong>Of</strong> Line</div>
         </div>
 
