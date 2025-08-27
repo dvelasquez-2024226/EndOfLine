@@ -1,8 +1,10 @@
 package modelo;
 
+import java.io.InputStream;
 import java.sql.Date;
 
 public class Empleado {
+    
     private int carne;
     private String nombreEmpleado;
     private String apellidoEmpleado;
@@ -11,12 +13,13 @@ public class Empleado {
     private Date fechaIngreso;
     private String usuarioEmpleado;
     private String contraseniaEmpleado;
+    private InputStream foto;
     private int codigoConcesionario;
-
+    
     public Empleado() {
     }
 
-    public Empleado(int carne, String nombreEmpleado, String apellidoEmpleado, String correoEmpleado, String telefonoEmpleado, Date fechaIngreso, String usuarioEmpleado, String contraseniaEmpleado, int codigoConcesionario) {
+    public Empleado(int carne, String nombreEmpleado, String apellidoEmpleado, String correoEmpleado, String telefonoEmpleado, Date fechaIngreso, String usuarioEmpleado, String contraseniaEmpleado, InputStream foto, int codigoConcesionario) {
         this.carne = carne;
         this.nombreEmpleado = nombreEmpleado;
         this.apellidoEmpleado = apellidoEmpleado;
@@ -25,10 +28,9 @@ public class Empleado {
         this.fechaIngreso = fechaIngreso;
         this.usuarioEmpleado = usuarioEmpleado;
         this.contraseniaEmpleado = contraseniaEmpleado;
+        this.foto = foto;
         this.codigoConcesionario = codigoConcesionario;
     }
-
-    
 
     public int getCarne() {
         return carne;
@@ -78,14 +80,6 @@ public class Empleado {
         this.fechaIngreso = fechaIngreso;
     }
 
-    public int getCodigoConcesionario() {
-        return codigoConcesionario;
-    }
-
-    public void setCodigoConcesionario(int codigoConcesionario) {
-        this.codigoConcesionario = codigoConcesionario;
-    }
-
     public String getUsuarioEmpleado() {
         return usuarioEmpleado;
     }
@@ -101,8 +95,24 @@ public class Empleado {
     public void setContraseniaEmpleado(String contraseniaEmpleado) {
         this.contraseniaEmpleado = contraseniaEmpleado;
     }
-    
-    
+
+    public InputStream getFoto() {
+        return foto;
+    }
+
+    public void setFoto(InputStream foto) {
+        this.foto = foto;
+    }
+
+    public int getCodigoConcesionario() {
+        return codigoConcesionario;
+    }
+
+    public void setCodigoConcesionario(int codigoConcesionario) {
+        this.codigoConcesionario = codigoConcesionario;
+    }
+
+   
     
 }
 
