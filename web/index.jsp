@@ -4,6 +4,7 @@
     Author     : ISAAC
 --%>
 
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,20 +24,20 @@
                     <form class="form-sign" action="Validar" method="POST">
                         <div class="form-group text-center">
                             <h3 class="tituloColor">Bienvenidos</h3>
-                            <img src="image/Logo.png" alt="Logo pequeño" width="120"/><br>
+                            <img src="image/Logo.png" alt="Logo pequeno" width="120"/><br>
                             <label class="textoColor">Ingrese sus credenciales</label>
                         </div>
                         <!-- Campo Usuario -->
                         <div class="form-group d-flex align-items-center">
-                            <!-- Tamaño imagen usuario -->
+                            <!-- Tamano imagen usuario -->
                             <img src="image/Usuario.png" alt="Usuario" class="tamanoUsuario mr-2" />
                             <input type="text" name="txtUser" class="form-control inputColor" placeholder="Usuario">
                         </div>
-                        <!-- Campo Contraseña -->
+                        <!-- Campo Contrasena -->
                         <div class="form-group d-flex align-items-center">
-                            <!-- Tamaño imagen contraseña -->
-                            <img src="image/Contraseña.png" alt="Contraseña" class="tamanoContra mr-2" />
-                            <input type="password" name="txtPass" class="form-control inputColor" placeholder="Contraseña">
+                            <!-- Tamano imagen contrasena -->
+                            <img src="image/Contrasena.png" alt="Contrasena" class="tamanoContra mr-2" />
+                            <input type="password" name="txtPass" class="form-control inputColor" placeholder="Contrasena">
                         </div>
                         <input type="submit" value="Ingresar" name="accion" class="btn btn-primary btn-block btnColor">
                     </form>
