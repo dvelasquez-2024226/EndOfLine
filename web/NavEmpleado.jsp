@@ -22,7 +22,7 @@
                         <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="Controlador?menu=ProveedorNV&accion=Listar" target="myFrame">Proveedores</a>
                     </li>
                     <li class="nav-item">
-                        <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="#" >Membresias</a>
+                        <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="Controlador?menu=Membresia&accion=Listar" target="myFrame" >Membresias</a>
                     </li>
                     <li class="nav-item">
                         <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="Controlador?menu=Cliente&accion=Listar" target="myFrame">Cliente</a>
