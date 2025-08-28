@@ -1,119 +1,78 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>EndOfLine</title>
-    <link rel="stylesheet" href="styles/carro.css">
-</head>
-<body>
-    <!-- Imagen EndOfLine.png centrada -->
-    <div class="titulo-imagen">
-        <img src="image/EndOfLine.png" alt="EndOfLine" class="imagen-titulo">
-    </div>
+    <head>
+        <meta charset="UTF-8">
+        <title>EndOfLine</title>
+        <link rel="stylesheet" href="styles/carro.css">
+    </head>
+    <body>
+        <!-- Imagen EndOfLine.png centrada -->
+        <div class="titulo-imagen">
+            <h1>EndOfLine</h1>
+        </div>
 
-    <div class="contenedor-carros">
-        <!-- Carro 1 -->
-        <div class="carro">
-            <img src="image/carro1.jpg" alt="Carro 1">
-            <button onclick="mostrarInfo(0)">Ver detalles del veh�culo</button>
+        <!-- Nuevo contenedor con la información general sobre los carros -->
+        <div class="contenedor-info">
+            <h2>¡Bienvenido a nuestra colección exclusiva de carros!</h2>
+            <p>Aquí encontrarás una selección de los autos más impresionantes y exclusivos del mercado.</p>
         </div>
-        <!-- Carro 2 -->
-        <div class="carro">
-            <img src="image/carro2.jpg" alt="Carro 2">
-            <button onclick="mostrarInfo(1)">Ver detalles del veh�culo</button>
-        </div>
-        <!-- Carro 3 -->
-        <div class="carro">
-            <img src="image/carro3.jpg" alt="Carro 3">
-            <button onclick="mostrarInfo(2)">Ver detalles del veh�culo</button>
-        </div>
-        <!-- Carro 4 -->
-        <div class="carro">
-            <img src="image/carro4.jpg" alt="Carro 4">
-            <button onclick="mostrarInfo(3)">Ver detalles del veh�culo</button>
-        </div>
-        <!-- Carro 5 -->
-        <div class="carro">
-            <img src="image/carro5.jpg" alt="Carro 5">
-            <button onclick="mostrarInfo(4)">Ver detalles del veh�culo</button>
-        </div>
-    </div>
 
-    <!-- Ventana emergente -->
-    <div id="ventana-info" class="modal">
-        <div class="modal-contenido">
-            <span class="cerrar" onclick="cerrarVentana()">&times;</span>
-            <img id="imagen-carro" src="" alt="Imagen del carro">
-            <div class="info-carro">
-                <p><strong>Marca:</strong> <span id="marca"></span></p>
-                <p><strong>Modelo:</strong> <span id="modelo"></span></p>
-                <p><strong>Color:</strong> <span id="color"></span></p>
-                <p><strong>A�o:</strong> <span id="ano"></span></p>
-                <p><strong>Estado:</strong> <span id="estado"></span></p>
+        <div class="contenedor-carros">
+            <!-- Carro 1 -->
+            <div class="carro">
+                <div class="info-carro">
+                    <p><strong>Marca:</strong> Lamborghini</p>
+                    <p><strong>Modelo:</strong> Huracan Performante</p>
+                    <p><strong>Color:</strong> Nero Noctis</p>
+                    <p><strong>Año:</strong> 2024</p>
+                    <p><strong>Estado:</strong> Disponible</p>
+                </div>
+            </div>
+            <!-- Carro 2 -->
+            <div class="carro">
+                <div class="info-carro">
+                    <p><strong>Marca:</strong> Porsche</p>
+                    <p><strong>Modelo:</strong> 911 GT3 RS</p>
+                    <p><strong>Color:</strong> Blanco y Rojo</p>
+                    <p><strong>Año:</strong> 2025</p>
+                    <p><strong>Estado:</strong> En proceso de entrega</p>
+                </div>
+            </div>
+            <!-- Carro 3 -->
+            <div class="carro">
+                <div class="info-carro">
+                    <p><strong>Marca:</strong> Ferrari</p>
+                    <p><strong>Modelo:</strong> Roma</p>
+                    <p><strong>Color:</strong> Rosso Fiorano</p>
+                    <p><strong>Año:</strong> 2023</p>
+                    <p><strong>Estado:</strong> No disponible</p>
+                </div>
+            </div>
+            <!-- Carro 4 -->
+            <div class="carro">
+                <div class="info-carro">
+                    <p><strong>Marca:</strong> Audi</p>
+                    <p><strong>Modelo:</strong> R8</p>
+                    <p><strong>Color:</strong> Gris Daytona</p>
+                    <p><strong>Año:</strong> 2024</p>
+                    <p><strong>Estado:</strong> Disponible</p>
+                </div>
+            </div>
+            <!-- Carro 5 -->
+            <div class="carro">
+                <div class="info-carro">
+                    <p><strong>Marca:</strong> Rolls Royce</p>
+                    <p><strong>Modelo:</strong> Cullinan</p>
+                    <p><strong>Color:</strong> Negro</p>
+                    <p><strong>Año:</strong> 2025</p>
+                    <p><strong>Estado:</strong> Disponible</p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <script>
-        const carros = [
-            {
-                imagen: "image/carro1.jpg",
-                marca: "Lamborghini",
-                modelo: "Huracan Performante",
-                color: "Nero Noctis",
-                ano: "2024",
-                estado: "Disponible"
-            },
-            {
-                imagen: "image/carro2.jpg",
-                marca: "Porsche",
-                modelo: "911 GT3 RS",
-                color: "Blanco y Rojo",
-                ano: "2025",
-                estado: "En proceso de entrega"
-            },
-            {
-                imagen: "image/carro3.jpg",
-                marca: "Ferrari",
-                modelo: "Roma",
-                color: "Rosso Fiorano",
-                ano: "2023",
-                estado: "No disponible"
-            },
-            {
-                imagen: "image/carro4.jpg",
-                marca: "Audi",
-                modelo: "R8",
-                color: "Gris Daytona",
-                ano: "2024",
-                estado: "Disponible"
-            },
-            {
-                imagen: "image/carro5.jpg",
-                marca: "Rolls Royce",
-                modelo: "Cullinan",
-                color: "Negro",
-                ano: "2025",
-                estado: "Disponible"
-            }
-        ];
-
-        function mostrarInfo(index) {
-            const carro = carros[index];
-            document.getElementById("imagen-carro").src = carro.imagen;
-            document.getElementById("marca").textContent = carro.marca;
-            document.getElementById("modelo").textContent = carro.modelo;
-            document.getElementById("color").textContent = carro.color;
-            document.getElementById("ano").textContent = carro.ano;
-            document.getElementById("estado").textContent = carro.estado;
-
-            document.getElementById("ventana-info").style.display = "block";
-        }
-
-        function cerrarVentana() {
-            document.getElementById("ventana-info").style.display = "none";
-        }
-    </script>
-</body>
+        <script>
+            
+        </script>
+    </body>
 </html>
-

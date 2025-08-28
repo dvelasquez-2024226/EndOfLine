@@ -21,7 +21,7 @@
             }
 
             .header-bar {
-                background-color: #1a237e;
+                background-color: #2f344f;
                 color: white;
                 padding: 15px;
                 text-align: center;
