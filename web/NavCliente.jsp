@@ -39,6 +39,7 @@
                     <li><a href="#">Servicios</a></li>
                     <li><a href="#" >Talleres</a></li>
                     <li><a href="#" >Ubicaciones</a></li>
+                    <li><a href="Controlador?menu=MembresiaCliente&accion=Listar" target="myFrame" >Membresías</a></li>
                     <li><a href="Controlador?menu=EmpleadoCliente&accion=Listar" target="myFrame"" >Ayuda</a></li>
                     <li><a href="Controlador?menu=ContratoCl&accion=Listar" target="myFrame" >Contratos</a></li>
                     <div class="dropdown" >
