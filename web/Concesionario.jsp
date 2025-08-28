@@ -1,7 +1,7 @@
 <%-- 
     Document   : Concesionario
     Created on : 22/08/2025, 09:43:22
-    Author     : Sofia
+    Author     : Otto
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -19,7 +19,7 @@
                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             }
             .header-bar {
-                background-color: #1a237e; /* Azul oscuro como en tu menú principal */
+                background-color: #2f344f;
                 color: white;
                 padding: 15px;
                 text-align: center;
@@ -33,17 +33,17 @@
                 box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             }
             .card-body label {
-                color: #1a237e;
+                color: #38446c;
             }
             .btn-info {
-                background-color: #1a237e;
+                background-color: #683653;
                 border: none;
             }
             .btn-info:hover {
                 background-color: #0d164e;
             }
             .table thead {
-                background-color: #1a237e;
+                background-color: #2f344f;
                 color: white;
             }
             .table tbody tr:hover {
@@ -132,6 +132,32 @@
         </div>  
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>  
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>  
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
+        
+        <script>
+            document.querySelector("form").addEventListener("submit", function (evento) {
+ 
+                let accion = evento.submitter.value;
+                let mensaje;
+ 
+                if (accion === "Agregar") {
+                    mensaje = "¿Está seguro de que desea AGREGAR un nuevo dato?";
+                } else {
+                    mensaje = "¿Está seguro de que desea ACTUALIZAR el dato?";
+                }
+ 
+                if (!confirm(mensaje)) {
+                    evento.preventDefault();
+                }
+            });
+ 
+            document.querySelectorAll(".btn-danger").forEach(boton => {
+                boton.addEventListener("click", function (evento) {
+                    if (!confirm("¿Está seguro de que desea ELIMINAR el dato?")) {
+                        evento.preventDefault();
+                    }
+                });
+            });
+</script>
     </body>  
 </html>
