@@ -1,0 +1,89 @@
+body {
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #11101b;
+        color: #96253d;
+    }
+
+    /* Imagen del título centrada y más pequeña */
+    .titulo-imagen {
+        text-align: center;
+        margin-top: 50px;
+        box-shadow: 0 10px 100px rgba(200, 0, 2.5);
+    }
+
+    .imagen-titulo {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+        width: 300px;
+    }
+
+    /* Contenedor de información sobre los carros */
+    .contenedor-info {
+        background-color: #2f344f;
+        padding: 30px;
+        border-radius: 30px;
+        width: 90%;
+        max-width: 1400px;
+        margin: 100px auto;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 2.5);
+        color: #fbc1ab;
+        text-align: center;
+    }
+
+    /* Contenedor de carros */
+    .contenedor-carros {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px;
+        gap: 100px;
+    }
+
+    /* Diseño de cada carro */
+    .carro {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #2f344f;
+        padding: 30px;
+        border-radius: 30px;
+        width: 90%;
+        max-width: 1400px;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 2.5);
+    }
+
+    /* Eliminado el estilo de la imagen del carro */
+    .carro img {
+        display: none;
+    }
+
+    /* Estilo de la información del carro */
+    .info-carro {
+        text-align: center;
+        font-size: 1.2em;
+        color: #fbc1ab;
+        margin: 10px 0;
+    }
+
+    /* Eliminar el botón y el modal */
+    .carro button {
+        display: none;
+    }
+
+    /* Modal (ventana emergente) con fondo transparente (se elimina) */
+    .modal {
+        display: none;
+    }
+
+    /* Contenido de la ventana modal (se elimina) */
+    .modal-contenido {
+        display: none;
+    }
+
+    /* Información dentro de cada carro centrada */
+    .carro .info-carro p {
+        margin: 15px 0;
+    }

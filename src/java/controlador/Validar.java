@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Cliente;
 import modelo.ClienteDAO;
+import modelo.Empleado;
+import modelo.EmpleadoDAO;
 
 /**
  *
@@ -20,6 +22,8 @@ import modelo.ClienteDAO;
 public class Validar extends HttpServlet {
     Cliente cliente = new Cliente () ;
     ClienteDAO clienteDao = new ClienteDAO (); 
+    Empleado empleado = new Empleado();
+    EmpleadoDAO empleadoDao = new EmpleadoDAO();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -59,7 +63,8 @@ public class Validar extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        int codigoCliente= Integer.parseInt(request.getParameter("codigoCliente"));
+        clienteDao.listarImg(codigoCliente, response);
     }
 
     /**
@@ -79,10 +84,13 @@ public class Validar extends HttpServlet {
             String user = request.getParameter("txtUser");
             String pass = request.getParameter("txtPass");
             cliente = clienteDao.validar(user, pass);
+            empleado = empleadoDao.validar(user, pass);
             if (cliente.getApellidoCliente()!= null){
                 request.setAttribute("apellidoCliente" , cliente);
-                request.getRequestDispatcher("Controlador?menu=Principal").forward(request,response);
-                System.out.println("Hola");
+                request.getRequestDispatcher("Controlador?menu=NavCliente&accion=Listar").forward(request,response);
+            }else if(empleado.getUsuarioEmpleado()!= null){
+                request.setAttribute("usuarioEmpleado", empleado);
+                request.getRequestDispatcher("Controlador?menu=NavEmpleado&accion=Listar").forward(request, response);
             }else{
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             }

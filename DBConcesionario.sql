@@ -36,10 +36,12 @@ create table Clientes (
     correoCliente varchar(50) not null,
     telefonoCliente varchar(8) not null,
     direccionCliente varchar(150) not null,
+    foto longblob,
     codigoMembresia int not null,
 	primary key pk_CodigoCliente (codigoCliente),
     constraint FK_Clientes_Membresias foreign key (codigoMembresia)
 		references 	Membresias(codigoMembresia)
+        on delete cascade
 );
 
 create table Talleres (
@@ -62,9 +64,11 @@ create table Carros (
     codigoProveedor int not null,
 	primary key  PK_codigoCarro (codigoCarro),
 	constraint FK_Carros_Inventarios foreign key (codigoInventario)
-		references inventarios (codigoInventario),
+		references inventarios (codigoInventario)
+        on delete cascade,
 	constraint FK_carros_proveedores foreign key (codigoProveedor)
 		references proveedores(codigoProveedor)
+        on delete cascade
 );
 
 create table Concesionarios (
@@ -77,6 +81,7 @@ create table Concesionarios (
 	primary key pk_codigoconcesionario (codigoConcesionario),
     constraint FK_concesionarios_inventarios foreign key (codigoInventario)
 		references inventarios(codigoInventario)
+        on delete cascade
 );
 
 create table Empleados (
@@ -88,6 +93,7 @@ create table Empleados (
 	fechaIngreso date not null,
     usuarioEmpleado varchar(15) not null,
     contraseniaEmpleado varchar(100) not null,
+    foto longblob,
     codigoConcesionario int not null,
     primary key carne (carne),
     constraint FK_empleados_concesionarios foreign key (codigoConcesionario)
@@ -104,6 +110,7 @@ create table Contratos (
     primary key pk_codigoContrato (codigoContrato),
     constraint FK_contratos_concesionarios foreign key (codigoConcesionario)
 		references concesionarios(codigoConcesionario)
+        on delete cascade
 );
 
 create table Publicidad (
@@ -116,6 +123,7 @@ create table Publicidad (
 	primary key pk_codigoPublicidad (codigoPublicidad),
     constraint FK_publicidad_Carros foreign key (codigoCarro)
 		references Carros(codigoCarro)
+        on delete cascade
 );
 
 create table Servicios (
@@ -128,9 +136,11 @@ create table Servicios (
     noTaller int not null,
 	primary key pk_codigoServicio (noServicio),
     constraint FK_servicios_empleados foreign key (carne)
-		references empleados(carne),
+		references empleados(carne)
+        on delete cascade,
     constraint FK_servicio_talleres foreign key (noTaller)
 		references talleres(noTaller)
+        on delete cascade
 );
 
 create table detalleFactura (
@@ -143,6 +153,7 @@ create table detalleFactura (
     primary key pk_codigoDetalleFactura (codigoDetalleFactura),
     constraint FK_detalleFactura_contratos foreign key (codigoContrato)
 		references contratos(codigoContrato)
+        on delete cascade
 );
 
 create table Facturas (
@@ -156,11 +167,14 @@ create table Facturas (
     codigoCliente int not null,
     primary key pk_codigoFactura (codigoFactura),
 	constraint FK_factura_detalleFacturaforeign foreign key(codigoDetalleFactura)
-		references detalleFactura(codigoDetalleFactura),
+		references detalleFactura(codigoDetalleFactura)
+        on delete cascade,
 	constraint FK_factura_empleados foreign key (carne)
-		references empleados(carne),
+		references empleados(carne)
+        on delete cascade,
 	constraint FK_factura_clientes foreign key (codigoCliente)
 		references clientes(codigoCliente)
+        on delete cascade
 );
 
 insert into Inventarios (stock, fechaIngreso, fechaSalida, carne) 
@@ -196,16 +210,16 @@ Insert into Membresias(tipoMembresia,fechaPago,mensualidad,fechaVencimiento)
 Insert into Membresias(tipoMembresia,fechaPago,mensualidad,fechaVencimiento) 
 	values('Bronce','2025-05-10',199.99,'2025-10-18');
     
-insert into Clientes (nombreCliente, apellidoCliente, correoCliente, telefonoCliente, direccionCliente, codigoMembresia)
-	values ('Ana', 'Ramirez', 'ana.ramirez@example.com', '45678901', 'Av. Central 123, Zona 1', 1);
-insert into Clientes (nombreCliente, apellidoCliente, correoCliente, telefonoCliente, direccionCliente, codigoMembresia)
-	values ('Luis', 'Martínez', 'luis.martinez@example.com', '50234567', 'Calle 5, Colonia El Prado', 2);
-insert into Clientes (nombreCliente, apellidoCliente, correoCliente, telefonoCliente, direccionCliente, codigoMembresia)
-	values ('María', 'Gómez', 'maria.gomez@example.com', '43127890', 'Boulevard Los Álamos 89', 3);
-insert into Clientes (nombreCliente, apellidoCliente, correoCliente, telefonoCliente, direccionCliente, codigoMembresia)
-	values ('Carlos', 'Hernández', 'carlos.hdz@example.com', '39871234', 'Residencial Monte Bello, casa 45', 4);
-insert into Clientes (nombreCliente, apellidoCliente, correoCliente, telefonoCliente, direccionCliente, codigoMembresia)
-	values ('Sofía', 'López', 'sofia.lopez@example.com', '28903456', 'Zona 10, Torre Empresarial, apto 302', 5);
+insert into Clientes (nombreCliente, apellidoCliente, correoCliente, telefonoCliente, direccionCliente, foto, codigoMembresia) 
+	values ('Luis', 'Alay', 'lalay@gmail.com', '45671234', 'Zona 14, Ciudad de Guatemala', load_file('C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\lalay.jpg'), 2);
+insert into Clientes (nombreCliente, apellidoCliente, correoCliente, telefonoCliente, direccionCliente, foto, codigoMembresia) 
+	values ('Otto', 'Diaz', 'odiaz@gmail.com', '56782345', 'Santa Catarina Pinula, Guatemala', load_file('C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\'), 3);
+insert into Clientes (nombreCliente, apellidoCliente, correoCliente, telefonoCliente, direccionCliente, foto, codigoMembresia) 
+	values ('Rigoberto', 'Godinez', 'rgodinez@gmail.com', '67893456', 'Mixco, Zona 1, Guatemala', load_file('C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\rgodinez.jpg'), 5);
+insert into Clientes (nombreCliente, apellidoCliente, correoCliente, telefonoCliente, direccionCliente, foto, codigoMembresia) 
+values ('Ricardo ', 'Marroquin', 'rmarroquin@gmail.com', '78904567', 'San Miguel Petapa, Guatemala', load_file('C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\rmarroquin.jpg'), 1);
+insert into Clientes (nombreCliente, apellidoCliente, correoCliente, telefonoCliente, direccionCliente, foto, codigoMembresia) 
+	values ('David', 'Lopez', 'dlopez@gmail.com', '89015678', 'Villa Canales, Guatemala', load_file('C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\dlopez.jpg'), 4);
     
     
 insert into Talleres (ubicacion, repuestos, herramientas, estadocarro) 
@@ -241,16 +255,20 @@ insert into Concesionarios (nombreConcesionario, correoConcesionario, telefonoCo
 insert into Concesionarios (nombreConcesionario, correoConcesionario, telefonoConcesionario, direccionConcesionario, codigoInventario) 
 	values('Auto Premier', 'autopremier@gmail.com', '56789101', 'Zona 8', 5);
     
-insert into Empleados(nombreEmpleado, apellidoEmpleado, correoEmpleado, telefonoEmpleado, fechaIngreso, usuarioEmpleado, contraseniaEmpleado, codigoConcesionario) 
-	values ('Ricardo','Marroquin','rmarroquin-2024231@EndOfLine.gt','56379391','2020-3-12','rmarroquin','123',1);
-insert into Empleados(nombreEmpleado, apellidoEmpleado, correoEmpleado, telefonoEmpleado, fechaIngreso, usuarioEmpleado, contraseniaEmpleado, codigoConcesionario) 
-	values ('Andre','Lopez','alopez-2024231@EndOfLine.gt','24350580','2025-3-12','alopez','456',1);
-insert into Empleados(nombreEmpleado, apellidoEmpleado, correoEmpleado, telefonoEmpleado, fechaIngreso, usuarioEmpleado, contraseniaEmpleado, codigoConcesionario) 
-	values ('Ruben','Doblas','rdoblas-2024789@EndOfLine.gt','45612345','2020-8-11','rdoblas','789',1);
-insert into Empleados(nombreEmpleado, apellidoEmpleado, correoEmpleado, telefonoEmpleado, fechaIngreso, usuarioEmpleado, contraseniaEmpleado, codigoConcesionario) 
-	values ('Samuel','deluque','vguetta-777777@EndOfLine.gt','77777777','2027-3-12','sdeluque','963',1);
-insert into Empleados(nombreEmpleado, apellidoEmpleado, correoEmpleado, telefonoEmpleado, fechaIngreso, usuarioEmpleado, contraseniaEmpleado, codigoConcesionario) 
-	values ('Diego','Velasquez','jmartinez-2024083@EndOfLine.gt','45678941','2025-3-12','d','321',1);
+insert into Empleados(nombreEmpleado, apellidoEmpleado, correoEmpleado, telefonoEmpleado, fechaIngreso, usuarioEmpleado, contraseniaEmpleado, foto, codigoConcesionario) 
+	values ('Emilio', 'Navarro', 'cnavarro@EndOfLine.gt', '44561234', '2023-03-15', 'cnavarro', '2024170', load_file('C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\cnavarro.jpg'), 1);
+insert into Empleados(nombreEmpleado, apellidoEmpleado, correoEmpleado, telefonoEmpleado, fechaIngreso, usuarioEmpleado, contraseniaEmpleado, foto, codigoConcesionario) 
+	values ('Dany ', 'Lucas', 'dlucas@EndOfLine.gt', '66783456', '2024-01-25', 'dlucas', '2024332', load_file('C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\dlucas.jpg'), 1);
+insert into Empleados(nombreEmpleado, apellidoEmpleado, correoEmpleado, telefonoEmpleado, fechaIngreso, usuarioEmpleado, contraseniaEmpleado, foto, codigoConcesionario) 
+	values ('Diego', 'Monterroso', 'dmonterroso@EndOfLine.gt', '77894567', '2023-11-10', 'dmonterroso', '2021543', load_file('C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\dmonterroso.jpg'), 1);
+insert into Empleados(nombreEmpleado, apellidoEmpleado, correoEmpleado, telefonoEmpleado, fechaIngreso, usuarioEmpleado, contraseniaEmpleado, foto, codigoConcesionario) 
+	values ('Diego ', 'Velásquez ', 'dvelasquez@EndOfLine.gt', '88905678', '2022-05-18', 'dvelasquez', '2024226', load_file('C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\dvelasquez.jpg'), 1);
+insert into Empleados(nombreEmpleado, apellidoEmpleado, correoEmpleado, telefonoEmpleado, fechaIngreso, usuarioEmpleado, contraseniaEmpleado, foto, codigoConcesionario) 
+	values ('Francisco', 'Milian', 'fmilian@EndOfLine.gt', '99016789', '2023-06-22', 'fmilian', '2024356', load_file('C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\fmilian.jpg'), 1);
+insert into Empleados(nombreEmpleado, apellidoEmpleado, correoEmpleado, telefonoEmpleado, fechaIngreso, usuarioEmpleado, contraseniaEmpleado, foto, codigoConcesionario) 
+	values ('Isaac', 'Tiguilá', 'itiguila@EndOfLine.gt', '33457890', '2022-09-05', 'itiguila', '2024295', load_file('C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\itiguila.jpg'), 1);
+	
+SHOW VARIABLES LIKE 'secure_file_priv';
 
 insert into Contratos (clausula, precio, fechaInicio, fechaFin, codigoConcesionario)
 	values('Este contrato entrará en vigencia a partir de la fecha de firma y tendrá una duración de 6 meses, con opción a renovación.','268900.00','2025-01-06','2025-07-06',1);
@@ -307,4 +325,5 @@ insert into Facturas (fechaEmision, total, estado, metodoPago, codigoDetalleFact
 insert into Facturas (fechaEmision, total, estado, metodoPago, codigoDetalleFactura, carne, codigoCliente)
 	values ('2025-07-20', 760.50, 'Pendiente', 'Paypal',5,5,5);
     
-    select * from clientes where apellidoCliente = 'Ramírez' and telefonoCliente = '45678901';
+SELECT carne, LENGTH(foto) FROM Empleados;
+SELECT codigoCliente, LENGTH(foto) FROM Clientes;
