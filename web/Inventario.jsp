@@ -27,6 +27,8 @@
                 font-size: 1.5rem;
                 border-radius: 0 0 15px 15px;
                 margin-bottom: 25px;
+                
+                
             }
             .card {
                 border-radius: 15px;
