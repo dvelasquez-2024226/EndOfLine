@@ -22,7 +22,7 @@ public class ServicioDAO {
     int resp;
     
     public List listar(){
-        String sql = "select * from servicio";
+        String sql = "select * from servicios";
         List<Servicio> listaServicio = new ArrayList<>();
         try{
             con = cn.Conexion();
@@ -30,13 +30,13 @@ public class ServicioDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Servicio se = new Servicio();
-                se.setNoServicios(rs.getInt(1));
+                se.setNoServicio(rs.getInt(1));
                 se.setFechaIngreso(rs.getDate(2));
                 se.setDetalles(rs.getString(3));
-                se.setTipoServicios(rs.getString(4));
+                se.setTipoServicio(rs.getString(4));
                 se.setFechaSalida(rs.getDate(5));
-                se.setEmpleados_carne(rs.getInt(6));
-                se.setTaller_notaller(rs.getInt(7));
+                se.setCarne(rs.getInt(6));
+                se.setNotaller(rs.getInt(7));
                 listaServicio.add(se);
             }
         }catch(Exception e){
@@ -48,17 +48,17 @@ public class ServicioDAO {
     
     //MÉTODO AGREGAR
     public int agregar(Servicio ser) {
-        String sql = "insert into servicio (FechaIngreso, Detalles, TipoServicios, FechaSalida, Empleados_carne,) values (?,?,?,?,?)";
+        String sql = "insert into servicios (fechaIngreso, detalles, tipoServicio, fechaSalida, carne, noTaller) values (?,?,?,?,?,?)";
         try {
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
             
             ps.setDate(1, ser.getFechaIngreso());
             ps.setString(2, ser.getDetalles());
-            ps.setString(3, ser.getTipoServicios());
+            ps.setString(3, ser.getTipoServicio());
             ps.setDate(4, ser.getFechaSalida());
-            ps.setInt(5, ser.getEmpleados_carne());
-            ps.setInt(6, ser.getTaller_notaller());
+            ps.setInt(5, ser.getCarne());
+            ps.setInt(6, ser.getNotaller());
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -71,20 +71,19 @@ public class ServicioDAO {
     public Servicio listarCodigoServicio(int id) {
         //Instanciamos un objeto de tipo empleado
         Servicio ser = new Servicio();
-        String sql = "Select * from Servicio where codigoServicio ="+id;
+        String sql = "Select * from servicios where noServicio ="+id;
         try {
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while(rs.next()){
-                ser.setNoServicios(rs.getInt(2));
+                ser.setNoServicio(rs.getInt(2));
                 ser.setFechaIngreso(rs.getDate(3));
                 ser.setDetalles(rs.getString(4));
-                ser.setTipoServicios(rs.getString(5));
+                ser.setTipoServicio(rs.getString(5));
                 ser.setFechaSalida(rs.getDate(6));
-                ser.setFechaSalida(rs.getDate(6));
-                ser.setEmpleados_carne(rs.getInt(7));
-                ser.setTaller_notaller(rs.getInt(8));
+                ser.setCarne(rs.getInt(7));
+                ser.setNotaller(rs.getInt(8));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -95,20 +94,18 @@ public class ServicioDAO {
     
     //MÉTODO EDITAR
    public int actualizar(Servicio ser){
-       String sql = "update servicio set"
+       String sql = "update servicios set"
                + "fechaIngreso = ?, detalles = ?,"
-               + "tipoServicio = ?, fechaSalida = ? where taller_notaller = ?";
+               + "tipoServicio = ?, fechaSalida = ? where noServicio = ?";
 
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
-            ps.setInt(1, ser.getNoServicios());
+            ps.setInt(1, ser.getNoServicio());
             ps.setDate(2, ser.getFechaIngreso());
             ps.setString(3, ser.getDetalles());
-            ps.setString(4, ser.getTipoServicios());
+            ps.setString(4, ser.getTipoServicio());
             ps.setDate(5, ser.getFechaSalida());
-            ps.setInt(6, ser.getEmpleados_carne());
-            ps.setInt(6, ser.getTaller_notaller());
             ps.executeUpdate();
         }catch(Exception e){
             e.printStackTrace();
@@ -119,7 +116,7 @@ public class ServicioDAO {
    
    //    //MÉTODO ELIMINAR
        public void eliminar (int id){
-           String sql= "delete from servicio where noServicio ="+id;
+           String sql= "delete from servicios where noServicio ="+id;
            try{
                con = cn.Conexion();
                ps = con.prepareStatement(sql);

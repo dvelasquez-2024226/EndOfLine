@@ -1,12 +1,12 @@
 
 package modelo;
 
-
-
-
-
+/**
+ *
+ * @author emili
+ */
 public class Taller {
-    private int codigoTaller;
+    private int notaller;
     private String ubicacion;
     private String repuestos;
     private String herramientas;
@@ -15,20 +15,20 @@ public class Taller {
     public Taller() {
     }
 
-    public Taller(int codigoTaller, String ubicacion, String repuestos, String herramientas, String estadoCarro) {
-        this.codigoTaller = codigoTaller;
+    public Taller(int notaller, String ubicacion, String repuestos, String herramientas, String estadoCarro) {
+        this.notaller = notaller;
         this.ubicacion = ubicacion;
         this.repuestos = repuestos;
         this.herramientas = herramientas;
         this.estadoCarro = estadoCarro;
     }
 
-    public int getCodigoTaller() {
-        return codigoTaller;
+    public int getNotaller() {
+        return notaller;
     }
 
-    public void setCodigoTaller(int codigoTaller) {
-        this.codigoTaller = codigoTaller;
+    public void setNotaller(int notaller) {
+        this.notaller = notaller;
     }
 
     public String getUbicacion() {
@@ -62,6 +62,9 @@ public class Taller {
     public void setEstadoCarro(String estadoCarro) {
         this.estadoCarro = estadoCarro;
     }
+    
+    
+    
 }
 
     

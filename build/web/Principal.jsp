@@ -20,7 +20,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-
+        
     </head>
 
     <body>
@@ -35,12 +35,13 @@
                 <ul class="botones">
                     <li><a href="Controlador?menu=CarroCl&accion=Listar">Vehiculos</a></li>
                     <li><a href="Controlador?menu=ProveedorVC&accion=Listar">Proveedores</a></li>
+                    <li><a href="Controlador?menu=InventarioCl&accion=Listar">Inventario</a></li>
                     <li><a href="#">Servicios</a></li>
                     <li><a href="#">Talleres</a></li>
                     <li><a href="#">Ubicaciones</a></li>
                     <li><a href="#">Ayuda</a></li>
                     <li><a href="#">Carrito de compra</a></li>
-                    <li><a href="Controlador?menu=InventarioCl&accion=Listar">InventarioCl</a></li>
+                    
                     <div class="dropdown" >
                         <button style="border: none" class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton" aria-haspopup="true" data-toggle="dropdown" aria-expand="false">
                             ${apellidoCliente.getNombreCliente()}

@@ -1,36 +1,32 @@
-
 package modelo;
 
 import java.sql.Date;
 
-
-
 public class Contrato {
-    private int codigoContrato;
+    private Integer codigoContrato;
     private String clausula;
-    private double precio;
+    private Double precio;
     private Date fechaInicio;
     private Date fechaFin;
-    private int codigoConcesionario;
-    
-    public Contrato(){
-    
+    private Integer codigoConcecionario;
+
+    public Contrato() {
     }
 
-    public Contrato(int codigoContrato, String clausula, double precio, Date fechaInicio, Date fechaFin, int codigoConcesionario) {
+    public Contrato(Integer codigoContrato, String clausula, Double precio, Date fechaInicio, Date fechaFin, Integer codigoConcecionario) {
         this.codigoContrato = codigoContrato;
         this.clausula = clausula;
         this.precio = precio;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
-        this.codigoConcesionario = codigoConcesionario;
+        this.codigoConcecionario = codigoConcecionario;
     }
 
-    public int getCodigoContrato() {
+    public Integer getCodigoContrato() {
         return codigoContrato;
     }
 
-    public void setCodigoContrato(int codigoContrato) {
+    public void setCodigoContrato(Integer codigoContrato) {
         this.codigoContrato = codigoContrato;
     }
 
@@ -42,11 +38,11 @@ public class Contrato {
         this.clausula = clausula;
     }
 
-    public double getPrecio() {
+    public Double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(Double precio) {
         this.precio = precio;
     }
 
@@ -66,14 +62,11 @@ public class Contrato {
         this.fechaFin = fechaFin;
     }
 
-    public int getCodigoConcesionario() {
-        return codigoConcesionario;
+    public Integer getCodigoConcecionario() {
+        return codigoConcecionario;
     }
 
-    public void setCodigoConcesionario(int codigoConcesionario) {
-        this.codigoConcesionario = codigoConcesionario;
+    public void setCodigoConcecionario(Integer codigoConcecionario) {
+        this.codigoConcecionario = codigoConcecionario;
     }
-    
-    
-    
 }

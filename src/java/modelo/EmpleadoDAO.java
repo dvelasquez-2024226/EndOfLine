@@ -1,11 +1,16 @@
 package modelo;
 
 import config.Conexion;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpServletResponse;
 
 public class EmpleadoDAO {
     Conexion cn = new Conexion();
@@ -48,7 +53,7 @@ public class EmpleadoDAO {
     //LISTAR
     public List listar(){
         String sql = "select * from empleados";
-        List<Empleado> listaEmpleados = new ArrayList<>();
+        List<Empleado> listaEmpleado = new ArrayList<>();
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
@@ -63,13 +68,40 @@ public class EmpleadoDAO {
                 em.setFechaIngreso(rs.getDate(6));
                 em.setUsuarioEmpleado(rs.getString(7));
                 em.setContraseniaEmpleado(rs.getString(8));
-                em.setCodigoConcesionario(rs.getInt(9));
-                listaEmpleados.add(em);
+                em.setFoto(rs.getBinaryStream(9));
+                em.setCodigoConcesionario(rs.getInt(10));
+                listaEmpleado.add(em);
             }
         }catch(Exception e){
             e.printStackTrace();
         }
-        return listaEmpleados;
+        return listaEmpleado;
+    }
+    
+    public void listarImg(int carne , HttpServletResponse response){
+        String sql = "select * from Empleados where carne ="+carne;
+        InputStream inputStream = null;
+        OutputStream outputStream = null;
+        BufferedInputStream bufferedInputStream = null;
+        BufferedOutputStream bufferedOutputStream = null;
+        response.setContentType("image/*");
+        try {
+            outputStream=response.getOutputStream();
+            con = cn.Conexion();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                inputStream=rs.getBinaryStream("foto");
+            }
+            bufferedInputStream = new BufferedInputStream(inputStream);
+            bufferedOutputStream = new BufferedOutputStream(outputStream);
+            int i= 0;
+            while((i=bufferedInputStream.read())!=-1){
+                bufferedOutputStream.write(i);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     //AGREGAR
