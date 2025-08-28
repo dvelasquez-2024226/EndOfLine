@@ -14,7 +14,7 @@
                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             }
             .header-bar {
-                background-color: #1a237e; /* Azul oscuro como en tu menú principal */
+                background-color: #2f344f;
                 color: white;
                 padding: 15px;
                 text-align: center;
@@ -28,17 +28,17 @@
                 box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             }
             .card-body label {
-                color: #1a237e;
+                color: #38446c;
             }
             .btn-info {
-                background-color: #1a237e;
+                background-color: #683653;
                 border: none;
             }
             .btn-info:hover {
                 background-color: #0d164e;
             }
             .table thead {
-                background-color: #1a237e;
+                background-color: #2f344f;
                 color: white;
             }
             .table tbody tr:hover {
@@ -52,38 +52,7 @@
 
         <div class="container-fluid">  
             <div class="row">  
-                <!-- Formulario -->  
-                <div class="col-md-4 mb-4">  
-                    <div class="card">  
-                        <div class="card-body">  
-                            <h5 class="card-title text-center text-primary">Datos de la Publicidad</h5>  
-                            <form action="Controlador?menu=Publicidad" method="POST">
-                                <div class="form-group">
-                                    <label><strong>Fecha Inicio:</strong></label>
-                                    <input type="date" value="${publicidad.fechaInicio}" name="txtFechaInicio" class="form-control" min="2025-01-01">
-                                </div>
-                                <div class="form-group">
-                                    <label><strong>Fecha Fin:</strong></label>
-                                    <input type="date" value="${publicidad.fechaFin}" name="txtFechaFin" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label><strong>Costos:</strong></label>
-                                    <input type="number" value="${publicidad.costos}" name="txtCostos" class="form-control" min="0">
-                                </div>
-                                <div class="form-group">
-                                    <label><strong>Colaboradores:</strong></label>
-                                    <input type="text" value="${publicidad.colaboradores}" name="txtColaboradores" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label><strong>Codigo Carro:</strong></label>
-                                    <input type="number" value="${publicidad.codigoCarro}" name="txtCodigoCarro" class="form-control" min="0">
-                                </div>
-                                <input type="submit" name="accion" value="Agregar" class="btn btn-info">
-                                <input type="submit" name="accion" value="Actualizar" class="btn btn-success">
-                            </form>
-                        </div>  
-                    </div>  
-                </div>  
+
 
                 <!-- Tabla -->  
                 <div class="col-md-8">  
@@ -124,10 +93,71 @@
                         </div>  
                     </div>  
                 </div>  
+
+                <!-- Formulario -->  
+                <div class="col-md-4 mb-4">  
+                    <div class="card">  
+                        <div class="card-body">  
+                            <h5 class="card-title text-center text-primary">Datos de la Publicidad</h5>  
+                            <form action="Controlador?menu=Publicidad" method="POST">
+                                <div class="form-group">
+                                    <label><strong>Fecha Inicio:</strong></label>
+                                    <input type="date" value="${publicidad.fechaInicio}" name="txtFechaInicio" class="form-control" min="2025-01-01" required>
+                                </div>
+                                <div class="form-group">
+                                    <label><strong>Fecha Fin:</strong></label>
+                                    <input type="date" value="${publicidad.fechaFin}" name="txtFechaFin" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label><strong>Costos:</strong></label>
+                                    <input type="number" value="${publicidad.costos}" name="txtCostos" class="form-control" min="0" required>
+                                </div>
+                                <div class="form-group">
+                                    <label><strong>Colaboradores:</strong></label>
+                                    <input type="text" value="${publicidad.colaboradores}" name="txtColaboradores" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label><strong>Codigo Carro:</strong></label>
+                                    <input type="number" value="${publicidad.codigoCarro}" name="txtCodigoCarro" class="form-control" min="0" required>
+                                </div>
+                                <input type="submit" name="accion" value="Agregar" class="btn btn-info">
+                                <input type="submit" name="accion" value="Actualizar" class="btn btn-success">
+                            </form>
+                        </div>  
+                    </div>  
+                </div>  
             </div>  
         </div>  
 
+
+
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>  
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>  
+
+        <script>
+            document.querySelector("form").addEventListener("submit", function (evento) {
+
+                let accion = evento.submitter.value;
+                let mensaje;
+
+                if (accion === "Agregar") {
+                    mensaje = "¿Está seguro de que desea AGREGAR esta Publicidad?";
+                } else {
+                    mensaje = "¿Está seguro de que desea ACTUALIZAR esta Pulbicidad?";
+                }
+
+                if (!confirm(mensaje)) {
+                    evento.preventDefault();
+                }
+            });
+
+            document.querySelectorAll(".btn-danger").forEach(boton => {
+                boton.addEventListener("click", function (evento) {
+                    if (!confirm("¿Está seguro de que desea ELIMINAR esta Publicidad?")) {
+                        evento.preventDefault();
+                    }
+                });
+            });
+        </script>
     </body>  
 </html>

@@ -36,6 +36,8 @@ import modelo.Proveedor;
 import modelo.ProveedorDAO;
 import modelo.Publicidad;
 import modelo.PublicidadDAO;
+import modelo.Servicio;
+import modelo.ServicioDAO;
 import modelo.Taller;
 import modelo.TallerDAO;
 
@@ -69,6 +71,9 @@ public class Controlador extends HttpServlet {
     MembresiaDAO membresiaDao = new MembresiaDAO();
     Taller taller = new Taller();
     TallerDAO tallerDao = new TallerDAO();
+    Servicio servicio = new Servicio();
+    ServicioDAO servicioDao = new ServicioDAO();
+    int noServicio;
     int codTaller;
     int codConcesionario;
     int codDetaFactura;
@@ -972,7 +977,71 @@ public class Controlador extends HttpServlet {
                   break;
             }
             
-            request.getRequestDispatcher("Talleres.jsp").forward(request, response);
+            request.getRequestDispatcher("TalleresEmpleado.jsp").forward(request, response);
+        }else if(menu.equals("Servicio")){
+            switch(accion){
+                case "Listar":
+                    List listaServicios = servicioDao.listar();
+                    request.setAttribute("servicios", listaServicios);//html y el objeto de java
+                    break;
+                case "Agregar":
+                    String feIn = request.getParameter("txtFechaIngreso");
+                    Date feIngr = java.sql.Date.valueOf(feIn);
+                    String de = request.getParameter("txtDetalles");
+                    String tise = request.getParameter("txtTipoServicio");
+                    String feSa = request.getParameter("txFechaSalida");
+                    Date feSali = java.sql.Date.valueOf(feSa);
+                    Integer emCa = Integer.valueOf(request.getParameter("txtEmpleadosCarne")) ;
+                    Integer taNo = Integer.valueOf(request.getParameter("txtTallerNotaller"));
+                    servicio.setFechaIngreso(feIngr);
+                    servicio.setDetalles(de);
+                    servicio.setTipoServicio(tise);
+                    servicio.setFechaSalida(feSali);
+                    servicio.setCarne(emCa);
+                    servicio.setNotaller(0);
+                    break;
+                case "Editar":
+                    noServicio = Integer.parseInt(request.getParameter("noServicio"));
+                    Servicio s = servicioDao.listarCodigoServicio(noServicio);
+                    request.setAttribute("servicio", s);
+                    request.getRequestDispatcher("Controlador?menu=Servicio&accion=Listar").forward(request, response);
+                    break;
+                case "Actualizar":
+                    String feInSer = request.getParameter("txtFechaIngreso");
+                    Date fechaIngrSe = java.sql.Date.valueOf(feInSer);
+                    String deSer = request.getParameter("txtDetalles");
+                    String tiSeSer = request.getParameter("txtTipoServicio");
+                    String feSaSer = request.getParameter("txFechaSalida");
+                    Date feSaliSer = java.sql.Date.valueOf(feSaSer);
+                    Integer emCaSer = Integer.valueOf(request.getParameter("txtEmpleadosCarne")) ;
+                    Integer taNoSer = Integer.valueOf(request.getParameter("txtTallerNotaller"));
+                    servicio.setFechaIngreso(fechaIngrSe);
+                    servicio.setDetalles(deSer);
+                    servicio.setTipoServicio(tiSeSer);
+                    servicio.setFechaIngreso(feSaliSer);
+                    servicio.setCarne(emCaSer);
+                    servicio.setNotaller(taNoSer);
+                    servicioDao.actualizar(servicio);
+                    request.getRequestDispatcher("Controlador?menu=Servicio&accion=Listar").forward(request, response);
+                    break;
+                case "Eliminar":
+                    noServicio = Integer.parseInt(request.getParameter("noServicio"));
+                    servicioDao.eliminar(noServicio);
+                    request.getRequestDispatcher("Controlador?menu=Servicio&accion=Listar").forward(request, response);
+                    
+                    break;
+            }
+            List listaServicios = servicioDao.listar();
+            request.setAttribute("servicios", listaServicios);
+            request.getRequestDispatcher("Servicio.jsp").forward(request, response);
+        }else if(menu.equals("ServiciosClientes")){
+            switch (accion){
+                case "Listar":
+                    List listaServicio = servicioDao.listar();
+                    request.setAttribute("servicios", listaServicio);
+                    break;
+            }
+            request.getRequestDispatcher("ServiciosClientes.jsp").forward(request, response);
         }
 
     }

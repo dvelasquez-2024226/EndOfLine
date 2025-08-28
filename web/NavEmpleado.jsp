@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #CEC68D;">
+        <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #683653;">
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
@@ -22,13 +22,13 @@
                         <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="Controlador?menu=ProveedorNV&accion=Listar" target="myFrame">Proveedores</a>
                     </li>
                     <li class="nav-item">
-                        <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="#" >Membresias</a>
+                        <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="Controlador?menu=Membresia&accion=Listar" target="myFrame" >Membresias</a>
                     </li>
                     <li class="nav-item">
                         <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="Controlador?menu=Cliente&accion=Listar" target="myFrame">Cliente</a>
                     </li>
                     <li class="nav-item">
-                        <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="#" >Talleres</a>
+                        <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="Controlador?menu=Talleres&accion=Listar" target="myFrame" >Talleres</a>
                     </li>
                     <li class="nav-item">
                         <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="Controlador?menu=Carro&accion=Listar" target="myFrame" >Carros</a>
@@ -46,10 +46,10 @@
                         <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="Controlador?menu=Publicidad&accion=Listar" target="myFrame">Publicidad</a>
                     </li>
                     <li class="nav-item">
-                        <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="#" >Servicios</a>
+                        <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="Controlador?menu=Servicio&accion=Listar" target="myFrame">Servicios</a>
                     </li>
                     <li class="nav-item">
-                        <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="Controlador?menu=Factura&accion=Listar" target="myFrame" >Facutra</a>
+                        <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="Controlador?menu=Factura&accion=Listar" target="myFrame" >Factura</a>
                     </li>
                     <li class="nav-item">
                         <a style="margin-left: 10px; border: none;" class="btn btn-outline-light" href="Controlador?menu=DetalleFactura&accion=Listar" target="myFrame" >Detalle Factura</a>
