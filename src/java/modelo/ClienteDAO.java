@@ -1,11 +1,16 @@
 package modelo;
 
 import config.Conexion;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpServletResponse;
 
 public class ClienteDAO {
 
@@ -57,12 +62,39 @@ public class ClienteDAO {
                 c.setCorreoCliente(rs.getString(4));
                 c.setTelefonoCliente(rs.getString(5));
                 c.setDireccionCliente(rs.getString(6));
+                c.setFoto(rs.getBinaryStream(7));
                 listaClientes.add(c);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return listaClientes;
+    }
+    
+    public void listarImg(int codigoCliente , HttpServletResponse response){
+        String sql = "select * from Clientes where codigoCliente ="+codigoCliente;
+        InputStream inputStream = null;
+        OutputStream outputStream = null;
+        BufferedInputStream bufferedInputStream = null;
+        BufferedOutputStream bufferedOutputStream = null;
+        response.setContentType("image/*");
+        try {
+            outputStream=response.getOutputStream();
+            con = cn.Conexion();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                inputStream=rs.getBinaryStream("foto");
+            }
+            bufferedInputStream = new BufferedInputStream(inputStream);
+            bufferedOutputStream = new BufferedOutputStream(outputStream);
+            int i= 0;
+            while((i=bufferedInputStream.read())!=-1){
+                bufferedOutputStream.write(i);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     // MÉTODO AGREGAR
