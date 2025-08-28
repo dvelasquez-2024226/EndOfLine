@@ -36,9 +36,10 @@
                     <li><a href="Controlador?menu=CarroCl&accion=Listar" target="myFrame">Vehiculos</a></li>
                     <li><a href="Controlador?menu=ProveedorVC&accion=Listar" target="myFrame">Proveedores</a></li>
                     <li><a href="Controlador?menu=InventarioCl&accion=Listar" target="myFrame" >Inventario</a></li>
-                    <li><a href="#">Servicios</a></li>
+                    <li><a href="Controlador?menu=ServiciosClientes&accion=Listar" target="myFrame">Servicios</a></li>
                     <li><a href="#" >Talleres</a></li>
                     <li><a href="#" >Ubicaciones</a></li>
+                    <li><a href="Controlador?menu=MembresiaCliente&accion=Listar" target="myFrame" >Membresías</a></li>
                     <li><a href="Controlador?menu=EmpleadoCliente&accion=Listar" target="myFrame"" >Ayuda</a></li>
                     <li><a href="Controlador?menu=ContratoCl&accion=Listar" target="myFrame" >Contratos</a></li>
                     <div class="dropdown" >

@@ -14,6 +14,46 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
               integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
               crossorigin="anonymous">
+        <style>
+            body {
+                background: #f4f6f9;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+            .header-bar {
+                background-color: #2f344f;
+                color: white;
+                padding: 15px;
+                text-align: center;
+                font-weight: bold;
+                font-size: 1.5rem;
+                border-radius: 0 0 15px 15px;
+                margin-bottom: 25px;
+            }
+            .card {
+                border-radius: 15px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            }
+            .card-body label {
+                color: #38446c;
+            }
+            .btn-info {
+                background-color: #683653;
+                border: none;
+            }
+            .btn-info:hover {
+                background-color: #0d164e;
+            }
+            .btn-success {
+                border: none;
+            }
+            .table thead {
+                background-color: #2f344f;
+                color: white;
+            }
+            .table tbody tr:hover {
+                background-color: #e3e6f0;
+            }
+        </style>
     </head>
     <body>
         <div class="d-flex">
@@ -66,9 +106,9 @@
                                 <td>${taller.getEstadoCarro()}</td>
                                 <td>
                                     <a class="btn btn-warning" href="Controlador?menu=Talleres&accion=Editar&codigoTaller=${taller.getNotaller()}">Editar</a>
-                                       
+
                                     <a class="btn btn-danger" href="Controlador?menu=Talleres&accion=Eliminar&codigoTaller=${taller.getNotaller()}">Eliminar</a>
-                                       
+
                                 </td>
                             </tr>
                         </c:forEach>

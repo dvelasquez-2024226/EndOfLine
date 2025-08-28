@@ -9,34 +9,34 @@ import java.sql.Date;
  * @author yo
  */
 public class Servicio {
-   private int noServicios;
+   private int noServicio;
    private Date fechaIngreso;
    private String detalles;
-   private String tipoServicios;
+   private String tipoServicio;
    private Date fechaSalida;
-   private int empleados_carne;
-   private int taller_notaller;
+   private int carne;
+   private int noTaller;
    
    public Servicio(){
    
    }
 
-    public Servicio(int noServicios, Date fechaIngreso, String detalles, String tipoServicios, Date fechaSalida, int empleados_carne, int taller_notaller) {
-        this.noServicios = noServicios;
+    public Servicio(int noServicio, Date fechaIngreso, String detalles, String tipoServicio, Date fechaSalida, int carne, int noTaller) {
+        this.noServicio = noServicio;
         this.fechaIngreso = fechaIngreso;
         this.detalles = detalles;
-        this.tipoServicios = tipoServicios;
+        this.tipoServicio = tipoServicio;
         this.fechaSalida = fechaSalida;
-        this.empleados_carne = empleados_carne;
-        this.taller_notaller = taller_notaller;
+        this.carne = carne;
+        this.noTaller = noTaller;
     }
 
-    public int getNoServicios() {
-        return noServicios;
+    public int getNoServicio() {
+        return noServicio;
     }
 
-    public void setNoServicios(int noServicios) {
-        this.noServicios = noServicios;
+    public void setNoServicio(int noServicio) {
+        this.noServicio = noServicio;
     }
 
     public Date getFechaIngreso() {
@@ -55,12 +55,12 @@ public class Servicio {
         this.detalles = detalles;
     }
 
-    public String getTipoServicios() {
-        return tipoServicios;
+    public String getTipoServicio() {
+        return tipoServicio;
     }
 
-    public void setTipoServicios(String tipoServicios) {
-        this.tipoServicios = tipoServicios;
+    public void setTipoServicio(String tipoServicio) {
+        this.tipoServicio = tipoServicio;
     }
 
     public Date getFechaSalida() {
@@ -71,22 +71,21 @@ public class Servicio {
         this.fechaSalida = fechaSalida;
     }
 
-    public int getEmpleados_carne() {
-        return empleados_carne;
+    public int getCarne() {
+        return carne;
     }
 
-    public void setEmpleados_carne(int empleados_carne) {
-        this.empleados_carne = empleados_carne;
+    public void setCarne(int carne) {
+        this.carne = carne;
     }
 
-    public int getTaller_notaller() {
-        return taller_notaller;
+    public int getNotaller() {
+        return noTaller;
     }
 
-    public void setTaller_notaller(int taller_notaller) {
-        this.taller_notaller = taller_notaller;
+    public void setNotaller(int notaller) {
+        this.noTaller = notaller;
     }
-
    
-}
-
+   
+} 
